@@ -1,6 +1,10 @@
 #include <iostream>
+#include "CommandProcessor.h"
+using namespace GIS;
 
 int main() {
-    std::cout << "Hello, World!" << std::endl;
+
+    CommandProcessor* commandprocessor1 = new CommandProcessor();
+    commandprocessor1->readScript();
     return 0;
 }
