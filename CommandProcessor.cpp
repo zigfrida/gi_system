@@ -6,6 +6,8 @@
 #include <vector>
 #include <sstream>
 #include "CommandProcessor.h"
+#include "World.h"
+
 using namespace std;
 
 namespace GIS {
@@ -27,6 +29,8 @@ namespace GIS {
         }
     }
 
+
+
     int CommandProcessor::readScript()
     {
         string myText;
@@ -41,7 +45,13 @@ namespace GIS {
                     vector<string> concatenated;
                     tokenize(myText, '\t', concatenated);
                     command = concatenated[0];
+                    if (command == "world") {
+                        //run world
+                        World* world1 = new World();
+                        world1->createWorld();
+                    }
                 }
+
             }
         }
         ScriptFile1.close();
