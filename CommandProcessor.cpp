@@ -48,7 +48,7 @@ namespace GIS {
                     if (command == "world") {
                         //run world
                         World* world1 = new World();
-                        world1->createWorld();
+                        world1->createWorld(concatenated[1], concatenated[2], concatenated[3], concatenated[4]);
                     }
                 }
 

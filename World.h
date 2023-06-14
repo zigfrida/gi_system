@@ -4,11 +4,17 @@
 
 #ifndef GI_SYSTEM_WORLD_H
 #define GI_SYSTEM_WORLD_H
-
+using namespace std;
 namespace GIS {
     class World {
     public:
-        void createWorld();
+        int westLong;
+        int eastLong;
+        int southLat;
+        int northLat;
+        void createWorld(string westLong, string eastLong, string southLat, string northLat);
+        static int convertStringLatLongToInt(string lat);
+        bool isItInWorldBoundary(string lat, string longitude);
     };
 }
 
