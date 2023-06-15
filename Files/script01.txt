@@ -1,0 +1,100 @@
+; Script 1
+;
+; Testing using a small dataset
+;
+; Specify boundaries of coordinate space:
+;
+world	0794530W	0792630W	381000N	383000N
+;
+; Import the dataset [the address here is a relative address]
+import	./VA_Monterey.txt
+;
+; Lets visualize our already imported geographical data
+debug	world
+;
+; Also lets see what is inside name and coordinate indices
+debug	quad
+debug	hash
+;
+; To fill out the cache, let's do a single-match location search
+what_is_at	382812N	0793156W
+;
+; Now lets see if our cache is filled up
+debug	pool
+;
+; A few more search queries
+what_is	Church	VA
+; oops Church is "FEATURE_CLASS" how about the following query?
+what_is	Central Church	VA
+what_is	Town of Monterey	VA
+what_is	Smith Field	VA
+; Let's try a wrong state abbreviation
+what_is	Smith Field	CO
+;
+; Lets check the buffer pool again
+debug	pool
+;
+; So lets check the LRU mechanism [this query should move the last element of the cache all the way to the front!]
+what_is_at	382812N	0793156W
+;
+; checking the buffer pool again
+debug	pool
+;
+; More location searches
+what_is_at	381816N	0793700W
+what_is_at	381816N	0793708W
+what_is_at	381612N	0793256W
+what_is_at	382951N	0793238W
+; We expect two location matches for this one
+;
+what_is_at	382856N	0793031W
+; Now performing some area search [this should return 7 features]
+;
+what_is_in	382812N	0793156W	60	90
+; checking the buffer pool again
+; how about querying somewhere outside boundaries ?
+what_is_in	382012N	0792330W	60	90
+; Let's try some variations of a single-match region search with a square region:
+what_is_in	382148N	0793109W	15	15
+what_is_in	-long	382148N	0793109W	15	15
+; Let's try increasing the size of the region:
+what_is_in	382148N	0793109W	60	60
+what_is_in	382148N	0793109W	120	120
+what_is_in	382148N	0793109W	180	180
+what_is_in	-long	382148N	0793109W	180	180
+what_is_in	-filter	structure	382600N	0793310W	120	120
+what_is_in	-filter	water	382850N	0793030W	120	240
+what_is_in	-filter	pop	382000N	0793530W	3600	3600
+;
+debug	pool
+; Let's import a larger dataset [wait a second, VA_Bath has 520 records, why didn't all of them get imported? explain this in your report]
+import	./VA_Bath.txt
+; as import command bypasses the buffer pool, content of the buffer pool should remain intact
+debug	pool
+;
+; Exiting
+quit
+;
+; From this point on all of the commands will be ignored, you can use the following large dataset to test your implemented software
+; To consider this file please use the following world command at the beginning of this file
+; world	1130000W	0690000W	300000N	440000N
+import	CO_All.txt
+;
+; And some searches; let's see if you're taking the state abbreviation into account:
+what_is	Lincoln	CO
+what_is	Lincoln	NM
+;
+; Let's try spanning the border:
+what_is_in	365800N	1043030W	720	45
+;
+; Let's try a larger region and filter the results:
+what_is_in	-filter	water	370000N	1040000W	600	600
+what_is_in	-filter	pop	370000N	1040000W	600	600
+what_is_in	-filter	structure	370000N	1040000W	600	600
+;
+; And some more or less random searches:
+what_is	Slab Mill Gulch	CO
+what_is	Kemper School	CO
+what_is_at	380806N	1073426W
+what_is_at	371010N	1043002W
+what_is_at	402906N	1064954W
