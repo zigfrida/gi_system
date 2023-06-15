@@ -34,7 +34,7 @@ namespace GIS {
     int CommandProcessor::readScript()
     {
         string myText;
-        ifstream ScriptFile1("../script01.txt");
+        ifstream ScriptFile1("../Files/script01.txt");
 
         // Use a while loop together with the getline() function to read the file line by line
         while (getline (ScriptFile1, myText)) {
