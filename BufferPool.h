@@ -5,9 +5,13 @@
 #ifndef GI_SYSTEM_BUFFERPOOL_H
 #define GI_SYSTEM_BUFFERPOOL_H
 
+#include <string>
+
+using namespace std;
 
 class BufferPool {
-
+public:
+    void addMoreRecord(string filePath);
 };
 
 
