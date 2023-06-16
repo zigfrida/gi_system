@@ -8,6 +8,7 @@
 #include "CommandProcessor.h"
 #include "World.h"
 #include "HashTable.h"
+#include "Logger.h"
 
 using namespace std;
 
@@ -72,6 +73,7 @@ namespace GIS {
     {
         string myText;
         ifstream ScriptFile1("../Files/script01.txt");
+        int commandCounter = 0;
 
         // Use a while loop together with the getline() function to read the file line by line
         while (getline (ScriptFile1, myText)) {
@@ -86,12 +88,19 @@ namespace GIS {
                         //run world
                         World* world1 = new World();
                         world1->createWorld(concatenated[1], concatenated[2], concatenated[3], concatenated[4]);
+                        commandCounter++;
                     } else if (command == "import") {
+                        stringstream logMessage;
+                        logMessage << "Command " << commandCounter << ": " << myText << endl;
+                        Logger::getInstance().writeLog(logMessage.str());
+
                         // Uncomment lines to run import command
 //                        cout << "Import Command, file name: " << concatenated[1] << endl;
 //                        string file = "../Files/VA_Monterey.txt"; // + concatenated[1];
 //                        importCommand(file);
                     }
+                } else {
+                    Logger::getInstance().writeLog(myText);
                 }
 
             }

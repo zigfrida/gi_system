@@ -3,7 +3,9 @@
 //
 
 #include <iostream>
+#include <sstream>
 #include "World.h"
+#include "Logger.h"
 using namespace std;
 namespace GIS {
     void World::createWorld(string westLong, string eastLong, string southLat, string northLat) {
@@ -12,6 +14,12 @@ namespace GIS {
         this->southLat = convertStringLatLongToInt(southLat);
         this->northLat = convertStringLatLongToInt(northLat);
 
+        stringstream logMessage;
+        logMessage << "world\t" << this->westLong << "\t" << this->eastLong << endl;
+        Logger::getInstance().writeLog(logMessage.str());
+        Logger::getInstance().writeLog("------------------------------------------------------------------------------------------");
+        Logger::getInstance().writeLog("Latitude/longitude values in index entries are shown as signed integers, in total seconds.");
+        Logger::getInstance().writeLog("------------------------------------------------------------------------------------------");
     }
 
     int World::convertStringLatLongToInt(string lat) {
