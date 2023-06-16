@@ -8,6 +8,7 @@
 #include "CommandProcessor.h"
 #include "World.h"
 #include "HashTable.h"
+#include "GISRecord.h"
 
 using namespace std;
 
@@ -15,7 +16,7 @@ namespace GIS {
 
     CommandProcessor::CommandProcessor(){}
 
-    void tokenize(std::string const &str, const char delim,
+    void CommandProcessor::tokenize(std::string const &str, const char delim,
                   std::vector<std::string> &out)
     {
         // construct a stream from the string
@@ -27,9 +28,9 @@ namespace GIS {
         }
     }
 
-    void importCommand(string const &recordFile) {
+    void CommandProcessor::importCommand(string const &recordFile, string const &databaseFile) {
         HashTable* hashTable = new HashTable();
-
+        vector<GISRecord> dbBuffer;
         ifstream source(recordFile); // Source file
 //        ofstream database; // Destination file
 //        database.open("../Files/database.txt", ios::out | ios::in);
@@ -53,13 +54,23 @@ namespace GIS {
                     }
                     string key = featureInfo[1] + " " + featureInfo[3]; // Key is the concatenation of feature name and state abbreviation
                     string value = to_string(lineOffSet + 1); // line the feature was found in the import file
-
+                    GISRecord tempRec;
+                    tempRec.FEATURE_ID = 0;
+                    tempRec.FEATURE_CLASS = featureInfo[1];
+                    tempRec.FEATURE_Name = "";
+                    tempRec.Latitude = 0;
+                    tempRec.longitude = 0;
+                    tempRec.STATE_Abbreviation = "";
+                    dbBuffer.push_back(tempRec);
                     hashTable->insert(key, value);
                     lineOffSet++;
                 }
                 if (firstLine) firstLine = false;
             }
-
+            ofstream fout(databaseFile, ios::out | ios::binary);
+            size_t size = dbBuffer.size();
+            fout.write((char*)&dbBuffer[0], dbBuffer.size() * sizeof(dbBuffer));
+            fout.close();
 //            hashTable->displayHashTable(); // Visualization purposes
             source.close();
 //            database.close();
@@ -84,13 +95,13 @@ namespace GIS {
                     command = concatenated[0];
                     if (command == "world") {
                         //run world
-                        World* world1 = new World();
-                        world1->createWorld(concatenated[1], concatenated[2], concatenated[3], concatenated[4]);
+                        world1.createWorld(concatenated[1], concatenated[2], concatenated[3], concatenated[4]);
                     } else if (command == "import") {
                         // Uncomment lines to run import command
-//                        cout << "Import Command, file name: " << concatenated[1] << endl;
-//                        string file = "../Files/VA_Monterey.txt"; // + concatenated[1];
-//                        importCommand(file);
+                        cout << "Import Command, file name: " << concatenated[1] << endl;
+                        string file = "../Files/VA_Monterey.txt"; // + concatenated[1];
+                        string dbFile = "../Files/database.txt";
+                        importCommand(file, dbFile);
                     }
                 }
 
