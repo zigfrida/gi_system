@@ -1,0 +1,23 @@
+Course Project for COMP 8042
+Student Name: Amanda Golubics, Student Id: A01048162
+Student Name: David , Student Id: 
+Begin of GIS Program log:
+dbFile: 
+script: 
+log: 
+Start Time: 2023-06-18 01:41:29
+; Script 1
+;
+; Testing using a small dataset
+;
+; Specify boundaries of coordinate space:
+;
+world	-794530	-792630
+
+------------------------------------------------------------------------------------------
+Latitude/longitude values in index entries are shown as signed integers, in total seconds.
+------------------------------------------------------------------------------------------
+;
+; Import the dataset [the address here is a relative address]
+Command 1: import	./VA_Monterey.txt
+

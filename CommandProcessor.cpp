@@ -9,6 +9,7 @@
 #include "World.h"
 #include "HashTable.h"
 #include "GISRecord.h"
+#include "Logger.h"
 
 using namespace std;
 
@@ -87,6 +88,8 @@ namespace GIS {
         ifstream ScriptFile1("../Files/script01.txt");
         string file = "../Files/VA_Monterey.txt"; // + concatenated[1];
         string dbFile = "../Files/database.txt";
+        int commandCounter = 0;
+
         // Use a while loop together with the getline() function to read the file line by line
         while (getline (ScriptFile1, myText)) {
             // Output the text from the file
@@ -99,7 +102,12 @@ namespace GIS {
                     if (command == "world") {
                         //run world
                         world1.createWorld(concatenated[1], concatenated[2], concatenated[3], concatenated[4]);
+                        commandCounter++;
                     } else if (command == "import") {
+                        stringstream logMessage;
+                        logMessage << "Command " << commandCounter << ": " << myText << endl;
+                        Logger::getInstance().writeLog(logMessage.str());
+
                         // Uncomment lines to run import command
                         cout << "Import Command, file name: " << concatenated[1] << endl;
 
@@ -107,7 +115,8 @@ namespace GIS {
                         bufferPool1.readDatabaseFile(dbFile);
 
                     }
-
+                } else {
+                    Logger::getInstance().writeLog(myText);
                 }
 
             }
