@@ -52,25 +52,27 @@ namespace GIS {
                     while (getline(iss, feature, '|')) {
                         featureInfo.push_back(feature);
                     }
-                    string key = featureInfo[1] + " " + featureInfo[3]; // Key is the concatenation of feature name and state abbreviation
-                    string value = to_string(lineOffSet + 1); // line the feature was found in the import file
-                    GISRecord tempRec;
-                    tempRec.FEATURE_ID = 0;
-                    tempRec.FEATURE_CLASS = featureInfo[1];
-                    tempRec.FEATURE_Name = "";
-                    tempRec.Latitude = 0;
-                    tempRec.longitude = 0;
-                    tempRec.STATE_Abbreviation = "";
-                    dbBuffer.push_back(tempRec);
-                    hashTable->insert(key, value);
-                    lineOffSet++;
+
+                    if (world1.isItInWorldBoundary(featureInfo[7], featureInfo[8])) {
+                        string key = featureInfo[1] + " " + featureInfo[3]; // Key is the concatenation of feature name and state abbreviation
+                        string value = to_string(lineOffSet + 1); // line the feature was found in the import file
+                        GISRecord tempRec;
+                        tempRec.FEATURE_ID = stoi(featureInfo[0]);
+                        tempRec.FEATURE_Name = featureInfo[1];
+                        tempRec.FEATURE_CLASS = featureInfo[2];
+                        tempRec.Latitude = World::convertStringLatLongToInt(featureInfo[7]);
+                        tempRec.longitude = World::convertStringLatLongToInt(featureInfo[8]);
+                        tempRec.STATE_Abbreviation = featureInfo[3];
+                        dbBuffer.push_back(tempRec);
+                        hashTable->insert(key, value);
+                        lineOffSet++;
+                    }
                 }
                 if (firstLine) firstLine = false;
             }
-            ofstream fout(databaseFile, ios::out | ios::binary);
-            size_t size = dbBuffer.size();
-            fout.write((char*)&dbBuffer[0], dbBuffer.size() * sizeof(dbBuffer));
-            fout.close();
+
+            bufferPool1.appendToDatabase(dbBuffer, databaseFile);
+
 //            hashTable->displayHashTable(); // Visualization purposes
             source.close();
 //            database.close();
@@ -83,7 +85,8 @@ namespace GIS {
     {
         string myText;
         ifstream ScriptFile1("../Files/script01.txt");
-
+        string file = "../Files/VA_Monterey.txt"; // + concatenated[1];
+        string dbFile = "../Files/database.txt";
         // Use a while loop together with the getline() function to read the file line by line
         while (getline (ScriptFile1, myText)) {
             // Output the text from the file
@@ -99,10 +102,12 @@ namespace GIS {
                     } else if (command == "import") {
                         // Uncomment lines to run import command
                         cout << "Import Command, file name: " << concatenated[1] << endl;
-                        string file = "../Files/VA_Monterey.txt"; // + concatenated[1];
-                        string dbFile = "../Files/database.txt";
+
                         importCommand(file, dbFile);
+                        bufferPool1.readDatabaseFile(dbFile);
+
                     }
+
                 }
 
             }

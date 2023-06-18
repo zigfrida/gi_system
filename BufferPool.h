@@ -6,12 +6,17 @@
 #define GI_SYSTEM_BUFFERPOOL_H
 
 #include <string>
+#include <vector>
+#include "GISRecord.h"
 
 using namespace std;
 
 class BufferPool {
 public:
-    void addMoreRecord(string filePath);
+    vector<GISRecord> buffer1;
+    vector<GISRecord> readDatabaseFile(string filePath);
+    void appendToDatabase(vector<GISRecord> records1, string filePath);
+
 };
 
 

@@ -4,6 +4,7 @@
 #define GI_SYSTEM_COMMANDPROCESSOR_H
 
 #include "World.h"
+#include "BufferPool.h"
 #include <vector>
 using namespace std;
 namespace GIS {
@@ -11,6 +12,7 @@ namespace GIS {
     class CommandProcessor {
         public:
             World world1;
+            BufferPool bufferPool1;
             CommandProcessor();
             int readScript();
             void tokenize(string const &str, const char delim,
