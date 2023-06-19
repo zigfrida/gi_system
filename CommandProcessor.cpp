@@ -31,7 +31,7 @@ namespace GIS {
 
     void CommandProcessor::importCommand(string const &recordFile, string const &databaseFile) {
         HashTable* hashTable = new HashTable();
-        vector<GISRecord> dbBuffer;
+        vector<GISRecord> dbRecords;
         ifstream source(recordFile); // Source file
 //        ofstream database; // Destination file
 //        database.open("../Files/database.txt", ios::out | ios::in);
@@ -64,7 +64,7 @@ namespace GIS {
                         tempRec.Latitude = World::convertStringLatLongToInt(featureInfo[7]);
                         tempRec.longitude = World::convertStringLatLongToInt(featureInfo[8]);
                         tempRec.STATE_Abbreviation = featureInfo[3];
-                        dbBuffer.push_back(tempRec);
+                        dbRecords.push_back(tempRec);
                         hashTable->insert(key, value);
                         lineOffSet++;
                     }
@@ -72,7 +72,7 @@ namespace GIS {
                 if (firstLine) firstLine = false;
             }
 
-            bufferPool1.appendToDatabase(dbBuffer, databaseFile);
+            bufferPool1.appendToDatabase(dbRecords, databaseFile);
 
 //            hashTable->displayHashTable(); // Visualization purposes
             source.close();
@@ -112,8 +112,6 @@ namespace GIS {
                         cout << "Import Command, file name: " << concatenated[1] << endl;
 
                         importCommand(file, dbFile);
-                        bufferPool1.readDatabaseFile(dbFile);
-
                     }
                 } else {
                     Logger::getInstance().writeLog(myText);
