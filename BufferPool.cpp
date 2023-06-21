@@ -33,6 +33,7 @@ GISRecord BufferPool::whatIs(string name, string state) {
     for (size_t i = 0; i < buffer1.size(); ++i) {
         record3 = buffer1[i];
         if (record3.FEATURE_Name == name && record3.STATE_Abbreviation == state) {
+            bringToFrontOfBuffer(i);
             return record3;
         }
     }
@@ -53,6 +54,7 @@ GISRecord BufferPool::whatIs(string name, string state) {
         record3.Latitude = stoi(featureInfo[4]);
         record3.longitude = stoi(featureInfo[5]);
         record3.STATE_Abbreviation = featureInfo[3];
+        insertToBuffer(record3);
         return record3;
     }
 
@@ -109,6 +111,12 @@ vector<GISRecord> BufferPool::readDatabaseFile(string filePath) {
     return dbRecords;
 }
 
+/**
+ * This function finds a specific record at index in the database.txt
+ * @param filename
+ * @param index
+ * @return
+ */
 string BufferPool::getLineAtIndex(string& filename, size_t index) {
     ifstream inputFile(filename);
     string line;
@@ -124,4 +132,26 @@ string BufferPool::getLineAtIndex(string& filename, size_t index) {
 
     inputFile.close();
     return line;
+}
+
+void BufferPool::insertToBuffer(GISRecord record) {
+    if (buffer1.empty()) {
+        buffer1.push_back(record);
+    } else if (buffer1.size() >= 15) {
+        buffer1.insert(buffer1.begin(), record);
+        buffer1.pop_back();
+    } else {
+        buffer1.insert(buffer1.begin(), record);
+    }
+}
+
+void BufferPool::bringToFrontOfBuffer(int index) {
+    if (index >= buffer1.size()) {
+        std::cout << "Invalid index." << std::endl;
+        return;
+    }
+
+    GISRecord rec = buffer1[index];
+    buffer1.erase(buffer1.begin() + index);
+    buffer1.insert(buffer1.begin(), rec);
 }

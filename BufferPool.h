@@ -24,6 +24,10 @@ public:
     GISRecord whatIs(string name, string state);
 
     string getLineAtIndex(string &filePath, size_t index);
+
+    void insertToBuffer(GISRecord record);
+
+    void bringToFrontOfBuffer(int index);
 };
 
 
