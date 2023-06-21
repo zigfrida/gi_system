@@ -5,6 +5,7 @@
 
 #include "World.h"
 #include "BufferPool.h"
+#include "HashTable.h"
 #include <vector>
 using namespace std;
 namespace GIS {
@@ -12,7 +13,8 @@ namespace GIS {
     class CommandProcessor {
         public:
             World world1;
-            BufferPool bufferPool1;
+            BufferPool* bufferPool1;
+            HashTable* nameIndex;
             CommandProcessor();
             int readScript();
             void tokenize(string const &str, const char delim,

@@ -15,7 +15,7 @@ namespace GIS {
         if (logFile.is_open()) {
             logFile << "Course Project for COMP 8042" << endl;
             logFile << "Student Name: Amanda Golubics, Student Id: A01048162" << endl;
-            logFile << "Student Name: David , Student Id: " << endl;
+            logFile << "Student Name: Eunhak Lee, Student Id: A01026056" << endl;
             logFile << "Begin of GIS Program log:" << endl;
             logFile << "dbFile: " << endl;
             logFile << "script: " << endl;
