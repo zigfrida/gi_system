@@ -84,7 +84,7 @@ namespace GIS {
         if (!table[index].key.empty() && !table[index].isDeleted) {
             return table[index].value;
         }
-        return "";
+        return "-1";
     }
 
     void HashTable::displayHashTable() {
@@ -95,5 +95,4 @@ namespace GIS {
             }
         }
     }
-
 }
