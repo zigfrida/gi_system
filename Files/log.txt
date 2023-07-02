@@ -1,11 +1,11 @@
 Course Project for COMP 8042
 Student Name: Amanda Golubics, Student Id: A01048162
-Student Name: David , Student Id: 
+Student Name: Eunhak Lee, Student Id: A01026056
 Begin of GIS Program log:
 dbFile: 
 script: 
 log: 
-Start Time: 2023-06-18 19:23:01
+Start Time: 2023-07-01 18:54:32
 ; Script 1
 ;
 ; Testing using a small dataset
@@ -17,56 +17,15 @@ world	-794530	-792630
 ------------------------------------------------------------------------------------------
 Latitude/longitude values in index entries are shown as signed integers, in total seconds.
 ------------------------------------------------------------------------------------------
+						World boundaries are set to:
+						           383000
+						-794530              -792630
+						           381000
+------------------------------------------------------------------------------------------
 ;
 ; Import the dataset [the address here is a relative address]
 Command 1: import	./VA_Monterey.txt
 
-;
-; Lets visualize our already imported geographical data
-;
-; Also lets see what is inside name and coordinate indices
-;
-; To fill out the cache, let's do a single-match location search
-;
-; Now lets see if our cache is filled up
-;
-; A few more search queries
 ; oops Church is "FEATURE_CLASS" how about the following query?
-; Let's try a wrong state abbreviation
-;
-; Lets check the buffer pool again
-;
-; So lets check the LRU mechanism [this query should move the last element of the cache all the way to the front!]
-;
-; checking the buffer pool again
-;
-; More location searches
-; We expect two location matches for this one
-;
-; Now performing some area search [this should return 7 features]
-;
-; checking the buffer pool again
-; how about querying somewhere outside boundaries ?
-; Let's try some variations of a single-match region search with a square region:
-; Let's try increasing the size of the region:
-;
-; Let's import a larger dataset [wait a second, VA_Bath has 520 records, why didn't all of them get imported? explain this in your report]
-Command 1: import	./VA_Bath.txt
-
-; as import command bypasses the buffer pool, content of the buffer pool should remain intact
-;
-; Exiting
-;
-; From this point on all of the commands will be ignored, you can use the following large dataset to test your implemented software
-; To consider this file please use the following world command at the beginning of this file
-; world	1130000W	0690000W	300000N	440000N
-Command 1: import	CO_All.txt
-
-;
-; And some searches; let's see if you're taking the state abbreviation into account:
-;
-; Let's try spanning the border:
-;
-; Let's try a larger region and filter the results:
-;
-; And some more or less random searches:
+what_is	Central Church	VA
+Highland (38d 29m 53s North, 79d 33m 23s West)

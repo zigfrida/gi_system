@@ -15,11 +15,13 @@ namespace GIS {
             World world1;
             BufferPool* bufferPool1;
             HashTable* nameIndex;
+            int lineOffSet;
             CommandProcessor();
             int readScript();
             void tokenize(string const &str, const char delim,
                 vector<string> &out);
             void importCommand(string const &recordFile, string const &databaseFile);
+            void appendToDatabase(vector<GISRecord> records1, string filePath);
     };
 
 } // GIS

@@ -17,6 +17,8 @@ namespace GIS {
 
     CommandProcessor::CommandProcessor(){
         bufferPool1 = new BufferPool("../Files/database.txt");
+        lineOffSet = 0;
+        nameIndex = new HashTable();
     }
 
     void CommandProcessor::tokenize(std::string const &str, const char delim,
@@ -32,13 +34,13 @@ namespace GIS {
     }
 
     void CommandProcessor::importCommand(string const &recordFile, string const &databaseFile) {
-        nameIndex = new HashTable();
+
         vector<GISRecord> dbRecords;
         ifstream source(recordFile); // Source file
 //        ofstream database; // Destination file
 //        database.open("../Files/database.txt", ios::out | ios::in);
 
-        int lineOffSet = 0;
+
 
         if (!source.is_open()) {
             cout << "Error opening source file" << endl;
@@ -58,7 +60,7 @@ namespace GIS {
 
                     if (world1.isItInWorldBoundary(featureInfo[7], featureInfo[8])) {
                         string key = featureInfo[1] + " " + featureInfo[3]; // Key is the concatenation of feature name and state abbreviation
-                        string value = to_string(lineOffSet + 1); // line the feature was found in the import file
+                        string value = to_string(lineOffSet); // line the feature was found in the import file
                         GISRecord tempRec;
                         tempRec.FEATURE_ID = stoi(featureInfo[0]);
                         tempRec.FEATURE_Name = featureInfo[1];
@@ -66,6 +68,7 @@ namespace GIS {
                         tempRec.Latitude = World::convertStringLatLongToInt(featureInfo[7]);
                         tempRec.longitude = World::convertStringLatLongToInt(featureInfo[8]);
                         tempRec.STATE_Abbreviation = featureInfo[3];
+                        tempRec.COUNTY_NAME = featureInfo[5];
                         dbRecords.push_back(tempRec);
                         nameIndex->insert(key, value);
                         lineOffSet++;
@@ -74,12 +77,28 @@ namespace GIS {
                 if (firstLine) firstLine = false;
             }
 
-            bufferPool1->appendToDatabase(dbRecords, databaseFile);
-
-//            nameIndex->displayHashTable(); // Visualization purposes
+            appendToDatabase(dbRecords, databaseFile);
             source.close();
-//            database.close();
         }
+    }
+
+    /**
+     * Function to append record to the database.txt
+     * @param records1
+     * @param filePath
+     */
+    void CommandProcessor::appendToDatabase(vector<GISRecord> records1, string filePath) {
+        ofstream outputFile(filePath, std::ios::out | std::ios::app);  // Open the file for writing in binary mode
+        if (!outputFile) {
+            std::cerr << "Error opening file." << std::endl;
+        } else {
+            string tempp = "";
+            for (GISRecord& record : records1) {
+                tempp = record.dbPrint();
+                outputFile << tempp << endl;
+            }
+        }
+        outputFile.close();  // Close the file after writing
     }
 
 
@@ -115,7 +134,13 @@ namespace GIS {
 
                         importCommand(file, dbFile);
                     } else if (command=="what_is") {
-                        GISRecord what_isThis = bufferPool1->whatIs(concatenated[1], concatenated[2]);
+                        Logger::getInstance().writeLog(myText);
+                        GISRecord* what_isThis = bufferPool1->whatIs(concatenated[1], concatenated[2], nameIndex);
+                        if (what_isThis != nullptr) {
+                            Logger::getInstance().writeLog(what_isThis->whatIsPrint());
+                        } else {
+                            Logger::getInstance().writeLog("No records match \""+ concatenated[1] + "\" and \""+ concatenated[2] + "\"");
+                        }
                     }
                 } else {
                     Logger::getInstance().writeLog(myText);

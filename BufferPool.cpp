@@ -8,37 +8,17 @@
 #include "BufferPool.h"
 using namespace std;
 
-/**
- * Function to append record to the database.txt
- * @param records1
- * @param filePath
- */
-void BufferPool::appendToDatabase(vector<GISRecord> records1, string filePath) {
-    ofstream outputFile(filePath, std::ios::out | std::ios::app);  // Open the file for writing in binary mode
-    if (!outputFile) {
-        std::cerr << "Error opening file." << std::endl;
-    } else {
-        databaseFilePath = filePath;
-        string tempp = "";
-        for (GISRecord& record : records1) {
-            tempp = record.dbPrint();
-            outputFile << tempp << endl;
-        }
-    }
-    outputFile.close();  // Close the file after writing
-}
-
-GISRecord BufferPool::whatIs(string name, string state) {
-    GISRecord record3;
+GISRecord* BufferPool::whatIs(string name, string state, GIS::HashTable* nameIndex) {
+    GISRecord* record3 = new GISRecord();
     for (size_t i = 0; i < buffer1.size(); ++i) {
-        record3 = buffer1[i];
-        if (record3.FEATURE_Name == name && record3.STATE_Abbreviation == state) {
+        record3 = &buffer1[i];
+        if (record3->FEATURE_Name == name && record3->STATE_Abbreviation == state) {
             bringToFrontOfBuffer(i);
-            return record3;
+            return nullptr ;
         }
     }
 
-    int resultIndex = fakeHashSearch(name, state);
+    int resultIndex = stoi(nameIndex->search(name + " " + state));
     if (resultIndex > 0) {
         string line = getLineAtIndex(databaseFilePath, resultIndex);
         string feature;
@@ -48,17 +28,18 @@ GISRecord BufferPool::whatIs(string name, string state) {
             featureInfo.push_back(feature);
         }
 
-        record3.FEATURE_ID = stoi(featureInfo[0]);
-        record3.FEATURE_Name = featureInfo[1];
-        record3.FEATURE_CLASS = featureInfo[2];
-        record3.Latitude = stoi(featureInfo[4]);
-        record3.longitude = stoi(featureInfo[5]);
-        record3.STATE_Abbreviation = featureInfo[3];
-        insertToBuffer(record3);
+        record3->FEATURE_ID = stoi(featureInfo[0]);
+        record3->FEATURE_Name = featureInfo[1];
+        record3->FEATURE_CLASS = featureInfo[2];
+        record3->Latitude = stoi(featureInfo[4]);
+        record3->longitude = stoi(featureInfo[5]);
+        record3->STATE_Abbreviation = featureInfo[3];
+        record3->COUNTY_NAME = featureInfo[6];
+        insertToBuffer(*record3);
         return record3;
     }
 
-    return record3;
+    return nullptr;
 }
 
 /**

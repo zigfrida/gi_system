@@ -17,8 +17,12 @@ public:
     string STATE_Abbreviation;
     int Latitude;
     int longitude;
+    string COUNTY_NAME;
     //Print function used for DB append
     string dbPrint();
+    string whatIsPrint();
+    string convertToDMS(int value);
+    string convertToDMS2(int value);
 
 };
 

@@ -8,6 +8,7 @@
 #include <string>
 #include <vector>
 #include "GISRecord.h"
+#include "HashTable.h"
 
 using namespace std;
 
@@ -19,9 +20,8 @@ public:
     vector<GISRecord> buffer1;
     string databaseFilePath = "";
     vector<GISRecord> readDatabaseFile(string filePath);
-    void appendToDatabase(vector<GISRecord> records1, string filePath);
     int fakeHashSearch(string name, string state);
-    GISRecord whatIs(string name, string state);
+    GISRecord* whatIs(string name, string state, GIS::HashTable* nameIndex);
 
     string getLineAtIndex(string &filePath, size_t index);
 

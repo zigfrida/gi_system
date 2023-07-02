@@ -20,6 +20,11 @@ namespace GIS {
         Logger::getInstance().writeLog("------------------------------------------------------------------------------------------");
         Logger::getInstance().writeLog("Latitude/longitude values in index entries are shown as signed integers, in total seconds.");
         Logger::getInstance().writeLog("------------------------------------------------------------------------------------------");
+        Logger::getInstance().writeLog("\t\t\t\t\t\tWorld boundaries are set to:");
+        Logger::getInstance().writeLog("\t\t\t\t\t\t           " + to_string(this->northLat));
+        Logger::getInstance().writeLog("\t\t\t\t\t\t" + to_string(this->westLong) + "              " + to_string(this->eastLong));
+        Logger::getInstance().writeLog("\t\t\t\t\t\t           " + to_string(this->southLat));
+        Logger::getInstance().writeLog("------------------------------------------------------------------------------------------");
     }
 
     int World::convertStringLatLongToInt(string lat) {
