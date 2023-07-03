@@ -5,8 +5,8 @@
 
 #include "World.h"
 #include "BufferPool.h"
-#include "HashTable.h"
 #include "PRQuadtree.h"
+#include "HashTable.h"
 #include <vector>
 using namespace std;
 namespace GIS {
@@ -17,11 +17,13 @@ namespace GIS {
             BufferPool* bufferPool1;
             HashTable* nameIndex;
             PRQuadtree* prquadtree;
+            int lineOffSet;
             CommandProcessor();
             int readScript();
             void tokenize(string const &str, const char delim,
                 vector<string> &out);
             void importCommand(string const &recordFile, string const &databaseFile);
+            void appendToDatabase(vector<GISRecord> records1, string filePath);
     };
 
 } // GIS
