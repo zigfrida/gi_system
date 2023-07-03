@@ -5,10 +5,12 @@
 #ifndef GI_SYSTEM_COORDINATEINDEX_H
 #define GI_SYSTEM_COORDINATEINDEX_H
 
+namespace GIS {
+    class CoordinateIndex {
 
-class CoordinateIndex {
+    };
+}
 
-};
 
 
 #endif //GI_SYSTEM_COORDINATEINDEX_H

@@ -15,7 +15,10 @@ namespace GIS {
             World world1;
             BufferPool* bufferPool1;
             HashTable* nameIndex;
+            CoordinateIndex* coordinateIndex;
             int lineOffSet;
+            string scriptFile;
+            string dbFile;
             CommandProcessor();
             int readScript();
             void tokenize(string const &str, const char delim,

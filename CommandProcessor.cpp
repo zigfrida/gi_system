@@ -17,8 +17,11 @@ namespace GIS {
 
     CommandProcessor::CommandProcessor(){
         bufferPool1 = new BufferPool("../Files/database.txt");
+        scriptFile = "../Files/script01.txt";
+        dbFile = "../Files/database.txt";
         lineOffSet = 0;
         nameIndex = new HashTable();
+        coordinateIndex = new CoordinateIndex();
     }
 
     void CommandProcessor::tokenize(std::string const &str, const char delim,
@@ -37,10 +40,6 @@ namespace GIS {
 
         vector<GISRecord> dbRecords;
         ifstream source(recordFile); // Source file
-//        ofstream database; // Destination file
-//        database.open("../Files/database.txt", ios::out | ios::in);
-
-
 
         if (!source.is_open()) {
             cout << "Error opening source file" << endl;
@@ -106,9 +105,7 @@ namespace GIS {
     int CommandProcessor::readScript()
     {
         string myText;
-        ifstream ScriptFile1("../Files/script01.txt");
-        string file = "../Files/VA_Monterey.txt"; // + concatenated[1];
-        string dbFile = "../Files/database.txt";
+        ifstream ScriptFile1(scriptFile);
         int commandCounter = 0;
 
         // Use a while loop together with the getline() function to read the file line by line
@@ -129,10 +126,7 @@ namespace GIS {
                         logMessage << "Command " << commandCounter << ": " << myText << endl;
                         Logger::getInstance().writeLog(logMessage.str());
 
-                        // Uncomment lines to run import command
-                        cout << "Import Command, file name: " << concatenated[1] << endl;
-
-                        importCommand(file, dbFile);
+                        importCommand(concatenated[1], dbFile);
                     } else if (command=="what_is") {
                         Logger::getInstance().writeLog(myText);
                         GISRecord* what_isThis = bufferPool1->whatIs(concatenated[1], concatenated[2], nameIndex);
@@ -140,6 +134,14 @@ namespace GIS {
                             Logger::getInstance().writeLog(what_isThis->whatIsPrint());
                         } else {
                             Logger::getInstance().writeLog("No records match \""+ concatenated[1] + "\" and \""+ concatenated[2] + "\"");
+                        }
+                    }   else if (command=="what_is_at") {
+                        Logger::getInstance().writeLog(myText);
+                        GISRecord* what_isAt = bufferPool1->whatIsAt(concatenated[1], concatenated[2], coordinateIndex);
+                        if (what_isAt != nullptr) {
+                            Logger::getInstance().writeLog(what_isAt->whatIsPrint());
+                        } else {
+                            Logger::getInstance().writeLog("No feature at \""+ concatenated[1] + "\" and \""+ concatenated[2] + "\"");
                         }
                     }
                 } else {

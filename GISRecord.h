@@ -21,6 +21,7 @@ public:
     //Print function used for DB append
     string dbPrint();
     string whatIsPrint();
+    string whatIsAtPrint();
     string convertToDMS(int value);
     string convertToDMS2(int value);
 

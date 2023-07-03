@@ -42,6 +42,42 @@ GISRecord* BufferPool::whatIs(string name, string state, GIS::HashTable* nameInd
     return nullptr;
 }
 
+GISRecord* BufferPool::whatIsAt(string latString, string longString, GIS::CoordinateIndex* coordIndex) {
+    GISRecord* record3 = new GISRecord();
+    int latitude = GIS::World::convertStringLatLongToInt(latString);
+    int longitude = GIS::World::convertStringLatLongToInt(longString);
+    for (size_t i = 0; i < buffer1.size(); ++i) {
+        record3 = &buffer1[i];
+        if (record3->Latitude == latitude && record3->longitude == longitude) {
+            bringToFrontOfBuffer(i);
+            return nullptr ;
+        }
+    }
+
+    int resultIndex = fakeTreeSearch(latitude, longitude);
+    if (resultIndex > 0) {
+        string line = getLineAtIndex(databaseFilePath, resultIndex);
+        string feature;
+        vector<string> featureInfo;
+        istringstream iss(line);
+        while (getline(iss, feature, '|')) {
+            featureInfo.push_back(feature);
+        }
+
+        record3->FEATURE_ID = stoi(featureInfo[0]);
+        record3->FEATURE_Name = featureInfo[1];
+        record3->FEATURE_CLASS = featureInfo[2];
+        record3->Latitude = stoi(featureInfo[4]);
+        record3->longitude = stoi(featureInfo[5]);
+        record3->STATE_Abbreviation = featureInfo[3];
+        record3->COUNTY_NAME = featureInfo[6];
+        insertToBuffer(*record3);
+        return record3;
+    }
+
+    return nullptr;
+}
+
 /**
  * This function simulates a hashtable search function. Replace it with real hash search function later.
  */
@@ -50,6 +86,20 @@ int BufferPool::fakeHashSearch(string name, string state) {
     for (size_t i = 0; i < allRecords.size(); ++i) {
         const GISRecord& record = allRecords[i];
         if (record.FEATURE_Name == name && record.STATE_Abbreviation == state) {
+            return i;  // Return the index of the first matching record
+        }
+    }
+    return -1;
+}
+
+/**
+ * This function simulates a hashtable search function. Replace it with real hash search function later.
+ */
+int BufferPool::fakeTreeSearch(int latitude, int longitude) {
+    vector<GISRecord> allRecords = readDatabaseFile(databaseFilePath);
+    for (size_t i = 0; i < allRecords.size(); ++i) {
+        const GISRecord& record = allRecords[i];
+        if (record.longitude == longitude && record.Latitude == latitude) {
             return i;  // Return the index of the first matching record
         }
     }
