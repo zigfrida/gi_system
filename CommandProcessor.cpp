@@ -35,7 +35,6 @@ namespace GIS {
     }
 
     void CommandProcessor::importCommand(string const &recordFile, string const &databaseFile) {
-
         vector<GISRecord> dbRecords;
         ifstream source(recordFile); // Source file
 //        ofstream database; // Destination file
@@ -83,8 +82,6 @@ namespace GIS {
             }
 
             appendToDatabase(dbRecords, databaseFile);
-            cout << "Printing tree: " << endl;
-            prquadtree->displayPRQuadtree(prquadtree->root);
 //            nameIndex->displayHashTable(); // Visualization purposes
             source.close();
         }
@@ -157,6 +154,10 @@ namespace GIS {
 
             }
         }
+
+        cout << "Printing tree: " << endl;
+        prquadtree->displayPRQuadtree(prquadtree->root);
+
         ScriptFile1.close();
         return 0;
     }

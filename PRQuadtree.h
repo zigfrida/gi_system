@@ -24,7 +24,6 @@ namespace GIS {
             int worldMaxLongitude;
 
             PRQuadtree(int westLat, int eastLat, int southLong, int northLong) : root(nullptr), worldMinLatitude(westLat), worldMaxLatitude(eastLat), worldMaxLongitude(northLong), worldMinLongitude(southLong) {
-                cout << "PRQuadtree created" << endl;
             }
 
             ~PRQuadtree() {

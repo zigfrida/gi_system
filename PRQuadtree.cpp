@@ -25,7 +25,6 @@ namespace GIS {
         }
 
         if(root == nullptr) {
-            cout << "Tree is empty" << endl;
             root = new PRQuadtreeNode(worldMinLatitude, worldMaxLatitude, worldMinLongitude, worldMaxLongitude);
         }
         insertHelper(root, coordinate);
@@ -43,6 +42,17 @@ namespace GIS {
     void PRQuadtree::insertHelper(PRQuadtreeNode* node, const CoordinateIndex& coordinate){
         if (node->isLeafNode()) { // Check if the current node is a leaf node
             if (!node->isFull()) { // Checking if leaf is full
+                // Check if the coordinate already exists in the leaf node
+                for (auto dataIndex : node->data) {
+                    if (dataIndex->latitude == coordinate.latitude && dataIndex->longitude == coordinate.longitude) {
+                        // Update the existing data entry with new GIS Record and file offset
+                        dataIndex->gis_records.insert(dataIndex->gis_records.end(), coordinate.gis_records.begin(), coordinate.gis_records.end());
+                        dataIndex->fileOffsets.insert(dataIndex->fileOffsets.end(), coordinate.fileOffsets.begin(), coordinate.fileOffsets.end());
+                        return;
+                    }
+                }
+
+                // Create a new Coordinate Index and add it to the leaf node
                 CoordinateIndex* newIndex = new CoordinateIndex(coordinate.latitude, coordinate.longitude);
                 newIndex->gis_records = coordinate.gis_records;
                 newIndex->fileOffsets = coordinate.fileOffsets;

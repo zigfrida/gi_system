@@ -5,7 +5,7 @@ Begin of GIS Program log:
 dbFile: 
 script: 
 log: 
-Start Time: 2023-07-02 22:13:40
+Start Time: 2023-07-03 11:29:06
 ; Script 1
 ;
 ; Testing using a small dataset
@@ -77,3 +77,19 @@ Command 2: import	./VA_Bath.txt
 ; world	1130000W	0690000W	300000N	440000N
 Command 3: import	CO_All.txt
 
+;
+; And some searches; let's see if you're taking the state abbreviation into account:
+what_is	Lincoln	CO
+No records match "Lincoln" and "CO"
+what_is	Lincoln	NM
+No records match "Lincoln" and "NM"
+;
+; Let's try spanning the border:
+;
+; Let's try a larger region and filter the results:
+;
+; And some more or less random searches:
+what_is	Slab Mill Gulch	CO
+No records match "Slab Mill Gulch" and "CO"
+what_is	Kemper School	CO
+No records match "Kemper School" and "CO"
