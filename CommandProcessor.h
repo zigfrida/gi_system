@@ -18,6 +18,8 @@ namespace GIS {
             HashTable* nameIndex;
             PRQuadtree* prquadtree;
             int lineOffSet;
+            string scriptFile;
+            string dbFile;
             CommandProcessor();
             int readScript();
             void tokenize(string const &str, const char delim,
