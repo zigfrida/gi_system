@@ -37,7 +37,6 @@ namespace GIS {
     }
 
     void CommandProcessor::importCommand(string const &recordFile, string const &databaseFile) {
-
         vector<GISRecord> dbRecords;
         ifstream source(recordFile); // Source file
 
@@ -72,7 +71,7 @@ namespace GIS {
                         nameIndex->insert(key, value);
                         lineOffSet++;
                         CoordinateIndex* newCordIndex = new CoordinateIndex(tempRec.latitude, tempRec.longitude);
-                        newCordIndex->gis_records.push_back(tempRec);
+                        newCordIndex->fileOffsets.push_back(lineOffSet);
 
                         prquadtree->insert(*newCordIndex, tempRec);
                     }
@@ -81,8 +80,6 @@ namespace GIS {
             }
 
             appendToDatabase(dbRecords, databaseFile);
-            cout << "Printing tree: " << endl;
-            prquadtree->displayPRQuadtree(prquadtree->root);
 //            nameIndex->displayHashTable(); // Visualization purposes
             source.close();
         }
@@ -157,6 +154,10 @@ namespace GIS {
 
             }
         }
+
+        cout << "Printing tree: " << endl;
+        prquadtree->displayPRQuadtree(prquadtree->root);
+
         ScriptFile1.close();
         return 0;
     }

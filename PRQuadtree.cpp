@@ -25,7 +25,6 @@ namespace GIS {
         }
 
         if(root == nullptr) {
-            cout << "Tree is empty" << endl;
             root = new PRQuadtreeNode(worldMinLatitude, worldMaxLatitude, worldMinLongitude, worldMaxLongitude);
         }
         insertHelper(root, coordinate);
@@ -43,8 +42,17 @@ namespace GIS {
     void PRQuadtree::insertHelper(PRQuadtreeNode* node, const CoordinateIndex& coordinate){
         if (node->isLeafNode()) { // Check if the current node is a leaf node
             if (!node->isFull()) { // Checking if leaf is full
+                // Check if the coordinate already exists in the leaf node
+                for (auto dataIndex : node->data) {
+                    if (dataIndex->latitude == coordinate.latitude && dataIndex->longitude == coordinate.longitude) {
+                        // Update the existing data entry with new file offset
+                        dataIndex->fileOffsets.insert(dataIndex->fileOffsets.end(), coordinate.fileOffsets.begin(), coordinate.fileOffsets.end());
+                        return;
+                    }
+                }
+
+                // Create a new Coordinate Index and add it to the leaf node
                 CoordinateIndex* newIndex = new CoordinateIndex(coordinate.latitude, coordinate.longitude);
-                newIndex->gis_records = coordinate.gis_records;
                 newIndex->fileOffsets = coordinate.fileOffsets;
                 node->data.push_back(newIndex);
             } else { // Leaf node is full, need to partition first
@@ -140,7 +148,7 @@ namespace GIS {
         if (node->isLeafNode()) {
             // Print leaf node information
             for (const auto& index : node->data) {
-                cout << "[(" << index->latitude << "," << index->longitude << "), " << index->gis_records.size() << "] ";
+                cout << "[(" << index->latitude << "," << index->longitude << "), " << index->fileOffsets.size() << "] ";
             }
             cout << endl;
         } else {

@@ -15,7 +15,6 @@ namespace GIS {
         public:
             int latitude;
             int longitude;
-            vector<GISRecord> gis_records;
             vector<int> fileOffsets;
 
             CoordinateIndex(int lat, int lon) : latitude(lat), longitude(lon) {}
