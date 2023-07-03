@@ -23,7 +23,7 @@ namespace GIS {
             int worldMinLongitude;
             int worldMaxLongitude;
 
-            PRQuadtree(int westLat, int eastLat, int southLong, int northLong) : root(nullptr), worldMinLatitude(westLat), worldMaxLatitude(eastLat), worldMaxLongitude(northLong), worldMinLongitude(southLong) {
+            PRQuadtree(int westLat, int eastLat, int southLong, int northLong) : root(nullptr), worldMinLatitude(southLong), worldMaxLatitude(northLong), worldMaxLongitude(eastLat), worldMinLongitude(westLat) {
             }
 
             ~PRQuadtree() {

@@ -65,8 +65,8 @@ namespace GIS {
                         tempRec.FEATURE_ID = stoi(featureInfo[0]);
                         tempRec.FEATURE_Name = featureInfo[1];
                         tempRec.FEATURE_CLASS = featureInfo[2];
-                        tempRec.longitude = World::convertStringLatLongToInt(featureInfo[7]);
-                        tempRec.latitude = World::convertStringLatLongToInt(featureInfo[8]);
+                        tempRec.latitude = World::convertStringLatLongToInt(featureInfo[7]);
+                        tempRec.longitude = World::convertStringLatLongToInt(featureInfo[8]);
                         tempRec.STATE_Abbreviation = featureInfo[3];
                         tempRec.COUNTY_NAME = featureInfo[5];
                         dbRecords.push_back(tempRec);
