@@ -8,6 +8,7 @@
 #include "CommandProcessor.h"
 #include "World.h"
 #include "HashTable.h"
+#include "PRQuadtree.h"
 #include "GISRecord.h"
 #include "Logger.h"
 
@@ -21,7 +22,6 @@ namespace GIS {
         dbFile = "../Files/database.txt";
         lineOffSet = 0;
         nameIndex = new HashTable();
-        coordinateIndex = new CoordinateIndex();
     }
 
     void CommandProcessor::tokenize(std::string const &str, const char delim,
@@ -64,19 +64,26 @@ namespace GIS {
                         tempRec.FEATURE_ID = stoi(featureInfo[0]);
                         tempRec.FEATURE_Name = featureInfo[1];
                         tempRec.FEATURE_CLASS = featureInfo[2];
-                        tempRec.Latitude = World::convertStringLatLongToInt(featureInfo[7]);
-                        tempRec.longitude = World::convertStringLatLongToInt(featureInfo[8]);
+                        tempRec.longitude = World::convertStringLatLongToInt(featureInfo[7]);
+                        tempRec.latitude = World::convertStringLatLongToInt(featureInfo[8]);
                         tempRec.STATE_Abbreviation = featureInfo[3];
                         tempRec.COUNTY_NAME = featureInfo[5];
                         dbRecords.push_back(tempRec);
                         nameIndex->insert(key, value);
                         lineOffSet++;
+                        CoordinateIndex* newCordIndex = new CoordinateIndex(tempRec.latitude, tempRec.longitude);
+                        newCordIndex->gis_records.push_back(tempRec);
+
+                        prquadtree->insert(*newCordIndex, tempRec);
                     }
                 }
                 if (firstLine) firstLine = false;
             }
 
             appendToDatabase(dbRecords, databaseFile);
+            cout << "Printing tree: " << endl;
+            prquadtree->displayPRQuadtree(prquadtree->root);
+//            nameIndex->displayHashTable(); // Visualization purposes
             source.close();
         }
     }
@@ -106,7 +113,7 @@ namespace GIS {
     {
         string myText;
         ifstream ScriptFile1(scriptFile);
-        int commandCounter = 0;
+        int commandCounter = 1;
 
         // Use a while loop together with the getline() function to read the file line by line
         while (getline (ScriptFile1, myText)) {
@@ -118,15 +125,15 @@ namespace GIS {
                     tokenize(myText, '\t', concatenated);
                     command = concatenated[0];
                     if (command == "world") {
-                        //run world
+                        //run world            west              east            south             north
                         world1.createWorld(concatenated[1], concatenated[2], concatenated[3], concatenated[4]);
-                        commandCounter++;
+                        prquadtree = new PRQuadtree(world1.westLong, world1.eastLong, world1.southLat, world1.northLat); // Initialize PRQuadtree with world boundaries
                     } else if (command == "import") {
                         stringstream logMessage;
                         logMessage << "Command " << commandCounter << ": " << myText << endl;
                         Logger::getInstance().writeLog(logMessage.str());
-
                         importCommand(concatenated[1], dbFile);
+                        commandCounter++;
                     } else if (command=="what_is") {
                         Logger::getInstance().writeLog(myText);
                         GISRecord* what_isThis = bufferPool1->whatIs(concatenated[1], concatenated[2], nameIndex);
@@ -137,7 +144,7 @@ namespace GIS {
                         }
                     }   else if (command=="what_is_at") {
                         Logger::getInstance().writeLog(myText);
-                        GISRecord* what_isAt = bufferPool1->whatIsAt(concatenated[1], concatenated[2], coordinateIndex);
+                        GISRecord* what_isAt = bufferPool1->whatIsAt(concatenated[1], concatenated[2], prquadtree);
                         if (what_isAt != nullptr) {
                             Logger::getInstance().writeLog(what_isAt->whatIsPrint());
                         } else {

@@ -5,6 +5,7 @@
 
 #include "World.h"
 #include "BufferPool.h"
+#include "PRQuadtree.h"
 #include "HashTable.h"
 #include <vector>
 using namespace std;
@@ -15,7 +16,7 @@ namespace GIS {
             World world1;
             BufferPool* bufferPool1;
             HashTable* nameIndex;
-            CoordinateIndex* coordinateIndex;
+            PRQuadtree* prquadtree;
             int lineOffSet;
             string scriptFile;
             string dbFile;

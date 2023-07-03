@@ -5,7 +5,7 @@ Begin of GIS Program log:
 dbFile: 
 script: 
 log: 
-Start Time: 2023-07-03 11:13:01
+Start Time: 2023-07-03 11:25:54
 ; Script 1
 ;
 ; Testing using a small dataset
@@ -21,13 +21,13 @@ Latitude/longitude values in index entries are shown as signed integers, in tota
 						           383000
 						-794530              -792630
 						           381000
-------------------------------------------------------------------------------------------
+
 ;
 ; Import the dataset [the address here is a relative address]
 Command 1: import	../Files/VA_Monterey.txt
 
 ; oops Church is "FEATURE_CLASS" how about the following query?
 what_is	Central Church	VA
-Highland (38d 29m 53s North, 79d 33m 23s West)
+Highland (79d 33m 23s South, 38d 29m 53s East)
 what_is_at	382812N	0793156W
- (38d 28m 12s North, 79d 31m 56s West)
+No feature at "382812N" and "0793156W"

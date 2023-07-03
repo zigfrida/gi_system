@@ -6,9 +6,13 @@
 #define GI_SYSTEM_NAMEINDEX_H
 
 
-class NameIndex {
+using namespace std;
 
-};
+namespace GIS {
+    class NameIndex {
+
+    };
+}
 
 
 #endif //GI_SYSTEM_NAMEINDEX_H

@@ -31,7 +31,7 @@ GISRecord* BufferPool::whatIs(string name, string state, GIS::HashTable* nameInd
         record3->FEATURE_ID = stoi(featureInfo[0]);
         record3->FEATURE_Name = featureInfo[1];
         record3->FEATURE_CLASS = featureInfo[2];
-        record3->Latitude = stoi(featureInfo[4]);
+        record3->latitude = stoi(featureInfo[4]);
         record3->longitude = stoi(featureInfo[5]);
         record3->STATE_Abbreviation = featureInfo[3];
         record3->COUNTY_NAME = featureInfo[6];
@@ -42,13 +42,13 @@ GISRecord* BufferPool::whatIs(string name, string state, GIS::HashTable* nameInd
     return nullptr;
 }
 
-GISRecord* BufferPool::whatIsAt(string latString, string longString, GIS::CoordinateIndex* coordIndex) {
+GISRecord* BufferPool::whatIsAt(string latString, string longString, GIS::PRQuadtree* prQuadTree) {
     GISRecord* record3 = new GISRecord();
     int latitude = GIS::World::convertStringLatLongToInt(latString);
     int longitude = GIS::World::convertStringLatLongToInt(longString);
     for (size_t i = 0; i < buffer1.size(); ++i) {
         record3 = &buffer1[i];
-        if (record3->Latitude == latitude && record3->longitude == longitude) {
+        if (record3->latitude == latitude && record3->longitude == longitude) {
             bringToFrontOfBuffer(i);
             return nullptr ;
         }
@@ -67,7 +67,7 @@ GISRecord* BufferPool::whatIsAt(string latString, string longString, GIS::Coordi
         record3->FEATURE_ID = stoi(featureInfo[0]);
         record3->FEATURE_Name = featureInfo[1];
         record3->FEATURE_CLASS = featureInfo[2];
-        record3->Latitude = stoi(featureInfo[4]);
+        record3->latitude = stoi(featureInfo[4]);
         record3->longitude = stoi(featureInfo[5]);
         record3->STATE_Abbreviation = featureInfo[3];
         record3->COUNTY_NAME = featureInfo[6];
@@ -99,7 +99,7 @@ int BufferPool::fakeTreeSearch(int latitude, int longitude) {
     vector<GISRecord> allRecords = readDatabaseFile(databaseFilePath);
     for (size_t i = 0; i < allRecords.size(); ++i) {
         const GISRecord& record = allRecords[i];
-        if (record.longitude == longitude && record.Latitude == latitude) {
+        if (record.longitude == longitude && record.latitude == latitude) {
             return i;  // Return the index of the first matching record
         }
     }
@@ -132,7 +132,7 @@ vector<GISRecord> BufferPool::readDatabaseFile(string filePath) {
                 tempRec.FEATURE_ID = stoi(featureInfo[0]);
                 tempRec.FEATURE_Name = featureInfo[1];
                 tempRec.FEATURE_CLASS = featureInfo[2];
-                tempRec.Latitude = stoi(featureInfo[4]);
+                tempRec.latitude = stoi(featureInfo[4]);
                 tempRec.longitude = stoi(featureInfo[5]);
                 tempRec.STATE_Abbreviation = featureInfo[3];
                 dbRecords.push_back(tempRec);
