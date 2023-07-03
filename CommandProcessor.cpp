@@ -18,6 +18,8 @@ namespace GIS {
 
     CommandProcessor::CommandProcessor(){
         bufferPool1 = new BufferPool("../Files/database.txt");
+        scriptFile = "../Files/script01.txt";
+        dbFile = "../Files/database.txt";
         lineOffSet = 0;
         nameIndex = new HashTable();
     }
@@ -38,10 +40,6 @@ namespace GIS {
 
         vector<GISRecord> dbRecords;
         ifstream source(recordFile); // Source file
-//        ofstream database; // Destination file
-//        database.open("../Files/database.txt", ios::out | ios::in);
-
-
 
         if (!source.is_open()) {
             cout << "Error opening source file" << endl;
@@ -66,8 +64,8 @@ namespace GIS {
                         tempRec.FEATURE_ID = stoi(featureInfo[0]);
                         tempRec.FEATURE_Name = featureInfo[1];
                         tempRec.FEATURE_CLASS = featureInfo[2];
-                        tempRec.longitude = World::convertStringLatLongToInt(featureInfo[7]);
-                        tempRec.latitude = World::convertStringLatLongToInt(featureInfo[8]);
+                        tempRec.latitude = World::convertStringLatLongToInt(featureInfo[7]);
+                        tempRec.longitude = World::convertStringLatLongToInt(featureInfo[8]);
                         tempRec.STATE_Abbreviation = featureInfo[3];
                         tempRec.COUNTY_NAME = featureInfo[5];
                         dbRecords.push_back(tempRec);
@@ -114,9 +112,7 @@ namespace GIS {
     int CommandProcessor::readScript()
     {
         string myText;
-        ifstream ScriptFile1("../Files/script01.txt");
-        string file = "../Files/VA_Monterey.txt"; // + concatenated[1];
-        string dbFile = "../Files/database.txt";
+        ifstream ScriptFile1(scriptFile);
         int commandCounter = 1;
 
         // Use a while loop together with the getline() function to read the file line by line
@@ -136,19 +132,23 @@ namespace GIS {
                         stringstream logMessage;
                         logMessage << "Command " << commandCounter << ": " << myText << endl;
                         Logger::getInstance().writeLog(logMessage.str());
-
-                        // Uncomment lines to run import command
-                        cout << "Import Command, file name: " << concatenated[1] << endl;
-
-                        importCommand(file, dbFile);
+                        importCommand(concatenated[1], dbFile);
                         commandCounter++;
                     } else if (command=="what_is") {
                         Logger::getInstance().writeLog(myText);
                         GISRecord* what_isThis = bufferPool1->whatIs(concatenated[1], concatenated[2], nameIndex);
                         if (what_isThis != nullptr) {
-                            Logger::getInstance().writeLog(what_isThis->whatIsPrint());
+                            Logger::getInstance().writeLog(what_isThis->whatIsAtPrint());
                         } else {
                             Logger::getInstance().writeLog("No records match \""+ concatenated[1] + "\" and \""+ concatenated[2] + "\"");
+                        }
+                    }   else if (command=="what_is_at") {
+                        Logger::getInstance().writeLog(myText);
+                        GISRecord* what_isAt = bufferPool1->whatIsAt(concatenated[1], concatenated[2], prquadtree);
+                        if (what_isAt != nullptr) {
+                            Logger::getInstance().writeLog(what_isAt->whatIsAtPrint());
+                        } else {
+                            Logger::getInstance().writeLog("No feature at \""+ concatenated[1] + "\" and \""+ concatenated[2] + "\"");
                         }
                     }
                 } else {
