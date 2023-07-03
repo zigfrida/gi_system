@@ -14,7 +14,7 @@ string GISRecord::dbPrint() {
     result += "|";
     result += this->STATE_Abbreviation;
     result += "|";
-    result += to_string(this->Latitude) ;
+    result += to_string(this->latitude) ;
     result += "|";
     result += to_string(this->longitude);
     result += "|";
@@ -27,7 +27,7 @@ string GISRecord::whatIsPrint() {
     //Format example: Highland  (38d 29m 53s North, 79d 33m 23s West)
     string result = this->COUNTY_NAME + " (";
 
-    result += convertToDMS(this->Latitude) + ", ";
+    result += convertToDMS(this->latitude) + ", ";
     result += convertToDMS2(this->longitude) + ")";
     return result;
 }

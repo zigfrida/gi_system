@@ -15,7 +15,7 @@ public:
     string FEATURE_Name;
     string FEATURE_CLASS;
     string STATE_Abbreviation;
-    int Latitude;
+    int latitude;
     int longitude;
     string COUNTY_NAME;
     //Print function used for DB append

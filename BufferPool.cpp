@@ -31,7 +31,7 @@ GISRecord* BufferPool::whatIs(string name, string state, GIS::HashTable* nameInd
         record3->FEATURE_ID = stoi(featureInfo[0]);
         record3->FEATURE_Name = featureInfo[1];
         record3->FEATURE_CLASS = featureInfo[2];
-        record3->Latitude = stoi(featureInfo[4]);
+        record3->latitude = stoi(featureInfo[4]);
         record3->longitude = stoi(featureInfo[5]);
         record3->STATE_Abbreviation = featureInfo[3];
         record3->COUNTY_NAME = featureInfo[6];
@@ -82,7 +82,7 @@ vector<GISRecord> BufferPool::readDatabaseFile(string filePath) {
                 tempRec.FEATURE_ID = stoi(featureInfo[0]);
                 tempRec.FEATURE_Name = featureInfo[1];
                 tempRec.FEATURE_CLASS = featureInfo[2];
-                tempRec.Latitude = stoi(featureInfo[4]);
+                tempRec.latitude = stoi(featureInfo[4]);
                 tempRec.longitude = stoi(featureInfo[5]);
                 tempRec.STATE_Abbreviation = featureInfo[3];
                 dbRecords.push_back(tempRec);
