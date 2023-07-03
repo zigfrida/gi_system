@@ -1,63 +1,63 @@
-1481345|Asbury Church|Church|VA|-793312|382607|Highland|
-1481852|Blue Grass|Populated Place|VA|-793259|383000|Highland|
-1481878|Bluegrass Valley|Valley|VA|-793222|382953|Highland|
-1482110|Buck Hill|Summit|VA|-793358|381902|Highland|
-1482176|Burners Run|Stream|VA|-793409|382509|Highland|
-1482324|Mount Carlyle|Summit|VA|-793353|381556|Highland|
-1482434|Central Church|Church|VA|-793323|382953|Highland|
-1482557|Claylick Hollow|Valley|VA|-793238|381613|Highland|
-1482785|Crab Run|Stream|VA|-793144|381707|Highland|
-1482950|Davis Run|Stream|VA|-793053|381824|Highland|
-1483281|Elk Run|Stream|VA|-793153|382936|Highland|
-1483492|Forks of Waters|Locale|VA|-793031|382856|Highland|
-1483527|Frank Run|Stream|VA|-793310|382953|Highland|
-1483647|Ginseng Mountain|Summit|VA|-793139|382850|Highland|
-1483860|Gulf Mountain|Summit|VA|-793103|382940|Highland|
-1483916|Hamilton Chapel|Church|VA|-793707|381740|Highland|
-1484097|Highland High School|School|VA|-793444|382426|Highland|
-1484099|Highland Wildlife Management Area|Park|VA|-793439|381905|Highland|
-1484101|Hightown Church|Church|VA|-793718|382526|Highland|
-1484292|Hupman Valley|Valley|VA|-793154|381525|Highland|
-1484379|Jack Mountain|Range|VA|-793502|382023|Highland|
-1484574|Key Run|Stream|VA|-793238|382951|Highland|
-1484664|Lantz Mountain|Summit|VA|-793652|382852|Highland|
-1484722|Laurel Run|Stream|VA|-793159|382725|Highland|
-1484896|Little Doe Hill|Summit|VA|-793109|382148|Highland|
-1485337|Meadow Draft|Valley|VA|-793024|381508|Highland|
-1485495|Miracle Ridge|Ridge|VA|-793500|382541|Highland|
-1485521|Monterey Mountain|Summit|VA|-793622|382515|Highland|
-1485860|New Salem Church|Church|VA|-793151|381725|Highland|
-1486118|Peck Run|Stream|VA|-793109|382806|Highland|
-1486630|Barren Rock|Summit|VA|-793013|382502|Highland|
-1486995|Seldom Seen Hollow|Valley|VA|-793031|382145|Highland|
-1487013|Seybert Chapel|Church|VA|-793225|382512|Highland|
-1487250|Simmons Run|Stream|VA|-793209|382654|Highland|
-1487423|Southall Chapel|Church|VA|-793012|381522|Highland|
-1487661|Strait Creek|Stream|VA|-793031|382856|Highland|
-1487758|Swope Hollow|Valley|VA|-793005|381531|Highland|
-1487894|Thorny Bottom Church|Church|VA|-793141|382704|Highland|
-1488054|Union Chapel|Church|VA|-793435|382828|Highland|
-1488106|Vance Hollow|Valley|VA|-793019|381811|Highland|
-1488259|West Strait Creek|Stream|VA|-793204|382653|Highland|
-1488320|White Run|Stream|VA|-793313|382610|Highland|
-1488473|Wooden Run|Stream|VA|-793201|382718|Highland|
-1488515|Hannah Field Airport|Airport|VA|-793601|382354|Highland|
-1495244|Bear Mountain|Summit|VA|-793254|382012|Highland|
-1495400|Clover Creek|Populated Place|VA|-793256|381612|Highland|
-1495470|Doe Hill|Summit|VA|-793113|382313|Highland|
-1496000|New Hampden|Populated Place|VA|-793348|382934|Highland|
-1496110|Possum Trot|Populated Place|VA|-793156|382812|Highland|
-1496144|Rich Hills|Summit|VA|-793336|382453|Highland|
-1496194|Seybert Hills|Summit|VA|-793233|382552|Highland|
-1496241|Sounding Knob|Summit|VA|-793523|382047|Highland|
-1496325|Trimble|Populated Place|VA|-793708|381816|Highland|
-1496326|Trimble Knob|Summit|VA|-793517|382417|Highland|
-1498517|Monterey|Populated Place|VA|-793450|382444|Highland|
-1498741|Smith Field|Airport|VA|-793029|381809|Highland|
-1673765|Blue Grass School (historical)|School|VA|-793303|382957|Highland|
-1673766|Clover Creek Presbyterian Church|Church|VA|-793236|381612|Highland|
-1673775|Highland Elementary School|School|VA|-793446|382427|Highland|
-1673777|Monterey Methodist Episcopal Church|Church|VA|-793446|382442|Highland|
-1673781|Strait Creek School (historical)|School|VA|-793217|382447|Highland|
-1927411|Monterey District|Civil|VA|-793602|382120|Highland|
-2391311|Town of Monterey|Civil|VA|-793451|382442|Highland|
+1481345|Asbury Church|Church|VA|382607|-793312|Highland|
+1481852|Blue Grass|Populated Place|VA|383000|-793259|Highland|
+1481878|Bluegrass Valley|Valley|VA|382953|-793222|Highland|
+1482110|Buck Hill|Summit|VA|381902|-793358|Highland|
+1482176|Burners Run|Stream|VA|382509|-793409|Highland|
+1482324|Mount Carlyle|Summit|VA|381556|-793353|Highland|
+1482434|Central Church|Church|VA|382953|-793323|Highland|
+1482557|Claylick Hollow|Valley|VA|381613|-793238|Highland|
+1482785|Crab Run|Stream|VA|381707|-793144|Highland|
+1482950|Davis Run|Stream|VA|381824|-793053|Highland|
+1483281|Elk Run|Stream|VA|382936|-793153|Highland|
+1483492|Forks of Waters|Locale|VA|382856|-793031|Highland|
+1483527|Frank Run|Stream|VA|382953|-793310|Highland|
+1483647|Ginseng Mountain|Summit|VA|382850|-793139|Highland|
+1483860|Gulf Mountain|Summit|VA|382940|-793103|Highland|
+1483916|Hamilton Chapel|Church|VA|381740|-793707|Highland|
+1484097|Highland High School|School|VA|382426|-793444|Highland|
+1484099|Highland Wildlife Management Area|Park|VA|381905|-793439|Highland|
+1484101|Hightown Church|Church|VA|382526|-793718|Highland|
+1484292|Hupman Valley|Valley|VA|381525|-793154|Highland|
+1484379|Jack Mountain|Range|VA|382023|-793502|Highland|
+1484574|Key Run|Stream|VA|382951|-793238|Highland|
+1484664|Lantz Mountain|Summit|VA|382852|-793652|Highland|
+1484722|Laurel Run|Stream|VA|382725|-793159|Highland|
+1484896|Little Doe Hill|Summit|VA|382148|-793109|Highland|
+1485337|Meadow Draft|Valley|VA|381508|-793024|Highland|
+1485495|Miracle Ridge|Ridge|VA|382541|-793500|Highland|
+1485521|Monterey Mountain|Summit|VA|382515|-793622|Highland|
+1485860|New Salem Church|Church|VA|381725|-793151|Highland|
+1486118|Peck Run|Stream|VA|382806|-793109|Highland|
+1486630|Barren Rock|Summit|VA|382502|-793013|Highland|
+1486995|Seldom Seen Hollow|Valley|VA|382145|-793031|Highland|
+1487013|Seybert Chapel|Church|VA|382512|-793225|Highland|
+1487250|Simmons Run|Stream|VA|382654|-793209|Highland|
+1487423|Southall Chapel|Church|VA|381522|-793012|Highland|
+1487661|Strait Creek|Stream|VA|382856|-793031|Highland|
+1487758|Swope Hollow|Valley|VA|381531|-793005|Highland|
+1487894|Thorny Bottom Church|Church|VA|382704|-793141|Highland|
+1488054|Union Chapel|Church|VA|382828|-793435|Highland|
+1488106|Vance Hollow|Valley|VA|381811|-793019|Highland|
+1488259|West Strait Creek|Stream|VA|382653|-793204|Highland|
+1488320|White Run|Stream|VA|382610|-793313|Highland|
+1488473|Wooden Run|Stream|VA|382718|-793201|Highland|
+1488515|Hannah Field Airport|Airport|VA|382354|-793601|Highland|
+1495244|Bear Mountain|Summit|VA|382012|-793254|Highland|
+1495400|Clover Creek|Populated Place|VA|381612|-793256|Highland|
+1495470|Doe Hill|Summit|VA|382313|-793113|Highland|
+1496000|New Hampden|Populated Place|VA|382934|-793348|Highland|
+1496110|Possum Trot|Populated Place|VA|382812|-793156|Highland|
+1496144|Rich Hills|Summit|VA|382453|-793336|Highland|
+1496194|Seybert Hills|Summit|VA|382552|-793233|Highland|
+1496241|Sounding Knob|Summit|VA|382047|-793523|Highland|
+1496325|Trimble|Populated Place|VA|381816|-793708|Highland|
+1496326|Trimble Knob|Summit|VA|382417|-793517|Highland|
+1498517|Monterey|Populated Place|VA|382444|-793450|Highland|
+1498741|Smith Field|Airport|VA|381809|-793029|Highland|
+1673765|Blue Grass School (historical)|School|VA|382957|-793303|Highland|
+1673766|Clover Creek Presbyterian Church|Church|VA|381612|-793236|Highland|
+1673775|Highland Elementary School|School|VA|382427|-793446|Highland|
+1673777|Monterey Methodist Episcopal Church|Church|VA|382442|-793446|Highland|
+1673781|Strait Creek School (historical)|School|VA|382447|-793217|Highland|
+1927411|Monterey District|Civil|VA|382120|-793602|Highland|
+2391311|Town of Monterey|Civil|VA|382442|-793451|Highland|

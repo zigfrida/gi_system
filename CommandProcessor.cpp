@@ -64,8 +64,8 @@ namespace GIS {
                         tempRec.FEATURE_ID = stoi(featureInfo[0]);
                         tempRec.FEATURE_Name = featureInfo[1];
                         tempRec.FEATURE_CLASS = featureInfo[2];
-                        tempRec.longitude = World::convertStringLatLongToInt(featureInfo[7]);
-                        tempRec.latitude = World::convertStringLatLongToInt(featureInfo[8]);
+                        tempRec.latitude = World::convertStringLatLongToInt(featureInfo[7]);
+                        tempRec.longitude = World::convertStringLatLongToInt(featureInfo[8]);
                         tempRec.STATE_Abbreviation = featureInfo[3];
                         tempRec.COUNTY_NAME = featureInfo[5];
                         dbRecords.push_back(tempRec);
@@ -138,7 +138,7 @@ namespace GIS {
                         Logger::getInstance().writeLog(myText);
                         GISRecord* what_isThis = bufferPool1->whatIs(concatenated[1], concatenated[2], nameIndex);
                         if (what_isThis != nullptr) {
-                            Logger::getInstance().writeLog(what_isThis->whatIsPrint());
+                            Logger::getInstance().writeLog(what_isThis->whatIsAtPrint());
                         } else {
                             Logger::getInstance().writeLog("No records match \""+ concatenated[1] + "\" and \""+ concatenated[2] + "\"");
                         }
@@ -146,7 +146,7 @@ namespace GIS {
                         Logger::getInstance().writeLog(myText);
                         GISRecord* what_isAt = bufferPool1->whatIsAt(concatenated[1], concatenated[2], prquadtree);
                         if (what_isAt != nullptr) {
-                            Logger::getInstance().writeLog(what_isAt->whatIsPrint());
+                            Logger::getInstance().writeLog(what_isAt->whatIsAtPrint());
                         } else {
                             Logger::getInstance().writeLog("No feature at \""+ concatenated[1] + "\" and \""+ concatenated[2] + "\"");
                         }

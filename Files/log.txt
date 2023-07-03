@@ -5,7 +5,7 @@ Begin of GIS Program log:
 dbFile: 
 script: 
 log: 
-Start Time: 2023-07-03 11:25:54
+Start Time: 2023-07-03 11:56:06
 ; Script 1
 ;
 ; Testing using a small dataset
@@ -28,6 +28,6 @@ Command 1: import	../Files/VA_Monterey.txt
 
 ; oops Church is "FEATURE_CLASS" how about the following query?
 what_is	Central Church	VA
-Highland (79d 33m 23s South, 38d 29m 53s East)
+"Central Church" "Highland" "VA"
 what_is_at	382812N	0793156W
-No feature at "382812N" and "0793156W"
+"" "" ""

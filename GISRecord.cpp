@@ -34,10 +34,10 @@ string GISRecord::whatIsPrint() {
 
 string GISRecord::whatIsAtPrint() {
     //Format example: Highland  (38d 29m 53s North, 79d 33m 23s West)
-    string result = this->COUNTY_NAME + " (";
+    string result = "\"" + this->FEATURE_Name + "\" \"";
 
-    result += convertToDMS(this->latitude) + ", ";
-    result += convertToDMS2(this->longitude) + ")";
+    result += this->COUNTY_NAME + "\" \"";
+    result += this->STATE_Abbreviation + "\"";
     return result;
 }
 
