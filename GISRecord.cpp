@@ -14,7 +14,7 @@ string GISRecord::dbPrint() {
     result += "|";
     result += this->STATE_Abbreviation;
     result += "|";
-    result += to_string(this->Latitude) ;
+    result += to_string(this->latitude) ;
     result += "|";
     result += to_string(this->longitude);
     result += "|";

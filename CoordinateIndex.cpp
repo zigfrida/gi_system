@@ -3,3 +3,9 @@
 //
 
 #include "CoordinateIndex.h"
+
+using namespace std;
+
+namespace GIS {
+
+}

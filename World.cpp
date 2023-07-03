@@ -14,12 +14,7 @@ namespace GIS {
         this->southLat = convertStringLatLongToInt(southLat);
         this->northLat = convertStringLatLongToInt(northLat);
 
-        stringstream logMessage;
-        logMessage << "world\t" << this->westLong << "\t" << this->eastLong << endl;
-        Logger::getInstance().writeLog(logMessage.str());
-        Logger::getInstance().writeLog("------------------------------------------------------------------------------------------");
-        Logger::getInstance().writeLog("Latitude/longitude values in index entries are shown as signed integers, in total seconds.");
-        Logger::getInstance().writeLog("------------------------------------------------------------------------------------------");
+        writeWorldToLog();
     }
 
     int World::convertStringLatLongToInt(string lat) {
@@ -46,5 +41,21 @@ namespace GIS {
         }
 
         return true;
+    }
+
+    void World::writeWorldToLog() {
+        stringstream logMessage, upSentence, middleSentence, lastSentence;
+        logMessage << "world\t" << this->westLong << "\t" << this->eastLong << endl;
+        Logger::getInstance().writeLog(logMessage.str());
+        Logger::getInstance().writeLog("------------------------------------------------------------------------------------------");
+        Logger::getInstance().writeLog("Latitude/longitude values in index entries are shown as signed integers, in total seconds.");
+        Logger::getInstance().writeLog("------------------------------------------------------------------------------------------");
+        Logger::getInstance().writeLog("\t\t\t\t\t\tWorld boundaries are set to:");
+        upSentence << "\t\t\t\t\t\t           " <<  this->northLat;
+        Logger::getInstance().writeLog(upSentence.str());
+        middleSentence << "\t\t\t\t\t\t" << this->westLong << "              " << this->eastLong;
+        Logger::getInstance().writeLog(middleSentence.str());
+        lastSentence << "\t\t\t\t\t\t           " << this->southLat << endl;
+        Logger::getInstance().writeLog(lastSentence.str());
     }
 }

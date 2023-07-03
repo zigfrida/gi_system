@@ -6,6 +6,7 @@
 #include "World.h"
 #include "BufferPool.h"
 #include "HashTable.h"
+#include "PRQuadtree.h"
 #include <vector>
 using namespace std;
 namespace GIS {
@@ -15,6 +16,7 @@ namespace GIS {
             World world1;
             BufferPool* bufferPool1;
             HashTable* nameIndex;
+            PRQuadtree* prquadtree;
             CommandProcessor();
             int readScript();
             void tokenize(string const &str, const char delim,
