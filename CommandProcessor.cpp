@@ -135,7 +135,7 @@ namespace GIS {
                         Logger::getInstance().writeLog(myText);
                         GISRecord* what_isThis = bufferPool1->whatIs(concatenated[1], concatenated[2], nameIndex);
                         if (what_isThis != nullptr) {
-                            Logger::getInstance().writeLog(what_isThis->whatIsAtPrint());
+                            Logger::getInstance().writeLog(what_isThis->whatIsPrint());
                         } else {
                             Logger::getInstance().writeLog("No records match \""+ concatenated[1] + "\" and \""+ concatenated[2] + "\"");
                         }
