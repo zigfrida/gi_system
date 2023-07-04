@@ -12,3 +12,5 @@ import	../Files/VA_Monterey.txt
 ; oops Church is "FEATURE_CLASS" how about the following query?
 what_is	Central Church	VA
 what_is_at	382812N	0793156W
+what_is	Central Church	VA
+what_is_at	382812N	0793156W

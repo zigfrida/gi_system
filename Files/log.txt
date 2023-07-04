@@ -5,7 +5,7 @@ Begin of GIS Program log:
 dbFile: 
 script: 
 log: 
-Start Time: 2023-07-03 11:56:06
+Start Time: 2023-07-03 19:09:22
 ; Script 1
 ;
 ; Testing using a small dataset
@@ -30,4 +30,8 @@ Command 1: import	../Files/VA_Monterey.txt
 what_is	Central Church	VA
 "Central Church" "Highland" "VA"
 what_is_at	382812N	0793156W
-"" "" ""
+"Possum Trot" "Highland" "VA"
+what_is	Central Church	VA
+"Possum Trot" "Highland" "VA"
+what_is_at	382812N	0793156W
+"Central Church" "Highland" "VA"

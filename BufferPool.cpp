@@ -9,12 +9,12 @@
 using namespace std;
 
 GISRecord* BufferPool::whatIs(string name, string state, GIS::HashTable* nameIndex) {
-    GISRecord* record3 = new GISRecord();
+    GISRecord* record3 = nullptr;
+    record3 = new GISRecord;
     for (size_t i = 0; i < buffer1.size(); ++i) {
-        record3 = &buffer1[i];
-        if (record3->FEATURE_Name == name && record3->STATE_Abbreviation == state) {
+        if (buffer1[i].FEATURE_Name == name && buffer1[i].STATE_Abbreviation == state) {
             bringToFrontOfBuffer(i);
-            return nullptr ;
+            return &buffer1[i];
         }
     }
 
@@ -43,14 +43,14 @@ GISRecord* BufferPool::whatIs(string name, string state, GIS::HashTable* nameInd
 }
 
 GISRecord* BufferPool::whatIsAt(string latString, string longString, GIS::PRQuadtree* prQuadTree) {
-    GISRecord* record3 = new GISRecord();
+    GISRecord* record3 = nullptr;
+    record3 = new GISRecord();
     int latitude = GIS::World::convertStringLatLongToInt(latString);
     int longitude = GIS::World::convertStringLatLongToInt(longString);
     for (size_t i = 0; i < buffer1.size(); ++i) {
-        record3 = &buffer1[i];
-        if (record3->latitude == latitude && record3->longitude == longitude) {
+        if (buffer1[i].latitude == latitude && buffer1[i].longitude == longitude) {
             bringToFrontOfBuffer(i);
-            return nullptr ;
+            return &buffer1[i];
         }
     }
 
