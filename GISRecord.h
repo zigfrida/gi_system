@@ -18,6 +18,7 @@ public:
     int latitude;
     int longitude;
     string COUNTY_NAME;
+    int lineOfSet;
     //Print function used for DB append
     string dbPrint();
     string whatIsPrint();

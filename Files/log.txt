@@ -5,7 +5,7 @@ Begin of GIS Program log:
 dbFile: 
 script: 
 log: 
-Start Time: 2023-07-05 12:11:50
+Start Time: 2023-07-05 12:22:50
 ; Script 1
 ;
 ; Testing using a small dataset
@@ -191,7 +191,7 @@ Command 5: what_is_at	382812N	0793156W
 Command 6: debug	pool
 
 MRU
-	1496110|Possum Trot|Populated Place|VA|Highland|382812|-793156|
+	47: 1496110|Possum Trot|Populated Place|VA|Highland|382812|-793156|
 LRU
 ------------------------------------------------------------------------------------------
 ;
@@ -218,10 +218,10 @@ No records match "Smith Field" and "CO"
 Command 12: debug	pool
 
 MRU
-	1498741|Smith Field|Airport|VA|Highland|381809|-793029|
-	2391311|Town of Monterey|Civil|VA|Highland|382442|-793451|
-	1482434|Central Church|Church|VA|Highland|382953|-793323|
-	1498741|Smith Field|Airport|VA|Highland|381809|-793029|
+	54: 1498741|Smith Field|Airport|VA|Highland|381809|-793029|
+	61: 2391311|Town of Monterey|Civil|VA|Highland|382442|-793451|
+	5: 1482434|Central Church|Church|VA|Highland|382953|-793323|
+	54: 1498741|Smith Field|Airport|VA|Highland|381809|-793029|
 LRU
 ------------------------------------------------------------------------------------------
 ;
@@ -234,11 +234,11 @@ Command 13: what_is_at	382812N	0793156W
 Command 14: debug	pool
 
 MRU
-	1496110|Possum Trot|Populated Place|VA|Highland|382812|-793156|
-	1498741|Smith Field|Airport|VA|Highland|381809|-793029|
-	2391311|Town of Monterey|Civil|VA|Highland|382442|-793451|
-	1482434|Central Church|Church|VA|Highland|382953|-793323|
-	1496110|Possum Trot|Populated Place|VA|Highland|382812|-793156|
+	47: 1496110|Possum Trot|Populated Place|VA|Highland|382812|-793156|
+	54: 1498741|Smith Field|Airport|VA|Highland|381809|-793029|
+	61: 2391311|Town of Monterey|Civil|VA|Highland|382442|-793451|
+	5: 1482434|Central Church|Church|VA|Highland|382953|-793323|
+	47: 1496110|Possum Trot|Populated Place|VA|Highland|382812|-793156|
 LRU
 ------------------------------------------------------------------------------------------
 ;
@@ -270,15 +270,15 @@ Command 19: what_is_at	382856N	0793031W
 Command 20: debug	pool
 
 MRU
-	1483492|Forks of Waters|Locale|VA|Highland|382856|-793031|
-	1484574|Key Run|Stream|VA|Highland|382951|-793238|
-	1495400|Clover Creek|Populated Place|VA|Highland|381612|-793256|
-	1496325|Trimble|Populated Place|VA|Highland|381816|-793708|
-	1496110|Possum Trot|Populated Place|VA|Highland|382812|-793156|
-	1498741|Smith Field|Airport|VA|Highland|381809|-793029|
-	2391311|Town of Monterey|Civil|VA|Highland|382442|-793451|
-	1482434|Central Church|Church|VA|Highland|382953|-793323|
-	1483492|Forks of Waters|Locale|VA|Highland|382856|-793031|
+	10: 1483492|Forks of Waters|Locale|VA|Highland|382856|-793031|
+	20: 1484574|Key Run|Stream|VA|Highland|382951|-793238|
+	44: 1495400|Clover Creek|Populated Place|VA|Highland|381612|-793256|
+	51: 1496325|Trimble|Populated Place|VA|Highland|381816|-793708|
+	47: 1496110|Possum Trot|Populated Place|VA|Highland|382812|-793156|
+	54: 1498741|Smith Field|Airport|VA|Highland|381809|-793029|
+	61: 2391311|Town of Monterey|Civil|VA|Highland|382442|-793451|
+	5: 1482434|Central Church|Church|VA|Highland|382953|-793323|
+	10: 1483492|Forks of Waters|Locale|VA|Highland|382856|-793031|
 LRU
 ------------------------------------------------------------------------------------------
 ; Let's import a larger dataset [wait a second, VA_Bath has 520 records, why didn't all of them get imported? explain this in your report]
@@ -288,15 +288,15 @@ Command 21: import	./VA_Bath.txt
 Command 22: debug	pool
 
 MRU
-	1483492|Forks of Waters|Locale|VA|Highland|382856|-793031|
-	1484574|Key Run|Stream|VA|Highland|382951|-793238|
-	1495400|Clover Creek|Populated Place|VA|Highland|381612|-793256|
-	1496325|Trimble|Populated Place|VA|Highland|381816|-793708|
-	1496110|Possum Trot|Populated Place|VA|Highland|382812|-793156|
-	1498741|Smith Field|Airport|VA|Highland|381809|-793029|
-	2391311|Town of Monterey|Civil|VA|Highland|382442|-793451|
-	1482434|Central Church|Church|VA|Highland|382953|-793323|
-	1483492|Forks of Waters|Locale|VA|Highland|382856|-793031|
+	10: 1483492|Forks of Waters|Locale|VA|Highland|382856|-793031|
+	20: 1484574|Key Run|Stream|VA|Highland|382951|-793238|
+	44: 1495400|Clover Creek|Populated Place|VA|Highland|381612|-793256|
+	51: 1496325|Trimble|Populated Place|VA|Highland|381816|-793708|
+	47: 1496110|Possum Trot|Populated Place|VA|Highland|382812|-793156|
+	54: 1498741|Smith Field|Airport|VA|Highland|381809|-793029|
+	61: 2391311|Town of Monterey|Civil|VA|Highland|382442|-793451|
+	5: 1482434|Central Church|Church|VA|Highland|382953|-793323|
+	10: 1483492|Forks of Waters|Locale|VA|Highland|382856|-793031|
 LRU
 ------------------------------------------------------------------------------------------
 ;
