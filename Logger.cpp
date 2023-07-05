@@ -58,13 +58,22 @@ namespace GIS {
         return timeBuffer;
     }
 
-    void Logger::updateCommandCount() {
-        commandCount++;
-    }
-
     void Logger::writeCommandCount(const string &commandName) {
         if (logFile.is_open()) {
             logFile << "Command " << commandCount << ": " << commandName << endl << endl;
+            logFile.flush();
+            commandCount++;
+        } else {
+            cerr << "Error: Log file is not open!" << endl;
+        }
+    }
+
+    void Logger::quitCommand() {
+        if (logFile.is_open()) {
+            logFile << "Command " << commandCount << ": quit" << endl << endl;
+            logFile << "Terminating execution of commands." << endl;
+            logFile << "------------------------------------------------------------------------------------------" << endl;
+            logFile << "End Time: " << getCurrentTime() << endl;
             logFile.flush();
             commandCount++;
         } else {

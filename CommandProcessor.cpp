@@ -158,6 +158,9 @@ namespace GIS {
                             Logger::getInstance().writeCommandCount(myText);
                             bufferPool1->displayDebugPool();
                         }
+                    } else if (command == "quit") {
+                        Logger::getInstance().quitCommand();
+                        return 0;
                     }
 
                 } else {

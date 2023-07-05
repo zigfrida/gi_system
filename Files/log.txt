@@ -5,7 +5,7 @@ Begin of GIS Program log:
 dbFile: 
 script: 
 log: 
-Start Time: 2023-07-05 12:22:50
+Start Time: 2023-07-05 12:38:23
 ; Script 1
 ;
 ; Testing using a small dataset
@@ -301,38 +301,8 @@ LRU
 ------------------------------------------------------------------------------------------
 ;
 ; Exiting
-;
-; From this point on all of the commands will be ignored, you can use the following large dataset to test your implemented software
-; To consider this file please use the following world command at the beginning of this file
-; world	1130000W	0690000W	300000N	440000N
-Command 23: import	CO_All.txt
+Command 23: quit
 
-;
-; And some searches; let's see if you're taking the state abbreviation into account:
-Command 24: what_is	Lincoln	CO
-
-No records match "Lincoln" and "CO"
-Command 25: what_is	Lincoln	NM
-
-No records match "Lincoln" and "NM"
-;
-; Let's try spanning the border:
-;
-; Let's try a larger region and filter the results:
-;
-; And some more or less random searches:
-Command 26: what_is	Slab Mill Gulch	CO
-
-No records match "Slab Mill Gulch" and "CO"
-Command 27: what_is	Kemper School	CO
-
-No records match "Kemper School" and "CO"
-Command 28: what_is_at	380806N	1073426W
-
-No feature at "380806N" and "1073426W"
-Command 29: what_is_at	371010N	1043002W
-
-No feature at "371010N" and "1043002W"
-Command 30: what_is_at	402906N	1064954W
-
-No feature at "402906N" and "1064954W"
+Terminating execution of commands.
+------------------------------------------------------------------------------------------
+End Time: 2023-07-05 12:38:23
