@@ -6,6 +6,8 @@
 #include <iostream>
 #include <sstream>
 #include "BufferPool.h"
+#include "Logger.h"
+
 using namespace std;
 
 GISRecord* BufferPool::whatIs(string name, string state, GIS::HashTable* nameIndex) {
@@ -185,4 +187,19 @@ void BufferPool::bringToFrontOfBuffer(int index) {
     GISRecord rec = buffer1[index];
     buffer1.erase(buffer1.begin() + index);
     buffer1.insert(buffer1.begin(), rec);
+}
+
+void BufferPool::displayDebugPool() {
+    stringstream logMessage;
+    logMessage << "MRU" << endl;
+    for(auto feature : buffer1) {
+        logMessage << "\t" << feature.FEATURE_ID << "|" << feature.FEATURE_Name << "|" << feature.FEATURE_CLASS << "|" << feature.STATE_Abbreviation << "|" << feature.COUNTY_NAME << "|" << feature.latitude << "|" << feature.longitude << "|" << endl;
+    }
+//    for (int i = 0; i < buffer1.size(); ++i) {
+//        logMessage << "\t" <<  << endl;
+//    }
+
+    logMessage << "LRU" << endl;
+    logMessage << "------------------------------------------------------------------------------------------";
+    GIS::Logger::getInstance().writeLog(logMessage.str());
 }

@@ -52,6 +52,14 @@ namespace GIS {
         string search(const string& key);
 
         void displayHashTable();
+
+        void displayDebugHashTable();
+
+        int getSize() {return size;}
+
+        int getCount() {return count;}
+
+
     };
 }
 

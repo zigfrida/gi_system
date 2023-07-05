@@ -3,8 +3,10 @@
 //
 
 #include <iostream>
+#include <sstream>
 #include "PRQuadtree.h"
 #include "World.h"
+#include "Logger.h"
 
 using namespace std;
 
@@ -159,6 +161,34 @@ namespace GIS {
                 displayPRQuadtree(node->children[i], level + 1);
             }
         }
+    }
+
+    void PRQuadtree::displayDebugPRQuadtree(GIS::PRQuadtreeNode *node, int level) {
+        stringstream logMessage;
+        if (node == nullptr) return; // tree is empty
+        // Indentation based on the indent level
+        for (int i = 0; i < level; ++i) {
+            logMessage << "  ";
+        }
+
+        if (node->isLeafNode()) {
+            // Print leaf node information
+            for (const auto& index : node->data) {
+                logMessage << "[(" << index->latitude << "," << index->longitude << "), " << index->fileOffsets.size() << "] ";
+            }
+        } else {
+            // Print internal node information
+            logMessage << "@\n";
+            for (int i = 0; i < 4; ++i) {
+                // Recursively display child nodes with increased indent
+                displayDebugPRQuadtree(node->children[i], level + 1);
+            }
+        }
+
+        if (level == 0)
+            logMessage << "------------------------------------------------------------------------------------------";
+
+        Logger::getInstance().writeLog(logMessage.str());
     }
 
 }

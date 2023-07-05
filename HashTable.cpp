@@ -3,7 +3,9 @@
 //
 
 #include <iostream>
+#include <sstream>
 #include "HashTable.h"
+#include "Logger.h"
 
 using namespace std;
 
@@ -94,5 +96,20 @@ namespace GIS {
                 cout << "---------------------------------------" << endl;
             }
         }
+    }
+
+    void HashTable::displayDebugHashTable() {
+        stringstream logMessage;
+        logMessage << "Format of display is \n"
+                      "Slot number: data record" << endl;
+        logMessage << "Current table size is " << size << endl;
+        logMessage << "Number of elements in table is " << count << endl << endl;
+        for (int i = 0; i < size; i++) {
+            if (!table[i].key.empty() && !table[i].isDeleted) {
+                logMessage << "\t" << i << ": [" << table[i].key << ", [" << table[i].value << "]]" << endl;
+            }
+        }
+        logMessage << "------------------------------------------------------------------------------------------";
+        Logger::getInstance().writeLog(logMessage.str());
     }
 }
