@@ -38,8 +38,7 @@ namespace GIS {
 
     void CommandProcessor::importCommand(string const &recordFile, string const &databaseFile) {
         vector<GISRecord> dbRecords;
-        // ifstream source(recordFile); // Source file
-        ifstream source("../Files/VA_Monterey.txt");
+         ifstream source(recordFile); // Source file
 
         if (!source.is_open()) {
             cout << "Error opening source file" << endl;
