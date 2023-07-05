@@ -6,6 +6,8 @@
 #include <iostream>
 #include <sstream>
 #include "BufferPool.h"
+#include "Logger.h"
+
 using namespace std;
 
 GISRecord* BufferPool::whatIs(string name, string state, GIS::HashTable* nameIndex) {
@@ -35,6 +37,7 @@ GISRecord* BufferPool::whatIs(string name, string state, GIS::HashTable* nameInd
         record3->longitude = stoi(featureInfo[5]);
         record3->STATE_Abbreviation = featureInfo[3];
         record3->COUNTY_NAME = featureInfo[6];
+        record3->lineOfSet = resultIndex - 1;
         insertToBuffer(*record3);
         return record3;
     }
@@ -71,6 +74,7 @@ GISRecord* BufferPool::whatIsAt(string latString, string longString, GIS::PRQuad
         record3->longitude = stoi(featureInfo[5]);
         record3->STATE_Abbreviation = featureInfo[3];
         record3->COUNTY_NAME = featureInfo[6];
+        record3->lineOfSet = resultIndex - 1;
         insertToBuffer(*record3);
         return record3;
     }
@@ -118,6 +122,7 @@ vector<GISRecord> BufferPool::readDatabaseFile(string filePath) {
         cout << "Error opening source file" << endl;
     } else {
         string line;
+        int lineCount = 0;
 
         while (getline(source, line)) {
             istringstream iss(line);
@@ -135,7 +140,10 @@ vector<GISRecord> BufferPool::readDatabaseFile(string filePath) {
                 tempRec.latitude = stoi(featureInfo[4]);
                 tempRec.longitude = stoi(featureInfo[5]);
                 tempRec.STATE_Abbreviation = featureInfo[3];
+                tempRec.lineOfSet = lineCount;
                 dbRecords.push_back(tempRec);
+
+                lineCount++;
         }
         source.close();
     }
@@ -185,4 +193,15 @@ void BufferPool::bringToFrontOfBuffer(int index) {
     GISRecord rec = buffer1[index];
     buffer1.erase(buffer1.begin() + index);
     buffer1.insert(buffer1.begin(), rec);
+}
+
+void BufferPool::displayDebugPool() {
+    stringstream logMessage;
+    logMessage << "MRU" << endl;
+    for(auto feature : buffer1) {
+        logMessage << "\t" << feature.lineOfSet << ": " << feature.FEATURE_ID << "|" << feature.FEATURE_Name << "|" << feature.FEATURE_CLASS << "|" << feature.STATE_Abbreviation << "|" << feature.COUNTY_NAME << "|" << feature.latitude << "|" << feature.longitude << "|" << endl;
+    }
+    logMessage << "LRU" << endl;
+    logMessage << "------------------------------------------------------------------------------------------";
+    GIS::Logger::getInstance().writeLog(logMessage.str());
 }

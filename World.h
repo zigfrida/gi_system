@@ -19,7 +19,7 @@ namespace GIS {
         void createWorld(string westLong, string eastLong, string southLat, string northLat);
         static int convertStringLatLongToInt(string lat);
         bool isItInWorldBoundary(string lat, string longitude);
-        void writeWorldToLog();
+        void writeWorldToLog(string westLong, string eastLong, string southLat, string northLat);
     };
 }
 

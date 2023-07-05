@@ -38,6 +38,8 @@ public:
     void insertToBuffer(GISRecord record);
 
     void bringToFrontOfBuffer(int index);
+
+    void displayDebugPool();
 };
 
 
