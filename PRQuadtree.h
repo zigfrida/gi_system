@@ -32,6 +32,7 @@ namespace GIS {
 
             void insert(const CoordinateIndex& coordinate, const GISRecord& record);
             void displayPRQuadtree(PRQuadtreeNode* node, int level = 0);
+            void displayDebugPRQuadtree(PRQuadtreeNode* node, int level = 0);
 
         private:
             void destroyTree(PRQuadtreeNode* node);

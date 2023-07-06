@@ -14,7 +14,7 @@ namespace GIS {
         this->southLat = convertStringLatLongToInt(southLat);
         this->northLat = convertStringLatLongToInt(northLat);
 
-        writeWorldToLog();
+        writeWorldToLog(westLong, eastLong, southLat, northLat);
     }
 
     int World::convertStringLatLongToInt(string lat) {
@@ -43,19 +43,17 @@ namespace GIS {
         return true;
     }
 
-    void World::writeWorldToLog() {
-        stringstream logMessage, upSentence, middleSentence, lastSentence;
-        logMessage << "world\t" << this->westLong << "\t" << this->eastLong << endl;
+    void World::writeWorldToLog(string westLong, string eastLong, string southLat, string northLat) {
+        stringstream logMessage;
+        logMessage << endl << "world\t" << westLong << "\t" << eastLong << "\t" << southLat << "\t" << northLat << endl;
+        logMessage << "------------------------------------------------------------------------------------------" << endl;
+        logMessage << "Latitude/longitude values in index entries are shown as signed integers, in total seconds." << endl;
+        logMessage << "------------------------------------------------------------------------------------------" << endl;
+        logMessage << "\t\t\t\t\t\tWorld boundaries are set to:" << endl;
+        logMessage << "\t\t\t\t\t\t           " <<  this->northLat << endl;
+        logMessage << "\t\t\t\t\t\t" << this->westLong << "              " << this->eastLong << endl;
+        logMessage << "\t\t\t\t\t\t           " << this->southLat << endl;
+        logMessage << "------------------------------------------------------------------------------------------";
         Logger::getInstance().writeLog(logMessage.str());
-        Logger::getInstance().writeLog("------------------------------------------------------------------------------------------");
-        Logger::getInstance().writeLog("Latitude/longitude values in index entries are shown as signed integers, in total seconds.");
-        Logger::getInstance().writeLog("------------------------------------------------------------------------------------------");
-        Logger::getInstance().writeLog("\t\t\t\t\t\tWorld boundaries are set to:");
-        upSentence << "\t\t\t\t\t\t           " <<  this->northLat;
-        Logger::getInstance().writeLog(upSentence.str());
-        middleSentence << "\t\t\t\t\t\t" << this->westLong << "              " << this->eastLong;
-        Logger::getInstance().writeLog(middleSentence.str());
-        lastSentence << "\t\t\t\t\t\t           " << this->southLat << endl;
-        Logger::getInstance().writeLog(lastSentence.str());
     }
 }

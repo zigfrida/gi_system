@@ -26,6 +26,7 @@ namespace GIS {
                 vector<string> &out);
             void importCommand(string const &recordFile, string const &databaseFile);
             void appendToDatabase(vector<GISRecord> records1, string filePath);
+
     };
 
 } // GIS

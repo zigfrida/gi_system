@@ -5,9 +5,9 @@ Begin of GIS Program log:
 dbFile: 
 script: 
 log: 
-Start Time: 2023-07-05 23:57:47
-world	-794530	-792630
+Start Time: 2023-07-06 00:08:24
 
+world	0794530W	0792630W	381000N	383000N
 ------------------------------------------------------------------------------------------
 Latitude/longitude values in index entries are shown as signed integers, in total seconds.
 ------------------------------------------------------------------------------------------
@@ -15,26 +15,43 @@ Latitude/longitude values in index entries are shown as signed integers, in tota
 						           383000
 						-794530              -792630
 						           381000
+------------------------------------------------------------------------------------------
+Command 1: import	/Files/VA_Monterey.txt
 
-Command 1: import	../Files/VA_Monterey.txt
+Import failed. Import file /Files/VA_Monterey.txt does not exist!
 
-Command 2: what_is	Central Church	VA
+Command 2: what_is_at	382812N	0793156W
 
-Highland (38d 29m 53s North, 79d 33m 23s West)
-
-
-Command 3: what_is_at	382812N	0793156W
-
-"Possum Trot" "Highland" "VA"
+No feature at "382812N" and "0793156W"
 
 
-Command 3: what_is	Central Church	VA
+Command 3: debug	pool
 
-Highland (38d 28m 12s North, 79d 31m 56s West)
+MRU
+LRU
+------------------------------------------------------------------------------------------
+Command 4: what_is	Church	VA
+
+No records match "Church" and "VA"
+Command 5: what_is	Central Church	VA
+
+No records match "Central Church" and "VA"
+Command 6: what_is_at	382812N	0793156W
+
+No feature at "382812N" and "0793156W"
 
 
-Command 4: what_is_at	382812N	0793156W
+Command 7: what_is	Central Church	VA
 
-"Central Church" "Highland" "VA"
+No records match "Central Church" and "VA"
+Command 8: what_is_at	382812N	0793156W
+
+No feature at "382812N" and "0793156W"
 
 
+Command 9: what_is	Town of Monterey	VA
+
+No records match "Town of Monterey" and "VA"
+Command 10: what_is	Smith Field	VA
+
+No records match "Smith Field" and "VA"

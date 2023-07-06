@@ -13,17 +13,20 @@ using namespace std;
 
 namespace GIS {
     class Logger {
+        int commandCount = 1;
+
         public:
             static Logger& getInstance();
             static void closeLogger();
             void writeLog(const string& message);
+            void writeCommandCount(const string& commandName);
+            void quitCommand();
 
         private:
             Logger();
             ~Logger();
             ofstream logFile;
             string getCurrentTime();
-
     };
 }
 

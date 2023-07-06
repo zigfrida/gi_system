@@ -7,10 +7,23 @@
 world	0794530W	0792630W	381000N	383000N
 ;
 ; Import the dataset [the address here is a relative address]
-import	../Files/VA_Monterey.txt
-
+import	/Files/VA_Monterey.txt
+;
+; Lets visualize our already imported geographical data
+;
+; To fill out the cache, let's do a single-match location search
+what_is_at	382812N	0793156W
+;
+; Now lets see if our cache is filled up
+debug	pool
+;
+; A few more search queries
+what_is	Church	VA
 ; oops Church is "FEATURE_CLASS" how about the following query?
 what_is	Central Church	VA
+
 what_is_at	382812N	0793156W
 what_is	Central Church	VA
 what_is_at	382812N	0793156W
+what_is	Town of Monterey	VA
+what_is	Smith Field	VA

@@ -38,10 +38,10 @@ namespace GIS {
 
     void CommandProcessor::importCommand(string const &recordFile, string const &databaseFile) {
         vector<GISRecord> dbRecords;
-        ifstream source(recordFile); // Source file
+         ifstream source(recordFile); // Source file
 
         if (!source.is_open()) {
-            cout << "Error opening source file" << endl;
+            Logger::getInstance().writeLog("Import failed. Import file " + recordFile + " does not exist!\n");
         } else {
             string line;
             bool firstLine = true;
@@ -80,7 +80,6 @@ namespace GIS {
             }
 
             appendToDatabase(dbRecords, databaseFile);
-//            nameIndex->displayHashTable(); // Visualization purposes
             source.close();
         }
     }
@@ -93,7 +92,7 @@ namespace GIS {
     void CommandProcessor::appendToDatabase(vector<GISRecord> records1, string filePath) {
         ofstream outputFile(filePath, std::ios::out | std::ios::app);  // Open the file for writing in binary mode
         if (!outputFile) {
-            std::cerr << "Error opening file." << std::endl;
+            Logger::getInstance().writeLog("Database file does not exist and creating file at designated path did not work\n");
         } else {
             string tempp = "";
             for (GISRecord& record : records1) {
@@ -110,7 +109,6 @@ namespace GIS {
     {
         string myText;
         ifstream ScriptFile1(scriptFile);
-        int commandCounter = 1;
 
         // Use a while loop together with the getline() function to read the file line by line
         while (getline (ScriptFile1, myText)) {
@@ -126,27 +124,18 @@ namespace GIS {
                         world1.createWorld(concatenated[1], concatenated[2], concatenated[3], concatenated[4]);
                         prquadtree = new PRQuadtree(world1.westLong, world1.eastLong, world1.southLat, world1.northLat); // Initialize PRQuadtree with world boundaries
                     } else if (command == "import") {
-                        stringstream logMessage;
-                        logMessage << "Command " << commandCounter << ": " << myText << endl;
-                        Logger::getInstance().writeLog(logMessage.str());
+                        Logger::getInstance().writeCommandCount(myText);
                         importCommand(concatenated[1], dbFile);
-                        commandCounter++;
-                    } else if (command=="what_is") {
-                        stringstream logMessage;
-                        logMessage << "Command " << commandCounter << ": " << myText << endl;
-                        Logger::getInstance().writeLog(logMessage.str());
+                    } else if (command == "what_is") {
+                        Logger::getInstance().writeCommandCount(myText);
                         GISRecord* what_isThis = bufferPool1->whatIs(concatenated[1], concatenated[2], nameIndex);
                         if (what_isThis != nullptr) {
                             Logger::getInstance().writeLog(what_isThis->whatIsPrint());
                         } else {
                             Logger::getInstance().writeLog("No records match \""+ concatenated[1] + "\" and \""+ concatenated[2] + "\"");
                         }
-                        Logger::getInstance().writeLog("\n");
-                        commandCounter++;
                     }  else if (command=="what_is_at") {
-                        stringstream logMessage;
-                        logMessage << "Command " << commandCounter << ": " << myText << endl;
-                        Logger::getInstance().writeLog(logMessage.str());
+                        Logger::getInstance().writeCommandCount(myText);
                         GISRecord* what_isAt = bufferPool1->whatIsAt(concatenated[1], concatenated[2], prquadtree);
                         if (what_isAt != nullptr) {
                             Logger::getInstance().writeLog(what_isAt->whatIsAtPrint());
@@ -154,15 +143,29 @@ namespace GIS {
                             Logger::getInstance().writeLog("No feature at \""+ concatenated[1] + "\" and \""+ concatenated[2] + "\"");
                         }
                         Logger::getInstance().writeLog("\n");
-                    }
-                } else {
-                }
+                    } else if (command == "debug") {
+                        string debugCommand = concatenated[1];
+                        if (debugCommand == "world") {
+                            Logger::getInstance().writeCommandCount(myText);
 
+                        } else if (debugCommand == "hash") {
+                            Logger::getInstance().writeCommandCount(myText);
+                            nameIndex->displayDebugHashTable();
+                        } else if (debugCommand == "quad") {
+                            Logger::getInstance().writeCommandCount(myText);
+                            prquadtree->displayDebugPRQuadtree(prquadtree->root);
+                        } else if (debugCommand == "pool") {
+                            Logger::getInstance().writeCommandCount(myText);
+                            bufferPool1->displayDebugPool();
+                        }
+                    } else if (command == "quit") {
+                        Logger::getInstance().quitCommand();
+                        return 0;
+                    }
+
+                }
             }
         }
-
-        cout << "Printing tree: " << endl;
-        prquadtree->displayPRQuadtree(prquadtree->root);
 
         ScriptFile1.close();
         return 0;
