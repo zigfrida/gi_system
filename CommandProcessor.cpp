@@ -132,24 +132,30 @@ namespace GIS {
                         importCommand(concatenated[1], dbFile);
                         commandCounter++;
                     } else if (command=="what_is") {
-                        Logger::getInstance().writeLog(myText);
+                        stringstream logMessage;
+                        logMessage << "Command " << commandCounter << ": " << myText << endl;
+                        Logger::getInstance().writeLog(logMessage.str());
                         GISRecord* what_isThis = bufferPool1->whatIs(concatenated[1], concatenated[2], nameIndex);
                         if (what_isThis != nullptr) {
                             Logger::getInstance().writeLog(what_isThis->whatIsPrint());
                         } else {
                             Logger::getInstance().writeLog("No records match \""+ concatenated[1] + "\" and \""+ concatenated[2] + "\"");
                         }
-                    }   else if (command=="what_is_at") {
-                        Logger::getInstance().writeLog(myText);
+                        Logger::getInstance().writeLog("\n");
+                        commandCounter++;
+                    }  else if (command=="what_is_at") {
+                        stringstream logMessage;
+                        logMessage << "Command " << commandCounter << ": " << myText << endl;
+                        Logger::getInstance().writeLog(logMessage.str());
                         GISRecord* what_isAt = bufferPool1->whatIsAt(concatenated[1], concatenated[2], prquadtree);
                         if (what_isAt != nullptr) {
                             Logger::getInstance().writeLog(what_isAt->whatIsAtPrint());
                         } else {
                             Logger::getInstance().writeLog("No feature at \""+ concatenated[1] + "\" and \""+ concatenated[2] + "\"");
                         }
+                        Logger::getInstance().writeLog("\n");
                     }
                 } else {
-                    Logger::getInstance().writeLog(myText);
                 }
 
             }
