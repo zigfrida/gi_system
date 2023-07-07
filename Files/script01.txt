@@ -7,7 +7,7 @@
 world	0794530W	0792630W	381000N	383000N
 ;
 ; Import the dataset [the address here is a relative address]
-import	/Files/VA_Monterey.txt
+import	../Files/VA_Monterey.txt
 ;
 ; Lets visualize our already imported geographical data
 ;

@@ -69,11 +69,11 @@ namespace GIS {
                         tempRec.COUNTY_NAME = featureInfo[5];
                         dbRecords.push_back(tempRec);
                         nameIndex->insert(key, value);
-                        lineOffSet++;
                         CoordinateIndex* newCordIndex = new CoordinateIndex(tempRec.latitude, tempRec.longitude);
                         newCordIndex->fileOffsets.push_back(lineOffSet);
 
                         prquadtree->insert(*newCordIndex, tempRec);
+                        lineOffSet++;
                     }
                 }
                 if (firstLine) firstLine = false;
@@ -130,15 +130,20 @@ namespace GIS {
                         Logger::getInstance().writeCommandCount(myText);
                         GISRecord* what_isThis = bufferPool1->whatIs(concatenated[1], concatenated[2], nameIndex);
                         if (what_isThis != nullptr) {
-                            Logger::getInstance().writeLog(what_isThis->whatIsPrint());
+                            Logger::getInstance().writeLog(what_isThis->whatIsPrint() + "\n");
                         } else {
-                            Logger::getInstance().writeLog("No records match \""+ concatenated[1] + "\" and \""+ concatenated[2] + "\"");
+                            Logger::getInstance().writeLog("No records match \""+ concatenated[1] + "\" and \""+ concatenated[2] + "\"\n");
                         }
                     }  else if (command=="what_is_at") {
                         Logger::getInstance().writeCommandCount(myText);
-                        GISRecord* what_isAt = bufferPool1->whatIsAt(concatenated[1], concatenated[2], prquadtree);
-                        if (what_isAt != nullptr) {
-                            Logger::getInstance().writeLog(what_isAt->whatIsAtPrint());
+                        vector<GISRecord> what_isAt = bufferPool1->whatIsAt(concatenated[1], concatenated[2], prquadtree);
+                        if (!what_isAt.empty()) {
+                            Logger::getInstance().writeLog("\tThe following feature(s) were found at (" + concatenated[1] + ", " + concatenated[2] + ")");
+                            string whatIsAtResult = "";
+                            for (auto rec : what_isAt) {
+                                whatIsAtResult += "\t\t" + rec.whatIsAtPrint() + "\n";
+                            }
+                            Logger::getInstance().writeLog(whatIsAtResult);
                         } else {
                             Logger::getInstance().writeLog("No feature at \""+ concatenated[1] + "\" and \""+ concatenated[2] + "\"");
                         }

@@ -33,6 +33,8 @@ namespace GIS {
             void insert(const CoordinateIndex& coordinate, const GISRecord& record);
             void displayPRQuadtree(PRQuadtreeNode* node, int level = 0);
             void displayDebugPRQuadtree(PRQuadtreeNode* node, int level = 0);
+            vector<int> searchOne(int latToSearch, int longToSearch);
+            vector<int> searchOneHelper(int latToSearch, int longToSearch, PRQuadtreeNode* node);
 
         private:
             void destroyTree(PRQuadtreeNode* node);
@@ -41,7 +43,6 @@ namespace GIS {
             int getQuadrant(PRQuadtreeNode *node, int latitude, int longitude) const;
             void createChildNode(PRQuadtreeNode* parent, int quadrant);
             bool isCoordinateInWorld(int latitude, int longitude);
-
     };
 }
 
