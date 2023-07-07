@@ -5,13 +5,7 @@ Begin of GIS Program log:
 dbFile: 
 script: 
 log: 
-Start Time: 2023-07-05 12:38:23
-; Script 1
-;
-; Testing using a small dataset
-;
-; Specify boundaries of coordinate space:
-;
+Start Time: 2023-07-06 00:08:24
 
 world	0794530W	0792630W	381000N	383000N
 ------------------------------------------------------------------------------------------
@@ -22,287 +16,42 @@ Latitude/longitude values in index entries are shown as signed integers, in tota
 						-794530              -792630
 						           381000
 ------------------------------------------------------------------------------------------
-;
-; Import the dataset [the address here is a relative address]
-Command 1: import	./VA_Monterey.txt
+Command 1: import	/Files/VA_Monterey.txt
 
-;
-; Lets visualize our already imported geographical data
-Command 2: debug	world
+Import failed. Import file /Files/VA_Monterey.txt does not exist!
 
-;
-; Also lets see what is inside name and coordinate indices
-Command 3: debug	quad
+Command 2: what_is_at	382812N	0793156W
 
-  [(381740,-793707), 1] [(381816,-793708), 1] 
-    
-    
-      [(381556,-793353), 1] 
-        [(381613,-793238), 1] [(381612,-793256), 1] [(381612,-793236), 1] 
-        [(381525,-793154), 1] 
-        
-        [(381707,-793144), 1] [(381725,-793151), 1] 
-      @
+No feature at "382812N" and "0793156W"
 
-      [(381902,-793358), 1] [(381905,-793439), 1] 
-      
-    @
 
-      [(381508,-793024), 1] [(381522,-793012), 1] [(381531,-793005), 1] 
-      
-      [(381824,-793053), 1] [(381811,-793019), 1] [(381809,-793029), 1] 
-      
-    @
-
-  @
-
-    
-    [(382354,-793601), 1] [(382120,-793602), 1] 
-    
-    [(382526,-793718), 1] [(382852,-793652), 1] [(382515,-793622), 1] 
-  @
-
-      [(382023,-793502), 1] [(382047,-793523), 1] 
-      [(382148,-793109), 1] [(382012,-793254), 1] 
-        
-        
-        [(382417,-793517), 1] 
-          [(382426,-793444), 1] [(382427,-793446), 1] 
-          
-          [(382444,-793450), 1] [(382442,-793446), 1] [(382442,-793451), 1] 
-          
-        @
-
-      @
-
-      [(382313,-793113), 1] [(382453,-793336), 1] [(382447,-793217), 1] 
-    @
-
-    [(382145,-793031), 1] 
-      [(382509,-793409), 1] [(382541,-793500), 1] 
-        [(382607,-793312), 1] [(382512,-793225), 1] [(382610,-793313), 1] [(382552,-793233), 1] 
-        
-        
-          [(382654,-793209), 1] [(382653,-793204), 1] 
-          
-          [(382718,-793201), 1] 
-          [(382725,-793159), 1] [(382704,-793141), 1] 
-        @
-
-      @
-
-      [(382828,-793435), 1] [(382934,-793348), 1] 
-        
-        [(382850,-793139), 1] [(382806,-793109), 1] [(382812,-793156), 1] 
-          
-          
-          [(382953,-793323), 1] [(382953,-793310), 1] [(382957,-793303), 1] 
-          [(383000,-793259), 1] [(382953,-793222), 1] [(382951,-793238), 1] 
-        @
-
-        [(382936,-793153), 1] 
-      @
-
-    @
-
-    [(382856,-793031), 2] [(382940,-793103), 1] [(382502,-793013), 1] 
-  @
-
-@
-------------------------------------------------------------------------------------------
-Command 4: debug	hash
-
-Format of display is 
-Slot number: data record
-Current table size is 1024
-Number of elements in table is 63
-
-	1: [Monterey VA, [54]]
-	17: [Union Chapel VA, [38]]
-	97: [Burners Run VA, [4]]
-	98: [Jack Mountain VA, [20]]
-	102: [Swope Hollow VA, [36]]
-	111: [Thorny Bottom Church VA, [37]]
-	113: [Hamilton Chapel VA, [15]]
-	114: [Peck Run VA, [29]]
-	118: [Bear Mountain VA, [44]]
-	161: [Miracle Ridge VA, [26]]
-	162: [Trimble VA, [52]]
-	193: [Smith Field VA, [55]]
-	194: [Highland Elementary School VA, [58]]
-	225: [Buck Hill VA, [3]]
-	257: [Blue Grass VA, [1]]
-	258: [Monterey Methodist Episcopal Church VA, [59]]
-	273: [Key Run VA, [21]]
-	274: [Rich Hills VA, [49]]
-	289: [Highland High School VA, [16]]
-	321: [Trimble Knob VA, [53]]
-	337: [Simmons Run VA, [33]]
-	353: [New Salem Church VA, [28]]
-	369: [Frank Run VA, [12]]
-	370: [Barren Rock VA, [30]]
-	433: [Hupman Valley VA, [19]]
-	434: [Seybert Hills VA, [50]]
-	449: [Asbury Church VA, [0]]
-	450: [Little Doe Hill VA, [24]]
-	465: [Gulf Mountain VA, [14]]
-	481: [Central Church VA, [6]]
-	497: [Davis Run VA, [9]]
-	498: [Ginseng Mountain VA, [13]]
-	502: [Wooden Run VA, [42]]
-	529: [Laurel Run VA, [23]]
-	545: [Claylick Hollow VA, [7]]
-	561: [Hannah Field Airport VA, [43]]
-	562: [Sounding Knob VA, [51]]
-	577: [Lantz Mountain VA, [22]]
-	578: [Vance Hollow VA, [39]]
-	582: [Strait Creek School (historical) VA, [60]]
-	609: [West Strait Creek VA, [40]]
-	610: [Clover Creek Presbyterian Church VA, [57]]
-	625: [Forks of Waters VA, [11]]
-	626: [Monterey Mountain VA, [27]]
-	657: [Monterey District VA, [61]]
-	673: [Highland Wildlife Management Area VA, [17]]
-	674: [Meadow Draft VA, [25]]
-	678: [Southall Chapel VA, [34]]
-	687: [New Hampden VA, [47]]
-	689: [Seldom Seen Hollow VA, [31]]
-	737: [Crab Run VA, [8]]
-	738: [Doe Hill VA, [46]]
-	769: [Town of Monterey VA, [62]]
-	817: [Clover Creek VA, [45]]
-	865: [Bluegrass Valley VA, [2]]
-	881: [Elk Run VA, [10]]
-	897: [Possum Trot VA, [48]]
-	945: [Strait Creek VA, [35]]
-	961: [Seybert Chapel VA, [32]]
-	962: [Blue Grass School (historical) VA, [56]]
-	977: [White Run VA, [41]]
-	993: [Hightown Church VA, [18]]
-	1009: [Mount Carlyle VA, [5]]
-------------------------------------------------------------------------------------------
-;
-; To fill out the cache, let's do a single-match location search
-Command 5: what_is_at	382812N	0793156W
-
-"Possum Trot" "Highland" "VA"
-;
-; Now lets see if our cache is filled up
-Command 6: debug	pool
+Command 3: debug	pool
 
 MRU
-	47: 1496110|Possum Trot|Populated Place|VA|Highland|382812|-793156|
 LRU
 ------------------------------------------------------------------------------------------
-;
-; A few more search queries
-Command 7: what_is	Church	VA
+Command 4: what_is	Church	VA
 
 No records match "Church" and "VA"
-; oops Church is "FEATURE_CLASS" how about the following query?
-Command 8: what_is	Central Church	VA
+Command 5: what_is	Central Church	VA
 
-"" "" ""
+No records match "Central Church" and "VA"
+Command 6: what_is_at	382812N	0793156W
+
+No feature at "382812N" and "0793156W"
+
+
+Command 7: what_is	Central Church	VA
+
+No records match "Central Church" and "VA"
+Command 8: what_is_at	382812N	0793156W
+
+No feature at "382812N" and "0793156W"
+
+
 Command 9: what_is	Town of Monterey	VA
 
-"" "" ""
+No records match "Town of Monterey" and "VA"
 Command 10: what_is	Smith Field	VA
 
-"Central Church" "Highland" "VA"
-; Let's try a wrong state abbreviation
-Command 11: what_is	Smith Field	CO
-
-No records match "Smith Field" and "CO"
-;
-; Lets check the buffer pool again
-Command 12: debug	pool
-
-MRU
-	54: 1498741|Smith Field|Airport|VA|Highland|381809|-793029|
-	61: 2391311|Town of Monterey|Civil|VA|Highland|382442|-793451|
-	5: 1482434|Central Church|Church|VA|Highland|382953|-793323|
-	54: 1498741|Smith Field|Airport|VA|Highland|381809|-793029|
-LRU
-------------------------------------------------------------------------------------------
-;
-; So lets check the LRU mechanism [this query should move the last element of the cache all the way to the front!]
-Command 13: what_is_at	382812N	0793156W
-
-"" "" ""
-;
-; checking the buffer pool again
-Command 14: debug	pool
-
-MRU
-	47: 1496110|Possum Trot|Populated Place|VA|Highland|382812|-793156|
-	54: 1498741|Smith Field|Airport|VA|Highland|381809|-793029|
-	61: 2391311|Town of Monterey|Civil|VA|Highland|382442|-793451|
-	5: 1482434|Central Church|Church|VA|Highland|382953|-793323|
-	47: 1496110|Possum Trot|Populated Place|VA|Highland|382812|-793156|
-LRU
-------------------------------------------------------------------------------------------
-;
-; More location searches
-Command 15: what_is_at	381816N	0793700W
-
-No feature at "381816N" and "0793700W"
-Command 16: what_is_at	381816N	0793708W
-
-"Central Church" "Highland" "VA"
-Command 17: what_is_at	381612N	0793256W
-
-"Central Church" "Highland" "VA"
-Command 18: what_is_at	382951N	0793238W
-
-"Central Church" "Highland" "VA"
-; We expect two location matches for this one
-;
-Command 19: what_is_at	382856N	0793031W
-
-"" "" ""
-; Now performing some area search [this should return 7 features]
-;
-; checking the buffer pool again
-; how about querying somewhere outside boundaries ?
-; Let's try some variations of a single-match region search with a square region:
-; Let's try increasing the size of the region:
-;
-Command 20: debug	pool
-
-MRU
-	10: 1483492|Forks of Waters|Locale|VA|Highland|382856|-793031|
-	20: 1484574|Key Run|Stream|VA|Highland|382951|-793238|
-	44: 1495400|Clover Creek|Populated Place|VA|Highland|381612|-793256|
-	51: 1496325|Trimble|Populated Place|VA|Highland|381816|-793708|
-	47: 1496110|Possum Trot|Populated Place|VA|Highland|382812|-793156|
-	54: 1498741|Smith Field|Airport|VA|Highland|381809|-793029|
-	61: 2391311|Town of Monterey|Civil|VA|Highland|382442|-793451|
-	5: 1482434|Central Church|Church|VA|Highland|382953|-793323|
-	10: 1483492|Forks of Waters|Locale|VA|Highland|382856|-793031|
-LRU
-------------------------------------------------------------------------------------------
-; Let's import a larger dataset [wait a second, VA_Bath has 520 records, why didn't all of them get imported? explain this in your report]
-Command 21: import	./VA_Bath.txt
-
-; as import command bypasses the buffer pool, content of the buffer pool should remain intact
-Command 22: debug	pool
-
-MRU
-	10: 1483492|Forks of Waters|Locale|VA|Highland|382856|-793031|
-	20: 1484574|Key Run|Stream|VA|Highland|382951|-793238|
-	44: 1495400|Clover Creek|Populated Place|VA|Highland|381612|-793256|
-	51: 1496325|Trimble|Populated Place|VA|Highland|381816|-793708|
-	47: 1496110|Possum Trot|Populated Place|VA|Highland|382812|-793156|
-	54: 1498741|Smith Field|Airport|VA|Highland|381809|-793029|
-	61: 2391311|Town of Monterey|Civil|VA|Highland|382442|-793451|
-	5: 1482434|Central Church|Church|VA|Highland|382953|-793323|
-	10: 1483492|Forks of Waters|Locale|VA|Highland|382856|-793031|
-LRU
-------------------------------------------------------------------------------------------
-;
-; Exiting
-Command 23: quit
-
-Terminating execution of commands.
-------------------------------------------------------------------------------------------
-End Time: 2023-07-05 12:38:23
+No records match "Smith Field" and "VA"

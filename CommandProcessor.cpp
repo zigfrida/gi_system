@@ -41,7 +41,7 @@ namespace GIS {
          ifstream source(recordFile); // Source file
 
         if (!source.is_open()) {
-            cout << "Error opening source file" << endl;
+            Logger::getInstance().writeLog("Import failed. Import file " + recordFile + " does not exist!\n");
         } else {
             string line;
             bool firstLine = true;
@@ -92,7 +92,7 @@ namespace GIS {
     void CommandProcessor::appendToDatabase(vector<GISRecord> records1, string filePath) {
         ofstream outputFile(filePath, std::ios::out | std::ios::app);  // Open the file for writing in binary mode
         if (!outputFile) {
-            std::cerr << "Error opening file." << std::endl;
+            Logger::getInstance().writeLog("Database file does not exist and creating file at designated path did not work\n");
         } else {
             string tempp = "";
             for (GISRecord& record : records1) {
@@ -130,7 +130,7 @@ namespace GIS {
                         Logger::getInstance().writeCommandCount(myText);
                         GISRecord* what_isThis = bufferPool1->whatIs(concatenated[1], concatenated[2], nameIndex);
                         if (what_isThis != nullptr) {
-                            Logger::getInstance().writeLog(what_isThis->whatIsAtPrint());
+                            Logger::getInstance().writeLog(what_isThis->whatIsPrint());
                         } else {
                             Logger::getInstance().writeLog("No records match \""+ concatenated[1] + "\" and \""+ concatenated[2] + "\"");
                         }
@@ -142,6 +142,7 @@ namespace GIS {
                         } else {
                             Logger::getInstance().writeLog("No feature at \""+ concatenated[1] + "\" and \""+ concatenated[2] + "\"");
                         }
+                        Logger::getInstance().writeLog("\n");
                     } else if (command == "debug") {
                         string debugCommand = concatenated[1];
                         if (debugCommand == "world") {
@@ -162,10 +163,7 @@ namespace GIS {
                         return 0;
                     }
 
-                } else {
-                    Logger::getInstance().writeLog(myText);
                 }
-
             }
         }
 
