@@ -60,6 +60,7 @@ vector<GISRecord> BufferPool::whatIsAt(string latString, string longString, GIS:
     vector<int> resultIndexList = prQuadTree->searchOne(latitude, longitude);
     bool alreadyAdded = false;
     for (int resultIndex : resultIndexList) {
+        alreadyAdded = false;
         for (const GISRecord& recc : whatIsAtList) {
             if (recc.lineOfSet == resultIndex) {
                 alreadyAdded = true;
@@ -93,6 +94,68 @@ vector<GISRecord> BufferPool::whatIsAt(string latString, string longString, GIS:
     return whatIsAtList;
 }
 
+vector<GISRecord> BufferPool::whatIsIn(string latString, string longString, string latSpanString, string longSpanString, string filter, GIS::PRQuadtree* prQuadTree) {
+    vector<GISRecord> whatIsInList;
+    whatIsInList.clear();
+    int latitude = GIS::World::convertStringLatLongToInt(latString);
+    int longitude = GIS::World::convertStringLatLongToInt(longString);
+    int latSpan = stoi(latSpanString);
+    int longSpan = stoi(longSpanString);
+
+    bool isAll = (filter == "" || filter == "-long");
+
+    for (size_t i = 0; i < buffer1.size(); ++i) {
+        if (buffer1[i].latitude < latitude + latSpan
+        && buffer1[i].latitude > latitude - latSpan
+        && buffer1[i].longitude < longitude + longSpan
+        && buffer1[i].longitude > longitude - longSpan
+        && (isAll || featureClassType(buffer1[i].FEATURE_CLASS) == filter )) {
+            whatIsInList.insert(whatIsInList.begin(), buffer1[i]);
+            bringToFrontOfBuffer(i);
+        }
+    }
+
+    vector<int> resultIndexList;
+    resultIndexList.clear();
+    resultIndexList = fakeTreeSearchArea(latitude, longitude, latSpan, longSpan);
+    bool alreadyAdded = false;
+    for (int resultIndex : resultIndexList) {
+        alreadyAdded = false;
+        for (const GISRecord& recc : whatIsInList) {
+            if (recc.lineOfSet == resultIndex) {
+                alreadyAdded = true;
+            }
+        }
+        if (resultIndex > 0 && !alreadyAdded) {
+            GISRecord* record3;
+            record3 = nullptr;
+            record3 = new GISRecord();
+            string line = getLineAtIndex(databaseFilePath, resultIndex);
+            string feature;
+            vector<string> featureInfo;
+            istringstream iss(line);
+            while (getline(iss, feature, '|')) {
+                featureInfo.push_back(feature);
+            }
+
+            record3->FEATURE_ID = stoi(featureInfo[0]);
+            record3->FEATURE_Name = featureInfo[1];
+            record3->FEATURE_CLASS = featureInfo[2];
+            record3->latitude = stoi(featureInfo[4]);
+            record3->longitude = stoi(featureInfo[5]);
+            record3->STATE_Abbreviation = featureInfo[3];
+            record3->COUNTY_NAME = featureInfo[6];
+            record3->lineOfSet = resultIndex;
+            if (isAll || featureClassType(record3->FEATURE_CLASS) == filter ) {
+                insertToBuffer(*record3);
+                whatIsInList.insert(whatIsInList.begin(), *record3);
+            }
+        }
+    }
+
+    return whatIsInList;
+}
+
 /**
  * This function simulates a hashtable search function. Replace it with real hash search function later.
  */
@@ -119,6 +182,26 @@ int BufferPool::fakeTreeSearch(int latitude, int longitude) {
         }
     }
     return -1;
+}
+
+/**
+ * This function simulates a hashtable search function. Replace it with real hash search function later.
+ */
+vector<int> BufferPool::fakeTreeSearchArea(int latitude, int longitude, int latSpan, int longSpan) {
+    vector<GISRecord> allRecords = readDatabaseFile(databaseFilePath);
+    vector<int> recordsInArea;
+    recordsInArea.clear();
+    for (size_t i = 0; i < allRecords.size(); ++i) {
+        GISRecord& record = allRecords[i];
+        if (record.latitude < latitude + latSpan
+            && record.latitude > latitude - latSpan
+            && record.longitude < longitude + longSpan
+            && record.longitude > longitude - longSpan) {
+            recordsInArea.insert(recordsInArea.begin(), i);
+            bringToFrontOfBuffer(i);
+        }
+    }
+    return recordsInArea;
 }
 
 /**
@@ -214,4 +297,43 @@ void BufferPool::displayDebugPool() {
     logMessage << "LRU" << endl;
     logMessage << "------------------------------------------------------------------------------------------";
     GIS::Logger::getInstance().writeLog(logMessage.str());
+}
+
+string BufferPool::featureClassType(string featureClass) {
+    if (
+            featureClass == "Airport" ||
+            featureClass == "Bridge" ||
+                    featureClass == "Building" ||
+                    featureClass == "Church" ||
+                    featureClass == "Dam" ||
+                    featureClass == "Hospital" ||
+                    featureClass == "Levee" ||
+                    featureClass == "Park" ||
+                    featureClass == "Post Office" ||
+                    featureClass == "School" ||
+                    featureClass == "Tower" ||
+                    featureClass == "Tunnel" ||
+                    featureClass == "Tunnel"
+            ) {
+        return "structure";
+    }
+
+    if (
+            featureClass == "Falls" ||
+            featureClass == "Glacier" ||
+            featureClass == "Gut" ||
+            featureClass == "Harbor" ||
+            featureClass == "Lake" ||
+            featureClass == "Rapids" ||
+            featureClass == "Reservoir"
+            ) {
+        return "water";
+    }
+
+    if (
+            featureClass == "Populated Place"
+            ) {
+        return "pop";
+    }
+    return "";
 }

@@ -22,8 +22,7 @@ what_is	Church	VA
 ; oops Church is "FEATURE_CLASS" how about the following query?
 what_is	Central Church	VA
 
-what_is_at	382812N	0793156W
-what_is	Central Church	VA
-what_is_at	382812N	0793156W
-what_is	Town of Monterey	VA
-what_is	Smith Field	VA
+what_is_in	-long	382148N	0793109W	15	15
+what_is_in	382148N	0793109W	60	60
+what_is_in	382148N	0793109W	180	180
+what_is_in	-filter	structure	382600N	0793310W	120	120
