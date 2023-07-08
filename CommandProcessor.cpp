@@ -38,8 +38,7 @@ namespace GIS {
 
     void CommandProcessor::importCommand(string const &recordFile, string const &databaseFile) {
         vector<GISRecord> dbRecords;
-         // ifstream source(recordFile); // Source file
-         ifstream source("../Files/VA_Monterey.txt");
+         ifstream source(recordFile); // Source file
 
         if (!source.is_open()) {
             Logger::getInstance().writeLog("Import failed. Import file " + recordFile + " does not exist!\n");
@@ -139,9 +138,12 @@ namespace GIS {
                         }
 
                         if (what_isThis != nullptr) {
-                            Logger::getInstance().writeLog(what_isThis->whatIsPrint() + "\n");
+                            Logger::getInstance().writeLog("\t" + what_isThis->whatIsPrint());
+                            Logger::getInstance().writeLog("------------------------------------------------------------------------------------------");
+
                         } else {
-                            Logger::getInstance().writeLog("No records match \""+ concatenated[1] + "\" and \""+ concatenated[2] + "\"\n");
+                            Logger::getInstance().writeLog("\tNo records match \""+ concatenated[1] + "\" and \""+ concatenated[2] + "\"");
+                            Logger::getInstance().writeLog("------------------------------------------------------------------------------------------");
                         }
                     }  else if (command=="what_is_at") {
                         Logger::getInstance().writeCommandCount(myText);
@@ -158,13 +160,14 @@ namespace GIS {
                             Logger::getInstance().writeLog("\tThe following feature(s) were found at (" + concatenated[1] + ", " + concatenated[2] + ")");
                             string whatIsAtResult = "";
                             for (auto rec : what_isAt) {
-                                whatIsAtResult += "\t\t" + rec.whatIsAtPrint() + "\n";
+                                whatIsAtResult += "\t\t" + rec.whatIsAtPrint();
                             }
                             Logger::getInstance().writeLog(whatIsAtResult);
+                            Logger::getInstance().writeLog("------------------------------------------------------------------------------------------");
                         } else {
                             Logger::getInstance().writeLog("No feature at \""+ concatenated[1] + "\" and \""+ concatenated[2] + "\"");
+                            Logger::getInstance().writeLog("------------------------------------------------------------------------------------------");
                         }
-                        Logger::getInstance().writeLog("\n");
                     } else if (command=="what_is_in") {
                         Logger::getInstance().writeCommandCount(myText);
                         vector<GISRecord> what_Is_In;
@@ -187,20 +190,21 @@ namespace GIS {
                             Logger::getInstance().writeLog("\tThe following feature(s) were found at (" + concatenated[1] + ", " + concatenated[2] + ")");
                             string whatIsInResult = "";
                             for (auto rec : what_Is_In) {
-                                whatIsInResult += "\t\t" + rec.whatIsAtPrint() + "\n";
+                                whatIsInResult += "\t\t" + rec.whatIsAtPrint();
                             }
                             Logger::getInstance().writeLog(whatIsInResult);
+                            Logger::getInstance().writeLog("------------------------------------------------------------------------------------------");
                         } else {
 
                             if (concatenated[1] == "-long") {
-                                Logger::getInstance().writeLog("No feature at \""+ concatenated[2] + "\" and \""+ concatenated[3] + "\"");
+                                Logger::getInstance().writeLog("\tNo feature at \""+ concatenated[2] + "\" and \""+ concatenated[3] + "\"");
                             } else if (concatenated[1] == "-filter") {
-                                Logger::getInstance().writeLog("No feature at \""+ concatenated[3] + "\" and \""+ concatenated[4] + "\"");
+                                Logger::getInstance().writeLog("\tNo feature at \""+ concatenated[3] + "\" and \""+ concatenated[4] + "\"");
                             } else {
-                                Logger::getInstance().writeLog("No feature at \""+ concatenated[1] + "\" and \""+ concatenated[2] + "\"");
+                                Logger::getInstance().writeLog("\tNo feature at \""+ concatenated[1] + "\" and \""+ concatenated[2] + "\"");
                             }
+                            Logger::getInstance().writeLog("------------------------------------------------------------------------------------------");
                         }
-                        Logger::getInstance().writeLog("\n");
                     } else if (command == "debug") {
                         string debugCommand = concatenated[1];
                         if (debugCommand == "world") {
