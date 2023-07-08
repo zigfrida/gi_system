@@ -2,7 +2,7 @@
 1481852|Blue Grass|Populated Place|VA|383000|-793259|Highland|
 1481878|Bluegrass Valley|Valley|VA|382953|-793222|Highland|
 1482110|Buck Hill|Summit|VA|381902|-793358|Highland|
-1482176|Burners Run|Stream|VA|382509|-793409|Highland|
+1482176|Burners Run|Stream|VA|382812|-793156|Highland|
 1482324|Mount Carlyle|Summit|VA|381556|-793353|Highland|
 1482434|Central Church|Church|VA|382953|-793323|Highland|
 1482557|Claylick Hollow|Valley|VA|381613|-793238|Highland|
@@ -21,7 +21,7 @@
 1484379|Jack Mountain|Range|VA|382023|-793502|Highland|
 1484574|Key Run|Stream|VA|382951|-793238|Highland|
 1484664|Lantz Mountain|Summit|VA|382852|-793652|Highland|
-1484722|Laurel Run|Stream|VA|382725|-793159|Highland|
+1484722|Laurel Run|Stream|VA|382812|-793156|Highland|
 1484896|Little Doe Hill|Summit|VA|382148|-793109|Highland|
 1485337|Meadow Draft|Valley|VA|381508|-793024|Highland|
 1485495|Miracle Ridge|Ridge|VA|382541|-793500|Highland|
@@ -65,7 +65,7 @@
 1481852|Blue Grass|Populated Place|VA|383000|-793259|Highland|
 1481878|Bluegrass Valley|Valley|VA|382953|-793222|Highland|
 1482110|Buck Hill|Summit|VA|381902|-793358|Highland|
-1482176|Burners Run|Stream|VA|382509|-793409|Highland|
+1482176|Burners Run|Stream|VA|382812|-793156|Highland|
 1482324|Mount Carlyle|Summit|VA|381556|-793353|Highland|
 1482434|Central Church|Church|VA|382953|-793323|Highland|
 1482557|Claylick Hollow|Valley|VA|381613|-793238|Highland|
@@ -84,7 +84,7 @@
 1484379|Jack Mountain|Range|VA|382023|-793502|Highland|
 1484574|Key Run|Stream|VA|382951|-793238|Highland|
 1484664|Lantz Mountain|Summit|VA|382852|-793652|Highland|
-1484722|Laurel Run|Stream|VA|382725|-793159|Highland|
+1484722|Laurel Run|Stream|VA|382812|-793156|Highland|
 1484896|Little Doe Hill|Summit|VA|382148|-793109|Highland|
 1485337|Meadow Draft|Valley|VA|381508|-793024|Highland|
 1485495|Miracle Ridge|Ridge|VA|382541|-793500|Highland|

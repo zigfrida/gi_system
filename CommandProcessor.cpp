@@ -38,7 +38,8 @@ namespace GIS {
 
     void CommandProcessor::importCommand(string const &recordFile, string const &databaseFile) {
         vector<GISRecord> dbRecords;
-         ifstream source(recordFile); // Source file
+         // ifstream source(recordFile); // Source file
+         ifstream source("../Files/VA_Monterey.txt");
 
         if (!source.is_open()) {
             Logger::getInstance().writeLog("Import failed. Import file " + recordFile + " does not exist!\n");
@@ -69,11 +70,11 @@ namespace GIS {
                         tempRec.COUNTY_NAME = featureInfo[5];
                         dbRecords.push_back(tempRec);
                         nameIndex->insert(key, value);
-                        lineOffSet++;
                         CoordinateIndex* newCordIndex = new CoordinateIndex(tempRec.latitude, tempRec.longitude);
                         newCordIndex->fileOffsets.push_back(lineOffSet);
 
                         prquadtree->insert(*newCordIndex, tempRec);
+                        lineOffSet++;
                     }
                 }
                 if (firstLine) firstLine = false;
@@ -128,19 +129,76 @@ namespace GIS {
                         importCommand(concatenated[1], dbFile);
                     } else if (command == "what_is") {
                         Logger::getInstance().writeCommandCount(myText);
-                        GISRecord* what_isThis = bufferPool1->whatIs(concatenated[1], concatenated[2], nameIndex);
+                        GISRecord* what_isThis;
+                        what_isThis = nullptr;
+                        try {
+                            what_isThis = bufferPool1->whatIs(concatenated[1], concatenated[2], nameIndex);
+                        } catch (exception e) {
+                            Logger::getInstance().writeLog("Invalid command argument!");
+                            continue;
+                        }
+
                         if (what_isThis != nullptr) {
-                            Logger::getInstance().writeLog(what_isThis->whatIsPrint());
+                            Logger::getInstance().writeLog(what_isThis->whatIsPrint() + "\n");
                         } else {
-                            Logger::getInstance().writeLog("No records match \""+ concatenated[1] + "\" and \""+ concatenated[2] + "\"");
+                            Logger::getInstance().writeLog("No records match \""+ concatenated[1] + "\" and \""+ concatenated[2] + "\"\n");
                         }
                     }  else if (command=="what_is_at") {
                         Logger::getInstance().writeCommandCount(myText);
-                        GISRecord* what_isAt = bufferPool1->whatIsAt(concatenated[1], concatenated[2], prquadtree);
-                        if (what_isAt != nullptr) {
-                            Logger::getInstance().writeLog(what_isAt->whatIsAtPrint());
+                        vector<GISRecord> what_isAt;
+                        what_isAt.clear();
+                        try {
+                            what_isAt = bufferPool1->whatIsAt(concatenated[1], concatenated[2], prquadtree);
+                        } catch (exception e) {
+                            Logger::getInstance().writeLog("Invalid command argument!");
+                            continue;
+                        }
+
+                        if (!what_isAt.empty()) {
+                            Logger::getInstance().writeLog("\tThe following feature(s) were found at (" + concatenated[1] + ", " + concatenated[2] + ")");
+                            string whatIsAtResult = "";
+                            for (auto rec : what_isAt) {
+                                whatIsAtResult += "\t\t" + rec.whatIsAtPrint() + "\n";
+                            }
+                            Logger::getInstance().writeLog(whatIsAtResult);
                         } else {
                             Logger::getInstance().writeLog("No feature at \""+ concatenated[1] + "\" and \""+ concatenated[2] + "\"");
+                        }
+                        Logger::getInstance().writeLog("\n");
+                    } else if (command=="what_is_in") {
+                        Logger::getInstance().writeCommandCount(myText);
+                        vector<GISRecord> what_Is_In;
+                        what_Is_In.clear();
+                        try {
+                            if (concatenated[1] == "-long") {
+                                what_Is_In = bufferPool1->whatIsIn(concatenated[2], concatenated[3], concatenated[4], concatenated[5], "-long", prquadtree);
+                            } else if (concatenated[1] == "-filter") {
+                                what_Is_In = bufferPool1->whatIsIn(concatenated[3], concatenated[4], concatenated[5], concatenated[6], concatenated[2], prquadtree);
+                            } else {
+                                what_Is_In = bufferPool1->whatIsIn(concatenated[1], concatenated[2], concatenated[3], concatenated[4], "", prquadtree);
+                            }
+
+
+                        } catch (exception e) {
+                            Logger::getInstance().writeLog("Invalid command argument!");
+                            continue;
+                        }
+                        if (!what_Is_In.empty()) {
+                            Logger::getInstance().writeLog("\tThe following feature(s) were found at (" + concatenated[1] + ", " + concatenated[2] + ")");
+                            string whatIsInResult = "";
+                            for (auto rec : what_Is_In) {
+                                whatIsInResult += "\t\t" + rec.whatIsAtPrint() + "\n";
+                            }
+                            Logger::getInstance().writeLog(whatIsInResult);
+                        } else {
+
+                            if (concatenated[1] == "-long") {
+                                Logger::getInstance().writeLog("No feature at \""+ concatenated[2] + "\" and \""+ concatenated[3] + "\"");
+                            } else if (concatenated[1] == "-filter") {
+                                Logger::getInstance().writeLog("No feature at \""+ concatenated[3] + "\" and \""+ concatenated[4] + "\"");
+                            } else {
+                                Logger::getInstance().writeLog("No feature at \""+ concatenated[1] + "\" and \""+ concatenated[2] + "\"");
+                            }
                         }
                         Logger::getInstance().writeLog("\n");
                     } else if (command == "debug") {

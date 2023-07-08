@@ -31,8 +31,10 @@ public:
     vector<GISRecord> readDatabaseFile(string filePath);
     int fakeHashSearch(string name, string state);
     int fakeTreeSearch(int latitude, int longitude);
+    vector<int> fakeTreeSearchArea(int latitude, int longitude, int latSpan, int longSpan);
     GISRecord* whatIs(string name, string state, GIS::HashTable* nameIndex);
-    GISRecord* whatIsAt(string latString, string longString, GIS::PRQuadtree* prQuadTree);
+    vector<GISRecord> whatIsAt(string latString, string longString, GIS::PRQuadtree* prQuadTree);
+    vector<GISRecord> whatIsIn(string latString, string longString, string latSpanString, string longSpanString, string filter, GIS::PRQuadtree* prQuadTree);
     string getLineAtIndex(string &filePath, size_t index);
 
     void insertToBuffer(GISRecord record);
@@ -40,6 +42,7 @@ public:
     void bringToFrontOfBuffer(int index);
 
     void displayDebugPool();
+    string featureClassType(string featureClass);
 };
 
 

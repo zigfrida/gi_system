@@ -111,6 +111,39 @@ namespace GIS {
                longitude >= worldMinLongitude && longitude <= worldMaxLongitude;
     }
 
+    vector<int> PRQuadtree::searchOne(int latToSearch, int longToSearch) {
+        vector<int> emptyy;
+        emptyy.clear();
+        if (!isCoordinateInWorld(latToSearch, longToSearch)) {
+            return emptyy;
+        }
+
+        if(root == nullptr) {
+            return emptyy;
+        }
+        return searchOneHelper(latToSearch, longToSearch, root);
+    }
+
+    vector<int> PRQuadtree::searchOneHelper(int latToSearch, int longToSearch, PRQuadtreeNode* node) {
+            if (!node->data.empty()) { // Checking if leaf is full
+                // Check if the coordinate already exists in the leaf node
+                for (auto dataIndex : node->data) {
+                    if (dataIndex->latitude == latToSearch && dataIndex->longitude == longToSearch) {
+                        // Update the existing data entry with new file offset
+                        return dataIndex->fileOffsets;
+                    }
+                }
+            }
+            int childToSeach = getQuadrant(node, latToSearch, longToSearch);
+            if (node->children[childToSeach] == nullptr) {
+                vector<int> empty;
+                empty.clear();
+                return empty;
+            } else {
+                return searchOneHelper(latToSearch, longToSearch, node->children[childToSeach]);
+            }
+    }
+
     // Determines the quadrant (the child node) in which a given coordinate should be inserted or located in the PR Quadtree
     int PRQuadtree::getQuadrant(PRQuadtreeNode *node, int latitude, int longitude) const {
         double latMid = (node->minLatitude + node->maxLatitude) / 2.0;
