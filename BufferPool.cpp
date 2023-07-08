@@ -105,12 +105,12 @@ vector<GISRecord> BufferPool::whatIsIn(string latString, string longString, stri
     bool isAll = (filter == "" || filter == "-long");
 
     for (size_t i = 0; i < buffer1.size(); ++i) {
-        if (buffer1[i].latitude < latitude + latSpan
-        && buffer1[i].latitude > latitude - latSpan
-        && buffer1[i].longitude < longitude + longSpan
-        && buffer1[i].longitude > longitude - longSpan
+        if (buffer1[i].latitude <= latitude + latSpan
+        && buffer1[i].latitude >= latitude - latSpan
+        && buffer1[i].longitude <= longitude + longSpan
+        && buffer1[i].longitude >= longitude - longSpan
         && (isAll || featureClassType(buffer1[i].FEATURE_CLASS) == filter )) {
-            whatIsInList.insert(whatIsInList.begin(), buffer1[i]);
+            whatIsInList.insert(whatIsInList.begin(), move(buffer1[i]));
             bringToFrontOfBuffer(i);
         }
     }
@@ -193,12 +193,11 @@ vector<int> BufferPool::fakeTreeSearchArea(int latitude, int longitude, int latS
     recordsInArea.clear();
     for (size_t i = 0; i < allRecords.size(); ++i) {
         GISRecord& record = allRecords[i];
-        if (record.latitude < latitude + latSpan
-            && record.latitude > latitude - latSpan
-            && record.longitude < longitude + longSpan
-            && record.longitude > longitude - longSpan) {
+        if (record.latitude <= latitude + latSpan
+            && record.latitude >= latitude - latSpan
+            && record.longitude <= longitude + longSpan
+            && record.longitude >= longitude - longSpan) {
             recordsInArea.insert(recordsInArea.begin(), i);
-            bringToFrontOfBuffer(i);
         }
     }
     return recordsInArea;
