@@ -58,9 +58,14 @@ vector<GISRecord> BufferPool::whatIsAt(string latString, string longString, GIS:
     }
 
     vector<int> resultIndexList = prQuadTree->searchOne(latitude, longitude);
-
+    bool alreadyAdded = false;
     for (int resultIndex : resultIndexList) {
-        if (resultIndex > 0 && std::find(whatIsAtList.begin(), whatIsAtList.end(),)) {
+        for (const GISRecord& recc : whatIsAtList) {
+            if (recc.lineOfSet == resultIndex) {
+                alreadyAdded = true;
+            }
+        }
+        if (resultIndex > 0 && !alreadyAdded) {
             GISRecord* record3;
             record3 = nullptr;
             record3 = new GISRecord();

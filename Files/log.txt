@@ -5,7 +5,7 @@ Begin of GIS Program log:
 dbFile: 
 script: 
 log: 
-Start Time: 2023-07-07 00:10:59
+Start Time: 2023-07-07 19:27:24
 
 world	0794530W	0792630W	381000N	383000N
 ------------------------------------------------------------------------------------------
@@ -46,9 +46,6 @@ Highland (38d 29m 53s North, 79d 33m 23s West)
 Command 6: what_is_at	382812N	0793156W
 
 	The following feature(s) were found at (382812N, 0793156W)
-		48:  "Possum Trot" "Highland" "VA"
-		23:  "Laurel Run" "Highland" "VA"
-		4:  "Burners Run" "Highland" "VA"
 		4:  "Burners Run" "Highland" "VA"
 		23:  "Laurel Run" "Highland" "VA"
 		48:  "Possum Trot" "Highland" "VA"
@@ -56,4 +53,23 @@ Command 6: what_is_at	382812N	0793156W
 
 
 Command 7: what_is	Central Church	VA
+
+Highland (38d 29m 53s North, 79d 33m 23s West)
+
+Command 8: what_is_at	382812N	0793156W
+
+	The following feature(s) were found at (382812N, 0793156W)
+		48:  "Possum Trot" "Highland" "VA"
+		23:  "Laurel Run" "Highland" "VA"
+		4:  "Burners Run" "Highland" "VA"
+
+
+
+Command 9: what_is	Town of Monterey	VA
+
+Highland (38d 24m 42s North, 79d 34m 51s West)
+
+Command 10: what_is	Smith Field	VA
+
+Highland (38d 18m 9s North, 79d 30m 29s West)
 
