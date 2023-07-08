@@ -13,14 +13,15 @@ namespace GIS {
         const float MAX_THRESHOLD = 0.7;
     private:
 
-        // Hash table data structure
-        struct hashTable {
-            string key;
-            string value; // Line offset in the file (-1 because of header)
-            bool isDeleted;
+        class NameIndex {
+            public:
+                string key;
+                string value; // Line offset in the file (-1 because of header)
+                bool isDeleted;
+                NameIndex(const string& key = "", const string& value = "") : key(key), value(value), isDeleted(false) {}
         };
 
-        hashTable* table;
+        NameIndex* table;
         int size;
         int count;
 
@@ -29,21 +30,21 @@ namespace GIS {
         // source: https://www.programmingalgorithms.com/algorithm/elf-hash/cpp/
         int elfhash(const string& key);
 
-        int findIndex(const hashTable* table, int tableSize, const string& key);
+        int findIndex(const NameIndex* table, int tableSize, const string& key);
 
     public:
-        void resolutionFunction();
-        void linearProbing();
 
         // Constructor
         HashTable() : size(INITIAL_SIZE), count(0) {
-            table = new hashTable[size];
+            table = new NameIndex[size]();
         }
 
         // Destructor for the HashTable
         ~HashTable(){
             delete[] table;
         }
+
+        int resolveCollision(int index, int stepSize);
 
         void insert(const string& key, const string& value);
 
