@@ -144,6 +144,75 @@ namespace GIS {
             }
     }
 
+
+    vector<int> PRQuadtree::treeSearchArea(int latToSearch, int longToSearch, int latSpan, int longSpan) {
+        vector<int> result;
+        result.clear();
+        if (!isCoordinateInWorld(latToSearch, longToSearch)) {
+            return result;
+        }
+
+        if(root == nullptr) {
+            return result;
+        }
+
+        treeSearchAreaHelper(latToSearch, longToSearch, latSpan, longSpan, root, result);
+        return result;
+    }
+
+    void PRQuadtree::treeSearchAreaHelper(int latToSearch, int longToSearch, int latSpan, int longSpan, PRQuadtreeNode* node, vector<int>& result) {
+        if (!node->data.empty()) {
+            for (auto dataIndex : node->data) {
+                int latitude = dataIndex->latitude;
+                int longitude = dataIndex->longitude;
+
+                if (latitude <= latToSearch + latSpan
+                    && latitude >= latToSearch - latSpan
+                    && longitude <= longToSearch + longSpan
+                    && longitude >= longToSearch - longSpan) {
+                    // The coordinate is within the search area
+                    result.insert(result.end(), dataIndex->fileOffsets.begin(), dataIndex->fileOffsets.end());
+                }
+            }
+        }
+
+
+
+        for (int i = 0; i < 4; ++i) {
+            if (node->children[i] != nullptr) {
+                int nodeMaxLat = node->children[i]->maxLatitude;
+                int nodeMaxLong = node->children[i]->maxLongitude;
+                int nodeMinLat = node->children[i]->minLatitude;
+                int nodeMinLong = node->children[i]->minLongitude;
+//                if (
+//                        isPointInsideSquare(nodeMaxLat, nodeMinLong, latToSearch, longToSearch, latSpan, longSpan) ||
+//                        isPointInsideSquare(nodeMaxLat, nodeMaxLong, latToSearch, longToSearch, latSpan, longSpan) ||
+//                        isPointInsideSquare(nodeMinLat, nodeMinLong, latToSearch, longToSearch, latSpan, longSpan) ||
+//                        isPointInsideSquare(nodeMinLat, nodeMaxLong, latToSearch, longToSearch, latSpan, longSpan)
+//                        )
+                    treeSearchAreaHelper(latToSearch, longToSearch, latSpan, longSpan, node->children[i], result);
+
+
+            }
+        }
+    }
+
+    bool PRQuadtree::isPointInsideSquare(int x, int y, int squareCenterX, int squareCenterY, int squareSpanX, int squareSpanY) {
+        // Calculate the boundaries of the square
+        int squareLeft = squareCenterX - squareSpanX;
+        int squareRight = squareCenterX + squareSpanX;
+        int squareTop = squareCenterY + squareSpanY;
+        int squareBottom = squareCenterY - squareSpanY;
+
+        // Check if the point is inside the square
+        if (x >= squareLeft && x <= squareRight && y >= squareBottom && y <= squareTop) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
     // Determines the quadrant (the child node) in which a given coordinate should be inserted or located in the PR Quadtree
     int PRQuadtree::getQuadrant(PRQuadtreeNode *node, int latitude, int longitude) const {
         double latMid = (node->minLatitude + node->maxLatitude) / 2.0;

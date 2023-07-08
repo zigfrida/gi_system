@@ -56,6 +56,7 @@ string GISRecord::whatIsInPrint() {
     result += "\"" + this->FEATURE_Name + "\" \"";
     result += this->COUNTY_NAME + "\" \"";
     result += this->STATE_Abbreviation + "\"";
+    result += " (" + convertToDMS2(this->latitude) + ", " + convertToDMS2(this->longitude) + ")";
     return result;
 }
 

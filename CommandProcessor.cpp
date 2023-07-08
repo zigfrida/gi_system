@@ -204,14 +204,21 @@ namespace GIS {
                         }
                         if (!what_Is_In.empty()) {
                             if (concatenated[1] == "-long") {
-                                bufferPool1->whatIsInLogger(what_Is_In, concatenated[2], concatenated[3]);
+                                bufferPool1->whatIsInLogger(what_Is_In, concatenated[2], concatenated[3], concatenated[4], concatenated[5]);
                             } else {
-                                Logger::getInstance().writeLog(
-                                        "\tThe following feature(s) were found at (" + concatenated[1] + ", " +
-                                        concatenated[2] + ")");
+
+                                if (concatenated[1] == "-filter") {
+                                    Logger::getInstance().writeLog(
+                                            "\tThe following " + to_string(what_Is_In.size()) + " feature(s) were found at (" + concatenated[3] + " +/- "+concatenated[5]+", " +
+                                            concatenated[4] + " +/- "+concatenated[6]+")");
+                                } else {
+                                    Logger::getInstance().writeLog(
+                                            "\tThe following " + to_string(what_Is_In.size()) + " feature(s) were found at (" + concatenated[1] + " +/- "+concatenated[3]+", " +
+                                            concatenated[2] + " +/- "+concatenated[4]+")");
+                                }
                                 string whatIsInResult = "";
                                 for (auto rec: what_Is_In) {
-                                    whatIsInResult += "\t\t" + rec.whatIsAtPrint() + "\n";
+                                    whatIsInResult += "\t\t" + rec.whatIsInPrint() + "\n";
                                 }
                                 Logger::getInstance().writeLog(whatIsInResult);
                                 Logger::getInstance().writeLog(
