@@ -110,7 +110,7 @@ vector<GISRecord> BufferPool::whatIsIn(string latString, string longString, stri
         && buffer1[i].longitude <= longitude + longSpan
         && buffer1[i].longitude >= longitude - longSpan
         && (isAll || featureClassType(buffer1[i].FEATURE_CLASS) == filter )) {
-            whatIsInList.insert(whatIsInList.begin(), move(buffer1[i]));
+            whatIsInList.insert(whatIsInList.begin(), buffer1[i]);
             bringToFrontOfBuffer(i);
         }
     }
@@ -311,7 +311,6 @@ string BufferPool::featureClassType(string featureClass) {
                     featureClass == "Post Office" ||
                     featureClass == "School" ||
                     featureClass == "Tower" ||
-                    featureClass == "Tunnel" ||
                     featureClass == "Tunnel"
             ) {
         return "structure";
@@ -324,7 +323,13 @@ string BufferPool::featureClassType(string featureClass) {
             featureClass == "Harbor" ||
             featureClass == "Lake" ||
             featureClass == "Rapids" ||
-            featureClass == "Reservoir"
+            featureClass == "Reservoir"||
+            featureClass == "Sea"||
+            featureClass == "Spring"||
+            featureClass == "Stream"||
+            featureClass == "Swamp"||
+            featureClass == "Well"
+
             ) {
         return "water";
     }

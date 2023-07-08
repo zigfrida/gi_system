@@ -23,6 +23,8 @@ public:
     string dbPrint();
     string whatIsPrint();
     string whatIsAtPrint();
+    string whatIsInPrint();
+    string whatIsInPrintLong();
     string convertToDMS(int value);
     string convertToDMS2(int value);
 

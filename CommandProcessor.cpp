@@ -72,7 +72,6 @@ namespace GIS {
                         nameIndex->insert(key, value);
                         CoordinateIndex* newCordIndex = new CoordinateIndex(tempRec.latitude, tempRec.longitude);
                         newCordIndex->fileOffsets.push_back(lineOffSet);
-
                         prquadtree->insert(*newCordIndex, tempRec);
                         lineOffSet++;
                     }
