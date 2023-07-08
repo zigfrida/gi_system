@@ -38,8 +38,11 @@ namespace GIS {
 
     void CommandProcessor::importCommand(string const &recordFile, string const &databaseFile) {
         vector<GISRecord> dbRecords;
-        ifstream source(recordFile); // Source file
-//        ifstream source("../Files/VA_Monterey.txt");
+         ifstream source(recordFile); // Source file
+//         ifstream source("../Files/VA_Monterey.txt");
+
+         int featureCount = 0;
+         int averageNameLength = 0;
 
         if (!source.is_open()) {
             Logger::getInstance().writeLog("Import failed. Import file " + recordFile + " does not exist!\n");
@@ -68,6 +71,8 @@ namespace GIS {
                         tempRec.longitude = World::convertStringLatLongToInt(featureInfo[8]);
                         tempRec.STATE_Abbreviation = featureInfo[3];
                         tempRec.COUNTY_NAME = featureInfo[5];
+                        tempRec.elev_in_ft = featureInfo[16];
+                        tempRec.date_created = featureInfo[18];
                         dbRecords.push_back(tempRec);
                         nameIndex->insert(key, value);
                         CoordinateIndex* newCordIndex = new CoordinateIndex(tempRec.latitude, tempRec.longitude);
@@ -75,10 +80,22 @@ namespace GIS {
 
                         prquadtree->insert(*newCordIndex, tempRec);
                         lineOffSet++;
+                        featureCount++;
+                        averageNameLength += featureInfo[1].length();
                     }
                 }
                 if (firstLine) firstLine = false;
             }
+
+            averageNameLength = averageNameLength / featureCount;
+
+            stringstream logMessage;
+            logMessage << "Imported Features by name: " << featureCount << endl;
+            logMessage << "Longest probe sequence:    " << nameIndex->getLongestProbSequence() << endl;
+            logMessage << "Imported Locations:        " << featureCount << endl;
+            logMessage << "Average name length:       " << averageNameLength << endl;
+            logMessage << "------------------------------------------------------------------------------------------";
+            Logger::getInstance().writeLog(logMessage.str());
 
             appendToDatabase(dbRecords, databaseFile);
             source.close();
@@ -182,21 +199,26 @@ namespace GIS {
                                 what_Is_In = bufferPool1->whatIsIn(concatenated[1], concatenated[2], concatenated[3], concatenated[4], "", prquadtree);
                             }
 
-
                         } catch (exception e) {
                             Logger::getInstance().writeLog("Invalid command argument!");
                             continue;
                         }
                         if (!what_Is_In.empty()) {
-                            Logger::getInstance().writeLog("\tThe following feature(s) were found at (" + concatenated[1] + ", " + concatenated[2] + ")");
-                            string whatIsInResult = "";
-                            for (auto rec : what_Is_In) {
-                                whatIsInResult += "\t\t" + rec.whatIsAtPrint() + "\n";
+                            if (concatenated[1] == "-long") {
+                                bufferPool1->whatIsInLogger(what_Is_In, concatenated[2], concatenated[3]);
+                            } else {
+                                Logger::getInstance().writeLog(
+                                        "\tThe following feature(s) were found at (" + concatenated[1] + ", " +
+                                        concatenated[2] + ")");
+                                string whatIsInResult = "";
+                                for (auto rec: what_Is_In) {
+                                    whatIsInResult += "\t\t" + rec.whatIsAtPrint() + "\n";
+                                }
+                                Logger::getInstance().writeLog(whatIsInResult);
+                                Logger::getInstance().writeLog(
+                                        "------------------------------------------------------------------------------------------");
                             }
-                            Logger::getInstance().writeLog(whatIsInResult);
-                            Logger::getInstance().writeLog("------------------------------------------------------------------------------------------");
                         } else {
-
                             if (concatenated[1] == "-long") {
                                 Logger::getInstance().writeLog("\tNo feature at \""+ concatenated[2] + "\" and \""+ concatenated[3] + "\"");
                             } else if (concatenated[1] == "-filter") {
