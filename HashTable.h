@@ -24,6 +24,7 @@ namespace GIS {
         NameIndex* table;
         int size;
         int count;
+        int longestProbeSequence;
 
         void resizeTable();
 
@@ -60,7 +61,7 @@ namespace GIS {
 
         int getCount() {return count;}
 
-
+        int getLongestProbSequence() const {return longestProbeSequence;}
     };
 }
 
