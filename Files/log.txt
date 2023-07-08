@@ -5,7 +5,7 @@ Begin of GIS Program log:
 dbFile: 
 script: 
 log: 
-Start Time: 2023-07-08 10:32:53
+Start Time: 2023-07-08 10:40:20
 
 world	0794530W	0792630W	381000N	383000N
 ------------------------------------------------------------------------------------------
@@ -251,7 +251,12 @@ Command 19: what_is_at	382856N	0793031W
 Command 20: what_is_in	382812N	0793156W	60	90
 
 	The following feature(s) were found at (382812N, 0793156W)
-		13:  "Ginseng Mountain" "Highland" "VA"		29:  "Peck Run" "Highland" "VA"		48:  "Possum Trot" "Highland" "VA"		23:  "Laurel Run" "Highland" "VA"		4:  "Burners Run" "Highland" "VA"
+		13:  "Ginseng Mountain" "Highland" "VA"
+		29:  "Peck Run" "Highland" "VA"
+		48:  "Possum Trot" "Highland" "VA"
+		23:  "Laurel Run" "Highland" "VA"
+		4:  "Burners Run" "Highland" "VA"
+
 ------------------------------------------------------------------------------------------
 Command 21: what_is_in	382012N	0792330W	60	90
 
@@ -261,36 +266,50 @@ Command 22: what_is_in	382148N	0793109W	15	15
 
 	The following feature(s) were found at (382148N, 0793109W)
 		24:  "Little Doe Hill" "Highland" "VA"
+
 ------------------------------------------------------------------------------------------
 Command 23: what_is_in	-long	382148N	0793109W	15	15
 
 	The following feature(s) were found at (-long, 382148N)
 		24:  "Little Doe Hill" "Highland" "VA"
+
 ------------------------------------------------------------------------------------------
 Command 24: what_is_in	382148N	0793109W	60	60
 
 	The following feature(s) were found at (382148N, 0793109W)
 		24:  "Little Doe Hill" "Highland" "VA"
+
 ------------------------------------------------------------------------------------------
 Command 25: what_is_in	382148N	0793109W	120	120
 
 	The following feature(s) were found at (382148N, 0793109W)
-		31:  "Seldom Seen Hollow" "Highland" "VA"		24:  "Little Doe Hill" "Highland" "VA"
+		31:  "Seldom Seen Hollow" "Highland" "VA"
+		24:  "Little Doe Hill" "Highland" "VA"
+
 ------------------------------------------------------------------------------------------
 Command 26: what_is_in	382148N	0793109W	180	180
 
 	The following feature(s) were found at (382148N, 0793109W)
-		44:  "Bear Mountain" "Highland" "VA"		46:  "Doe Hill" "Highland" "VA"		24:  "Little Doe Hill" "Highland" "VA"		31:  "Seldom Seen Hollow" "Highland" "VA"
+		44:  "Bear Mountain" "Highland" "VA"
+		46:  "Doe Hill" "Highland" "VA"
+		24:  "Little Doe Hill" "Highland" "VA"
+		31:  "Seldom Seen Hollow" "Highland" "VA"
+
 ------------------------------------------------------------------------------------------
 Command 27: what_is_in	-long	382148N	0793109W	180	180
 
 	The following feature(s) were found at (-long, 382148N)
-		31:  "Seldom Seen Hollow" "Highland" "VA"		24:  "Little Doe Hill" "Highland" "VA"		46:  "Doe Hill" "Highland" "VA"		44:  "Bear Mountain" "Highland" "VA"
+		31:  "Seldom Seen Hollow" "Highland" "VA"
+		24:  "Little Doe Hill" "Highland" "VA"
+		46:  "Doe Hill" "Highland" "VA"
+		44:  "Bear Mountain" "Highland" "VA"
+
 ------------------------------------------------------------------------------------------
 Command 28: what_is_in	-filter	structure	382600N	0793310W	120	120
 
 	The following feature(s) were found at (-filter, structure)
 		32:  "Seybert Chapel" "Highland" "VA"
+
 ------------------------------------------------------------------------------------------
 Command 29: what_is_in	-filter	water	382850N	0793030W	120	240
 
@@ -299,7 +318,13 @@ Command 29: what_is_in	-filter	water	382850N	0793030W	120	240
 Command 30: what_is_in	-filter	pop	382000N	0793530W	3600	3600
 
 	The following feature(s) were found at (-filter, pop)
-		1:  "Blue Grass" "Highland" "VA"		47:  "New Hampden" "Highland" "VA"		54:  "Monterey" "Highland" "VA"		48:  "Possum Trot" "Highland" "VA"		45:  "Clover Creek" "Highland" "VA"		52:  "Trimble" "Highland" "VA"
+		1:  "Blue Grass" "Highland" "VA"
+		47:  "New Hampden" "Highland" "VA"
+		54:  "Monterey" "Highland" "VA"
+		48:  "Possum Trot" "Highland" "VA"
+		45:  "Clover Creek" "Highland" "VA"
+		52:  "Trimble" "Highland" "VA"
+
 ------------------------------------------------------------------------------------------
 Command 31: debug	pool
 
@@ -347,4 +372,4 @@ Command 34: quit
 
 Terminating execution of commands.
 ------------------------------------------------------------------------------------------
-End Time: 2023-07-08 10:32:53
+End Time: 2023-07-08 10:40:20

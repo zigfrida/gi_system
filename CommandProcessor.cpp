@@ -38,7 +38,8 @@ namespace GIS {
 
     void CommandProcessor::importCommand(string const &recordFile, string const &databaseFile) {
         vector<GISRecord> dbRecords;
-         ifstream source(recordFile); // Source file
+        ifstream source(recordFile); // Source file
+//        ifstream source("../Files/VA_Monterey.txt");
 
         if (!source.is_open()) {
             Logger::getInstance().writeLog("Import failed. Import file " + recordFile + " does not exist!\n");
@@ -190,7 +191,7 @@ namespace GIS {
                             Logger::getInstance().writeLog("\tThe following feature(s) were found at (" + concatenated[1] + ", " + concatenated[2] + ")");
                             string whatIsInResult = "";
                             for (auto rec : what_Is_In) {
-                                whatIsInResult += "\t\t" + rec.whatIsAtPrint();
+                                whatIsInResult += "\t\t" + rec.whatIsAtPrint() + "\n";
                             }
                             Logger::getInstance().writeLog(whatIsInResult);
                             Logger::getInstance().writeLog("------------------------------------------------------------------------------------------");
