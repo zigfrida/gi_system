@@ -119,7 +119,7 @@ vector<GISRecord> BufferPool::readDatabaseFile(string filePath) {
     ifstream source(filePath);
     vector<GISRecord> dbRecords;
     if (!source.is_open()) {
-        cout << "Error opening source file" << endl;
+        GIS::Logger::getInstance().writeLog("Error opening source file");
     } else {
         string line;
         int lineCount = 0;
@@ -186,7 +186,7 @@ void BufferPool::insertToBuffer(GISRecord record) {
 
 void BufferPool::bringToFrontOfBuffer(int index) {
     if (index >= buffer1.size()) {
-        std::cout << "Invalid index." << std::endl;
+        GIS::Logger::getInstance().writeLog("Invalid Index.");
         return;
     }
 

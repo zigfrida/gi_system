@@ -13,7 +13,7 @@ namespace GIS {
 
     void HashTable::resizeTable() {
         int newSize = size * 2;
-        hashTable* newTable = new hashTable[newSize];
+        NameIndex* newTable = new NameIndex[newSize];
         for (int i = 0; i < size; ++i) {
             if (!table[i].key.empty() && !table[i].isDeleted) {
                 int index = findIndex(newTable, newSize, table[i].key);
@@ -37,7 +37,7 @@ namespace GIS {
         return hash % size;
     }
 
-    int HashTable::findIndex(const GIS::HashTable::hashTable *table, int tableSize, const std::string &key) {
+    int HashTable::findIndex(const NameIndex *table, int tableSize, const string &key) {
         int index = elfhash(key);
         int i = 1;
         while (!table[index].key.empty() && table[index].key != key) {
@@ -47,27 +47,35 @@ namespace GIS {
         return index;
     }
 
-    void HashTable::insert(const std::string &key, const std::string &value) {
+    int HashTable::resolveCollision(int index, int stepSize) {
+        int n = 1;
+        int originalIndex = index;
+
+        // Execute at least once since insert already checks once
+        do {
+            index = (originalIndex + (stepSize * n) + ((n * n + n) / 2) % size);
+            n++;
+        } while (!table[index].key.empty() && !table[index].isDeleted);
+        // If index is not empty and not marked as deleted, a collision has occurred
+
+        return index;
+    }
+
+    void HashTable::insert(const string &key, const string &value) {
         if ((float)count / size >= MAX_THRESHOLD) {
-            cout << "Table is full, resizing." << endl;
+            Logger::getInstance().writeLog("Table is full, resizing");
             resizeTable();
         }
 
         int index = findIndex(table, size, key);
         int stepSize = 1;
-        int n;
 
         // If index is not empty and not marked as deleted, a collision has occurred
-        while(!table[index].key.empty() && !table[index].isDeleted) {
-            // Collision occurred
-            n++;
-            index = (index + stepSize) % size;
-            stepSize = (((n * n) + n)/2); // Computes the step size per instructions
+        if (!table[index].key.empty() && !table[index].isDeleted) {
+            index = resolveCollision(index, stepSize);
         }
 
-        table[index].key = key;
-        table[index].value = value;
-        table[index].isDeleted = false;
+        table[index] = NameIndex(key, value);
         count++;
     }
 

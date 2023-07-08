@@ -14,15 +14,7 @@ namespace GIS {
 
     void PRQuadtree::insert(const CoordinateIndex& coordinate, const GISRecord& record){
         if (!isCoordinateInWorld(coordinate.latitude, coordinate.longitude)) {
-            cout << "Coordinate Lat " << coordinate.latitude << endl;
-            cout << "World max Lat " <<  worldMaxLatitude << endl;
-            cout << "World min Lat " << worldMinLatitude << endl;
-            cout << endl;
-            cout << "Coordinate Long " << coordinate.longitude << endl;
-            cout << "World max Long " << worldMaxLongitude << endl;
-            cout << "World min Long " <<worldMinLongitude << endl;
-            cout << endl;
-            cout << "Error: Coordinate is outside the world boundary!" << endl;
+            Logger::getInstance().writeLog("Error: Coordinate is outside the world boundary!");
             return;
         }
 
