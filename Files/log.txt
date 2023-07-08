@@ -5,7 +5,7 @@ Begin of GIS Program log:
 dbFile: 
 script: 
 log: 
-Start Time: 2023-07-08 10:40:20
+Start Time: 2023-07-08 13:57:07
 
 world	0794530W	0792630W	381000N	383000N
 ------------------------------------------------------------------------------------------
@@ -18,6 +18,11 @@ Latitude/longitude values in index entries are shown as signed integers, in tota
 ------------------------------------------------------------------------------------------
 Command 1: import	./VA_Monterey.txt
 
+Imported Features by name: 63
+Longest probe sequence:    0
+Imported Locations:        63
+Average name length:       14
+------------------------------------------------------------------------------------------
 Command 2: debug	world
 
 Command 3: debug	quad
@@ -270,8 +275,17 @@ Command 22: what_is_in	382148N	0793109W	15	15
 ------------------------------------------------------------------------------------------
 Command 23: what_is_in	-long	382148N	0793109W	15	15
 
-	The following feature(s) were found at (-long, 382148N)
-		24:  "Little Doe Hill" "Highland" "VA"
+	The following 1 feature(s) were found in 382148N 0793109W
+
+	Feature ID   :1484896
+	Feature Name :Little Doe Hill
+	Feature Cat  :Summit
+	State        :VA
+	County       :Highland
+	Longitude    :-793109
+	Latitude     :382148
+	Elev in ft   :3241
+	Date created :09/28/1979
 
 ------------------------------------------------------------------------------------------
 Command 24: what_is_in	382148N	0793109W	60	60
@@ -298,11 +312,47 @@ Command 26: what_is_in	382148N	0793109W	180	180
 ------------------------------------------------------------------------------------------
 Command 27: what_is_in	-long	382148N	0793109W	180	180
 
-	The following feature(s) were found at (-long, 382148N)
-		31:  "Seldom Seen Hollow" "Highland" "VA"
-		24:  "Little Doe Hill" "Highland" "VA"
-		46:  "Doe Hill" "Highland" "VA"
-		44:  "Bear Mountain" "Highland" "VA"
+	The following 4 feature(s) were found in 382148N 0793109W
+
+	Feature ID   :1486995
+	Feature Name :Seldom Seen Hollow
+	Feature Cat  :Valley
+	State        :VA
+	County       :Highland
+	Longitude    :-793031
+	Latitude     :382145
+	Elev in ft   :2461
+	Date created :09/28/1979
+
+	Feature ID   :1484896
+	Feature Name :Little Doe Hill
+	Feature Cat  :Summit
+	State        :VA
+	County       :Highland
+	Longitude    :-793109
+	Latitude     :382148
+	Elev in ft   :3241
+	Date created :09/28/1979
+
+	Feature ID   :1495470
+	Feature Name :Doe Hill
+	Feature Cat  :Summit
+	State        :VA
+	County       :Highland
+	Longitude    :-793113
+	Latitude     :382313
+	Elev in ft   :3970
+	Date created :09/28/1979
+
+	Feature ID   :1495244
+	Feature Name :Bear Mountain
+	Feature Cat  :Summit
+	State        :VA
+	County       :Highland
+	Longitude    :-793254
+	Latitude     :382012
+	Elev in ft   :3530
+	Date created :09/28/1979
 
 ------------------------------------------------------------------------------------------
 Command 28: what_is_in	-filter	structure	382600N	0793310W	120	120
@@ -348,6 +398,11 @@ LRU
 ------------------------------------------------------------------------------------------
 Command 32: import	./VA_Bath.txt
 
+Imported Features by name: 63
+Longest probe sequence:    4
+Imported Locations:        63
+Average name length:       14
+------------------------------------------------------------------------------------------
 Command 33: debug	pool
 
 MRU
@@ -372,4 +427,4 @@ Command 34: quit
 
 Terminating execution of commands.
 ------------------------------------------------------------------------------------------
-End Time: 2023-07-08 10:40:20
+End Time: 2023-07-08 13:57:07

@@ -145,6 +145,8 @@ vector<GISRecord> BufferPool::whatIsIn(string latString, string longString, stri
             record3->longitude = stoi(featureInfo[5]);
             record3->STATE_Abbreviation = featureInfo[3];
             record3->COUNTY_NAME = featureInfo[6];
+            record3->elev_in_ft = featureInfo[7];
+            record3->date_created = featureInfo[8];
             record3->lineOfSet = resultIndex;
             if (isAll || featureClassType(record3->FEATURE_CLASS) == filter ) {
                 insertToBuffer(*record3);
@@ -233,6 +235,9 @@ vector<GISRecord> BufferPool::readDatabaseFile(string filePath) {
                 tempRec.latitude = stoi(featureInfo[4]);
                 tempRec.longitude = stoi(featureInfo[5]);
                 tempRec.STATE_Abbreviation = featureInfo[3];
+                tempRec.COUNTY_NAME = featureInfo[5];
+                tempRec.elev_in_ft = featureInfo[16];
+                tempRec.date_created = featureInfo[18];
                 tempRec.lineOfSet = lineCount;
                 dbRecords.push_back(tempRec);
 
@@ -340,4 +345,27 @@ string BufferPool::featureClassType(string featureClass) {
         return "pop";
     }
     return "";
+}
+
+void BufferPool::whatIsInLogger(vector<GISRecord> records, string cord1, string cord2) {
+    stringstream logMessage;
+
+    logMessage << "\tThe following " << records.size() << " feature(s) were found in " << cord1 << " " << cord2 << endl;
+
+    for (auto rec : records) {
+        logMessage << "\n\tFeature ID   :" << rec.FEATURE_ID << endl;
+        logMessage << "\tFeature Name :" << rec.FEATURE_Name << endl;
+        logMessage << "\tFeature Cat  :" << rec.FEATURE_CLASS << endl;
+        logMessage << "\tState        :" << rec.STATE_Abbreviation << endl;
+        logMessage << "\tCounty       :" << rec.COUNTY_NAME << endl;
+        logMessage << "\tLongitude    :" << rec.longitude << endl;
+        logMessage << "\tLatitude     :" << rec.latitude << endl;
+        logMessage << "\tElev in ft   :" << rec.elev_in_ft << endl;
+        logMessage << "\tDate created :" << rec.date_created << endl;
+    }
+
+    logMessage << endl;
+    logMessage << "------------------------------------------------------------------------------------------";
+    GIS::Logger::getInstance().writeLog(logMessage.str());
+
 }

@@ -58,6 +58,10 @@ namespace GIS {
         } while (!table[index].key.empty() && !table[index].isDeleted);
         // If index is not empty and not marked as deleted, a collision has occurred
 
+        if (n > longestProbeSequence) {
+            longestProbeSequence = n;
+        }
+
         return index;
     }
 

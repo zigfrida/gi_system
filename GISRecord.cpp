@@ -20,6 +20,10 @@ string GISRecord::dbPrint() {
     result += "|";
     result += this->COUNTY_NAME;
     result += "|";
+    result += this->elev_in_ft;
+    result += "|";
+    result += this->date_created;
+    result += "|";
     return result;
 }
 
