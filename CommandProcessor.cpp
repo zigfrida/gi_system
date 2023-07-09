@@ -16,11 +16,11 @@ using namespace std;
 
 namespace GIS {
 
-    CommandProcessor::CommandProcessor(){
-        bufferPool1 = new BufferPool("../Files/database.txt");
-        scriptFile = "../Files/script01.txt";
-        dbFile = "../Files/database.txt";
-        Logger::getInstance().initialText(scriptFile, dbFile);
+    CommandProcessor::CommandProcessor(string dbArg, string scriptArg, string logArg){
+        bufferPool1 = new BufferPool(dbArg);
+        scriptFile = scriptArg;
+        dbFile = dbArg;
+        Logger::getInstance().initialText(scriptFile, dbFile, logArg);
         lineOffSet = 0;
         nameIndex = new HashTable();
     }

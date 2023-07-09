@@ -22,7 +22,7 @@ public:
         /**
          * Clear things inside the database text file
          */
-        ofstream outputFile22(databaseFilePath, std::ios::out);  // Open the file for writing in binary mode
+        ofstream outputFile22(databaseFilePath,  fstream::out | fstream::trunc);
         outputFile22 << "";
         outputFile22.close();
     }

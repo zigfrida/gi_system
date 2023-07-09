@@ -117,7 +117,6 @@ vector<GISRecord> BufferPool::whatIsIn(string latString, string longString, stri
 
     vector<int> resultIndexList;
     resultIndexList.clear();
-    //resultIndexList = fakeTreeSearchArea(latitude, longitude, latSpan, longSpan);
     resultIndexList = prQuadTree->treeSearchArea(latitude, longitude, latSpan, longSpan);
     bool alreadyAdded = false;
     for (int resultIndex : resultIndexList) {
