@@ -184,12 +184,10 @@ namespace GIS {
                 int nodeMaxLong = node->children[i]->maxLongitude;
                 int nodeMinLat = node->children[i]->minLatitude;
                 int nodeMinLong = node->children[i]->minLongitude;
-//                if (
-//                        isPointInsideSquare(nodeMaxLat, nodeMinLong, latToSearch, longToSearch, latSpan, longSpan) ||
-//                        isPointInsideSquare(nodeMaxLat, nodeMaxLong, latToSearch, longToSearch, latSpan, longSpan) ||
-//                        isPointInsideSquare(nodeMinLat, nodeMinLong, latToSearch, longToSearch, latSpan, longSpan) ||
-//                        isPointInsideSquare(nodeMinLat, nodeMaxLong, latToSearch, longToSearch, latSpan, longSpan)
-//                        )
+                if (
+                        isNodeInsideSearchArea(nodeMaxLat, nodeMinLat, nodeMaxLong, nodeMinLong, latToSearch, longToSearch, latSpan, longSpan)
+                        )
+
                     treeSearchAreaHelper(latToSearch, longToSearch, latSpan, longSpan, node->children[i], result);
 
 
@@ -197,20 +195,21 @@ namespace GIS {
         }
     }
 
-    bool PRQuadtree::isPointInsideSquare(int x, int y, int squareCenterX, int squareCenterY, int squareSpanX, int squareSpanY) {
+    bool PRQuadtree::isNodeInsideSearchArea(int nodeMaxX, int nodeMinX, int nodeMaxY, int nodeMinY, int searchCenterX, int searchCenterY, int searchSpanX, int searchSpanY) {
         // Calculate the boundaries of the square
-        int squareLeft = squareCenterX - squareSpanX;
-        int squareRight = squareCenterX + squareSpanX;
-        int squareTop = squareCenterY + squareSpanY;
-        int squareBottom = squareCenterY - squareSpanY;
+        int node2MinX = searchCenterX - searchSpanX;
+        int node2MaxX = searchCenterX + searchSpanX;
+        int node2MaxY = searchCenterY + searchSpanY;
+        int node2MinY = searchCenterY - searchSpanY;
 
-        // Check if the point is inside the square
-        if (x >= squareLeft && x <= squareRight && y >= squareBottom && y <= squareTop) {
-            return true;
-        }
-        else {
-            return false;
-        }
+        // Check if the nodes overlap in the x-axis
+        bool overlapX = (nodeMaxX >= node2MinX) && (nodeMinX <= node2MaxX);
+
+        // Check if the nodes overlap in the y-axis
+        bool overlapY = (nodeMaxY >= node2MinY) && (nodeMinY <= node2MaxY);
+
+        // Return true if there is overlap in both x and y axes
+        return overlapX && overlapY;
     }
 
     // Determines the quadrant (the child node) in which a given coordinate should be inserted or located in the PR Quadtree

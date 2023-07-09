@@ -37,7 +37,7 @@ namespace GIS {
             vector<int> searchOneHelper(int latToSearch, int longToSearch, PRQuadtreeNode* node);
             vector<int> treeSearchArea(int latitude, int longitude, int latSpan, int longSpan);
             void treeSearchAreaHelper(int latToSearch, int longToSearch, int latSpan, int longSpan, PRQuadtreeNode* node, vector<int>& result);
-            bool isPointInsideSquare(int x, int y, int squareCenterX, int squareCenterY, int squareSpanX, int squareSpanY);
+            bool isNodeInsideSearchArea(int nodeMaxX, int nodeMinX, int nodeMaxY, int nodeMinY, int searchCenterX, int searchCenterY, int searchSpanX, int searchSpanY);
 
         private:
             void destroyTree(PRQuadtreeNode* node);
