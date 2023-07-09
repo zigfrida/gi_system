@@ -284,4 +284,54 @@ namespace GIS {
         Logger::getInstance().writeLog(logMessage.str());
     }
 
+
+    vector<vector<int>> PRQuadtree::quadAndData() {
+        vector<vector<int>> result;
+        result.clear();
+        if (!isCoordinateInWorld(latToSearch, longToSearch)) {
+            return result;
+        }
+
+        if(root == nullptr) {
+            return result;
+        }
+
+        treeSearchAreaHelper(latToSearch, longToSearch, latSpan, longSpan, root, result);
+        return result;
+    }
+
+    void PRQuadtree::quadAndDataHelper(PRQuadtreeNode* node, vector<int[]>& result) {
+        if (!node->data.empty()) {
+            for (auto dataIndex : node->data) {
+                int latitude = dataIndex->latitude;
+                int longitude = dataIndex->longitude;
+
+                if (latitude <= latToSearch + latSpan
+                    && latitude >= latToSearch - latSpan
+                    && longitude <= longToSearch + longSpan
+                    && longitude >= longToSearch - longSpan) {
+                    // The coordinate is within the search area
+                    result.insert(result.end(), dataIndex->fileOffsets.begin(), dataIndex->fileOffsets.end());
+                }
+            }
+        }
+
+
+
+        for (int i = 0; i < 4; ++i) {
+            if (node->children[i] != nullptr) {
+                int nodeMaxLat = node->children[i]->maxLatitude;
+                int nodeMaxLong = node->children[i]->maxLongitude;
+                int nodeMinLat = node->children[i]->minLatitude;
+                int nodeMinLong = node->children[i]->minLongitude;
+                if (
+                        isNodeInsideSearchArea(nodeMaxLat, nodeMinLat, nodeMaxLong, nodeMinLong, latToSearch, longToSearch, latSpan, longSpan)
+                        )
+
+                    treeSearchAreaHelper(latToSearch, longToSearch, latSpan, longSpan, node->children[i], result);
+
+
+            }
+        }
+    }
 }
