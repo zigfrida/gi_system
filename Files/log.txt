@@ -2,10 +2,10 @@ Course Project for COMP 8042
 Student Name: Amanda Golubics, Student Id: A01048162
 Student Name: Eunhak Lee, Student Id: A01026056
 Begin of GIS Program log:
-dbFile: 
-script: 
-log: 
-Start Time: 2023-07-08 13:57:07
+dbFile: ../Files/database.txt
+script: ../Files/script01.txt
+log: ../Files/log.txt
+Start Time: 2023-07-08 18:50:01
 
 world	0794530W	0792630W	381000N	383000N
 ------------------------------------------------------------------------------------------
@@ -23,259 +23,83 @@ Longest probe sequence:    0
 Imported Locations:        63
 Average name length:       14
 ------------------------------------------------------------------------------------------
-Command 2: debug	world
-
-Command 3: debug	quad
-
-  [(381740,-793707), 1] [(381816,-793708), 1] 
-    
-    
-      [(381556,-793353), 1] 
-        [(381613,-793238), 1] [(381612,-793256), 1] [(381612,-793236), 1] 
-        [(381525,-793154), 1] 
-        
-        [(381707,-793144), 1] [(381725,-793151), 1] 
-      @
-
-      [(381902,-793358), 1] [(381905,-793439), 1] 
-      
-    @
-
-      [(381508,-793024), 1] [(381522,-793012), 1] [(381531,-793005), 1] 
-      
-      [(381824,-793053), 1] [(381811,-793019), 1] [(381809,-793029), 1] 
-      
-    @
-
-  @
-
-    
-    [(382354,-793601), 1] [(382120,-793602), 1] 
-    
-    [(382526,-793718), 1] [(382852,-793652), 1] [(382515,-793622), 1] 
-  @
-
-      [(382023,-793502), 1] [(382047,-793523), 1] 
-      [(382148,-793109), 1] [(382012,-793254), 1] 
-        
-        
-        [(382417,-793517), 1] 
-          [(382426,-793444), 1] [(382427,-793446), 1] 
-          
-          [(382444,-793450), 1] [(382442,-793446), 1] [(382442,-793451), 1] 
-          
-        @
-
-      @
-
-      [(382313,-793113), 1] [(382453,-793336), 1] [(382447,-793217), 1] 
-    @
-
-    [(382145,-793031), 1] 
-      [(382541,-793500), 1] 
-        [(382607,-793312), 1] [(382512,-793225), 1] [(382610,-793313), 1] [(382552,-793233), 1] 
-        
-        
-        [(382654,-793209), 1] [(382704,-793141), 1] [(382653,-793204), 1] [(382718,-793201), 1] 
-      @
-
-      [(382828,-793435), 1] [(382934,-793348), 1] 
-        
-        [(382812,-793156), 3] [(382850,-793139), 1] [(382806,-793109), 1] 
-          
-          
-          [(382953,-793323), 1] [(382953,-793310), 1] [(382957,-793303), 1] 
-          [(383000,-793259), 1] [(382953,-793222), 1] [(382951,-793238), 1] 
-        @
-
-        [(382936,-793153), 1] 
-      @
-
-    @
-
-    [(382856,-793031), 2] [(382940,-793103), 1] [(382502,-793013), 1] 
-  @
-
-@
-------------------------------------------------------------------------------------------
-Command 4: debug	hash
-
-Format of display is 
-Slot number: data record
-Current table size is 1024
-Number of elements in table is 63
-
-	1: [Monterey VA, [54]]
-	17: [Union Chapel VA, [38]]
-	97: [Burners Run VA, [4]]
-	98: [Jack Mountain VA, [20]]
-	102: [Swope Hollow VA, [36]]
-	111: [Thorny Bottom Church VA, [37]]
-	113: [Hamilton Chapel VA, [15]]
-	114: [Peck Run VA, [29]]
-	118: [Bear Mountain VA, [44]]
-	161: [Miracle Ridge VA, [26]]
-	162: [Trimble VA, [52]]
-	193: [Smith Field VA, [55]]
-	194: [Highland Elementary School VA, [58]]
-	225: [Buck Hill VA, [3]]
-	257: [Blue Grass VA, [1]]
-	258: [Monterey Methodist Episcopal Church VA, [59]]
-	273: [Key Run VA, [21]]
-	274: [Rich Hills VA, [49]]
-	289: [Highland High School VA, [16]]
-	321: [Trimble Knob VA, [53]]
-	337: [Simmons Run VA, [33]]
-	353: [New Salem Church VA, [28]]
-	369: [Frank Run VA, [12]]
-	370: [Barren Rock VA, [30]]
-	433: [Hupman Valley VA, [19]]
-	434: [Seybert Hills VA, [50]]
-	449: [Asbury Church VA, [0]]
-	450: [Little Doe Hill VA, [24]]
-	465: [Gulf Mountain VA, [14]]
-	481: [Central Church VA, [6]]
-	497: [Davis Run VA, [9]]
-	498: [Ginseng Mountain VA, [13]]
-	502: [Wooden Run VA, [42]]
-	529: [Laurel Run VA, [23]]
-	545: [Claylick Hollow VA, [7]]
-	561: [Hannah Field Airport VA, [43]]
-	562: [Sounding Knob VA, [51]]
-	577: [Lantz Mountain VA, [22]]
-	578: [Vance Hollow VA, [39]]
-	582: [Strait Creek School (historical) VA, [60]]
-	609: [West Strait Creek VA, [40]]
-	610: [Clover Creek Presbyterian Church VA, [57]]
-	625: [Forks of Waters VA, [11]]
-	626: [Monterey Mountain VA, [27]]
-	657: [Monterey District VA, [61]]
-	673: [Highland Wildlife Management Area VA, [17]]
-	674: [Meadow Draft VA, [25]]
-	678: [Southall Chapel VA, [34]]
-	687: [New Hampden VA, [47]]
-	689: [Seldom Seen Hollow VA, [31]]
-	737: [Crab Run VA, [8]]
-	738: [Doe Hill VA, [46]]
-	769: [Town of Monterey VA, [62]]
-	817: [Clover Creek VA, [45]]
-	865: [Bluegrass Valley VA, [2]]
-	881: [Elk Run VA, [10]]
-	897: [Possum Trot VA, [48]]
-	945: [Strait Creek VA, [35]]
-	961: [Seybert Chapel VA, [32]]
-	962: [Blue Grass School (historical) VA, [56]]
-	977: [White Run VA, [41]]
-	993: [Hightown Church VA, [18]]
-	1009: [Mount Carlyle VA, [5]]
-------------------------------------------------------------------------------------------
-Command 5: what_is_at	382812N	0793156W
+Command 2: what_is_at	382812N	0793156W
 
 	The following feature(s) were found at (382812N, 0793156W)
 		48:  "Possum Trot" "Highland" "VA"		23:  "Laurel Run" "Highland" "VA"		4:  "Burners Run" "Highland" "VA"
 ------------------------------------------------------------------------------------------
-Command 6: debug	pool
-
-MRU
-	48: 1496110|Possum Trot|Populated Place|VA|Highland|382812|-793156|
-	23: 1484722|Laurel Run|Stream|VA|Highland|382812|-793156|
-	4: 1482176|Burners Run|Stream|VA|Highland|382812|-793156|
-LRU
-------------------------------------------------------------------------------------------
-Command 7: what_is	Church	VA
+Command 3: what_is	Church	VA
 
 	No records match "Church" and "VA"
 ------------------------------------------------------------------------------------------
-Command 8: what_is	Central Church	VA
+Command 4: what_is	Central Church	VA
 
 	6: Highland (38d 29m 53s North, 79d 33m 23s West)
 ------------------------------------------------------------------------------------------
-Command 9: what_is	Town of Monterey	VA
+Command 5: what_is	Town of Monterey	VA
 
 	62: Highland (38d 24m 42s North, 79d 34m 51s West)
 ------------------------------------------------------------------------------------------
-Command 10: what_is	Smith Field	VA
+Command 6: what_is	Smith Field	VA
 
 	55: Highland (38d 18m 9s North, 79d 30m 29s West)
 ------------------------------------------------------------------------------------------
-Command 11: what_is	Smith Field	CO
+Command 7: what_is	Smith Field	CO
 
 	No records match "Smith Field" and "CO"
 ------------------------------------------------------------------------------------------
-Command 12: debug	pool
-
-MRU
-	55: 1498741|Smith Field|Airport|VA|Highland|381809|-793029|
-	62: 2391311|Town of Monterey|Civil|VA|Highland|382442|-793451|
-	6: 1482434|Central Church|Church|VA|Highland|382953|-793323|
-	48: 1496110|Possum Trot|Populated Place|VA|Highland|382812|-793156|
-	23: 1484722|Laurel Run|Stream|VA|Highland|382812|-793156|
-	4: 1482176|Burners Run|Stream|VA|Highland|382812|-793156|
-LRU
-------------------------------------------------------------------------------------------
-Command 13: what_is_at	382812N	0793156W
+Command 8: what_is_at	382812N	0793156W
 
 	The following feature(s) were found at (382812N, 0793156W)
 		4:  "Burners Run" "Highland" "VA"		23:  "Laurel Run" "Highland" "VA"		48:  "Possum Trot" "Highland" "VA"
 ------------------------------------------------------------------------------------------
-Command 14: debug	pool
-
-MRU
-	4: 1482176|Burners Run|Stream|VA|Highland|382812|-793156|
-	23: 1484722|Laurel Run|Stream|VA|Highland|382812|-793156|
-	48: 1496110|Possum Trot|Populated Place|VA|Highland|382812|-793156|
-	55: 1498741|Smith Field|Airport|VA|Highland|381809|-793029|
-	62: 2391311|Town of Monterey|Civil|VA|Highland|382442|-793451|
-	6: 1482434|Central Church|Church|VA|Highland|382953|-793323|
-LRU
-------------------------------------------------------------------------------------------
-Command 15: what_is_at	381816N	0793700W
+Command 9: what_is_at	381816N	0793700W
 
 No feature at "381816N" and "0793700W"
 ------------------------------------------------------------------------------------------
-Command 16: what_is_at	381816N	0793708W
+Command 10: what_is_at	381816N	0793708W
 
 	The following feature(s) were found at (381816N, 0793708W)
 		52:  "Trimble" "Highland" "VA"
 ------------------------------------------------------------------------------------------
-Command 17: what_is_at	381612N	0793256W
+Command 11: what_is_at	381612N	0793256W
 
 	The following feature(s) were found at (381612N, 0793256W)
 		45:  "Clover Creek" "Highland" "VA"
 ------------------------------------------------------------------------------------------
-Command 18: what_is_at	382951N	0793238W
+Command 12: what_is_at	382951N	0793238W
 
 	The following feature(s) were found at (382951N, 0793238W)
 		21:  "Key Run" "Highland" "VA"
 ------------------------------------------------------------------------------------------
-Command 19: what_is_at	382856N	0793031W
+Command 13: what_is_at	382856N	0793031W
 
 	The following feature(s) were found at (382856N, 0793031W)
 		35:  "Strait Creek" "Highland" "VA"		11:  "Forks of Waters" "Highland" "VA"
 ------------------------------------------------------------------------------------------
-Command 20: what_is_in	382812N	0793156W	60	90
+Command 14: what_is_in	382812N	0793156W	60	90
 
-	The following feature(s) were found at (382812N, 0793156W)
-		13:  "Ginseng Mountain" "Highland" "VA"
-		29:  "Peck Run" "Highland" "VA"
-		48:  "Possum Trot" "Highland" "VA"
-		23:  "Laurel Run" "Highland" "VA"
-		4:  "Burners Run" "Highland" "VA"
+	The following 5 feature(s) were found at (382812N +/- 60, 0793156W +/- 90)
+		29:  "Peck Run" "Highland" "VA" (38d 28m 6s East, 79d 31m 9s West)
+		13:  "Ginseng Mountain" "Highland" "VA" (38d 28m 50s East, 79d 31m 39s West)
+		48:  "Possum Trot" "Highland" "VA" (38d 28m 12s East, 79d 31m 56s West)
+		23:  "Laurel Run" "Highland" "VA" (38d 28m 12s East, 79d 31m 56s West)
+		4:  "Burners Run" "Highland" "VA" (38d 28m 12s East, 79d 31m 56s West)
 
 ------------------------------------------------------------------------------------------
-Command 21: what_is_in	382012N	0792330W	60	90
+Command 15: what_is_in	382012N	0792330W	60	90
 
 	No feature at "382012N" and "0792330W"
 ------------------------------------------------------------------------------------------
-Command 22: what_is_in	382148N	0793109W	15	15
+Command 16: what_is_in	382148N	0793109W	15	15
 
-	The following feature(s) were found at (382148N, 0793109W)
-		24:  "Little Doe Hill" "Highland" "VA"
+	The following 1 feature(s) were found at (382148N +/- 15, 0793109W +/- 15)
+		24:  "Little Doe Hill" "Highland" "VA" (38d 21m 48s East, 79d 31m 9s West)
 
 ------------------------------------------------------------------------------------------
-Command 23: what_is_in	-long	382148N	0793109W	15	15
+Command 17: what_is_in	-long	382148N	0793109W	15	15
 
-	The following 1 feature(s) were found in 382148N 0793109W
+	The following 1 feature(s) were found in 382148N +/- 15, 0793109W +/- 15
 
 	Feature ID   :1484896
 	Feature Name :Little Doe Hill
@@ -288,31 +112,31 @@ Command 23: what_is_in	-long	382148N	0793109W	15	15
 	Date created :09/28/1979
 
 ------------------------------------------------------------------------------------------
-Command 24: what_is_in	382148N	0793109W	60	60
+Command 18: what_is_in	382148N	0793109W	60	60
 
-	The following feature(s) were found at (382148N, 0793109W)
-		24:  "Little Doe Hill" "Highland" "VA"
-
-------------------------------------------------------------------------------------------
-Command 25: what_is_in	382148N	0793109W	120	120
-
-	The following feature(s) were found at (382148N, 0793109W)
-		31:  "Seldom Seen Hollow" "Highland" "VA"
-		24:  "Little Doe Hill" "Highland" "VA"
+	The following 1 feature(s) were found at (382148N +/- 60, 0793109W +/- 60)
+		24:  "Little Doe Hill" "Highland" "VA" (38d 21m 48s East, 79d 31m 9s West)
 
 ------------------------------------------------------------------------------------------
-Command 26: what_is_in	382148N	0793109W	180	180
+Command 19: what_is_in	382148N	0793109W	120	120
 
-	The following feature(s) were found at (382148N, 0793109W)
-		44:  "Bear Mountain" "Highland" "VA"
-		46:  "Doe Hill" "Highland" "VA"
-		24:  "Little Doe Hill" "Highland" "VA"
-		31:  "Seldom Seen Hollow" "Highland" "VA"
+	The following 2 feature(s) were found at (382148N +/- 120, 0793109W +/- 120)
+		31:  "Seldom Seen Hollow" "Highland" "VA" (38d 21m 45s East, 79d 30m 31s West)
+		24:  "Little Doe Hill" "Highland" "VA" (38d 21m 48s East, 79d 31m 9s West)
 
 ------------------------------------------------------------------------------------------
-Command 27: what_is_in	-long	382148N	0793109W	180	180
+Command 20: what_is_in	382148N	0793109W	180	180
 
-	The following 4 feature(s) were found in 382148N 0793109W
+	The following 4 feature(s) were found at (382148N +/- 180, 0793109W +/- 180)
+		46:  "Doe Hill" "Highland" "VA" (38d 23m 13s East, 79d 31m 13s West)
+		44:  "Bear Mountain" "Highland" "VA" (38d 20m 12s East, 79d 32m 54s West)
+		24:  "Little Doe Hill" "Highland" "VA" (38d 21m 48s East, 79d 31m 9s West)
+		31:  "Seldom Seen Hollow" "Highland" "VA" (38d 21m 45s East, 79d 30m 31s West)
+
+------------------------------------------------------------------------------------------
+Command 21: what_is_in	-long	382148N	0793109W	180	180
+
+	The following 4 feature(s) were found in 382148N +/- 180, 0793109W +/- 180
 
 	Feature ID   :1486995
 	Feature Name :Seldom Seen Hollow
@@ -334,16 +158,6 @@ Command 27: what_is_in	-long	382148N	0793109W	180	180
 	Elev in ft   :3241
 	Date created :09/28/1979
 
-	Feature ID   :1495470
-	Feature Name :Doe Hill
-	Feature Cat  :Summit
-	State        :VA
-	County       :Highland
-	Longitude    :-793113
-	Latitude     :382313
-	Elev in ft   :3970
-	Date created :09/28/1979
-
 	Feature ID   :1495244
 	Feature Name :Bear Mountain
 	Feature Cat  :Summit
@@ -354,77 +168,54 @@ Command 27: what_is_in	-long	382148N	0793109W	180	180
 	Elev in ft   :3530
 	Date created :09/28/1979
 
-------------------------------------------------------------------------------------------
-Command 28: what_is_in	-filter	structure	382600N	0793310W	120	120
-
-	The following feature(s) were found at (-filter, structure)
-		32:  "Seybert Chapel" "Highland" "VA"
-
-------------------------------------------------------------------------------------------
-Command 29: what_is_in	-filter	water	382850N	0793030W	120	240
-
-	No feature at "382850N" and "0793030W"
-------------------------------------------------------------------------------------------
-Command 30: what_is_in	-filter	pop	382000N	0793530W	3600	3600
-
-	The following feature(s) were found at (-filter, pop)
-		1:  "Blue Grass" "Highland" "VA"
-		47:  "New Hampden" "Highland" "VA"
-		54:  "Monterey" "Highland" "VA"
-		48:  "Possum Trot" "Highland" "VA"
-		45:  "Clover Creek" "Highland" "VA"
-		52:  "Trimble" "Highland" "VA"
+	Feature ID   :1495470
+	Feature Name :Doe Hill
+	Feature Cat  :Summit
+	State        :VA
+	County       :Highland
+	Longitude    :-793113
+	Latitude     :382313
+	Elev in ft   :3970
+	Date created :09/28/1979
 
 ------------------------------------------------------------------------------------------
-Command 31: debug	pool
+Command 22: what_is_in	-filter	structure	382600N	0793310W	120	120
 
-MRU
-	1: 1481852|Blue Grass|Populated Place|VA|Highland|383000|-793259|
-	47: 1496000|New Hampden|Populated Place|VA|Highland|382934|-793348|
-	54: 1498517|Monterey|Populated Place|VA|Highland|382444|-793450|
-	21: 1484574|Key Run|Stream|VA|Highland|382951|-793238|
-	23: 1484722|Laurel Run|Stream|VA|Highland|382812|-793156|
-	11: 1483492|Forks of Waters|Locale|VA|Highland|382856|-793031|
-	29: 1486118|Peck Run|Stream|VA|Highland|382806|-793109|
-	13: 1483647|Ginseng Mountain|Summit|VA|Highland|382850|-793139|
-	46: 1495470|Doe Hill|Summit|VA|Highland|382313|-793113|
-	31: 1486995|Seldom Seen Hollow|Valley|VA|Highland|382145|-793031|
-	32: 1487013|Seybert Chapel|Church|VA|Highland|382512|-793225|
-	24: 1484896|Little Doe Hill|Summit|VA|Highland|382148|-793109|
-	44: 1495244|Bear Mountain|Summit|VA|Highland|382012|-793254|
-	4: 1482176|Burners Run|Stream|VA|Highland|382812|-793156|
-	35: 1487661|Strait Creek|Stream|VA|Highland|382856|-793031|
-LRU
-------------------------------------------------------------------------------------------
-Command 32: import	./VA_Bath.txt
+	The following 1 feature(s) were found at (382600N +/- 120, 0793310W +/- 120)
+		32:  "Seybert Chapel" "Highland" "VA" (38d 25m 12s East, 79d 32m 25s West)
 
-Imported Features by name: 63
-Longest probe sequence:    4
-Imported Locations:        63
-Average name length:       14
 ------------------------------------------------------------------------------------------
-Command 33: debug	pool
+Command 23: what_is_in	-filter	water	382850N	0793030W	120	240
 
-MRU
-	1: 1481852|Blue Grass|Populated Place|VA|Highland|383000|-793259|
-	47: 1496000|New Hampden|Populated Place|VA|Highland|382934|-793348|
-	54: 1498517|Monterey|Populated Place|VA|Highland|382444|-793450|
-	21: 1484574|Key Run|Stream|VA|Highland|382951|-793238|
-	23: 1484722|Laurel Run|Stream|VA|Highland|382812|-793156|
-	11: 1483492|Forks of Waters|Locale|VA|Highland|382856|-793031|
-	29: 1486118|Peck Run|Stream|VA|Highland|382806|-793109|
-	13: 1483647|Ginseng Mountain|Summit|VA|Highland|382850|-793139|
-	46: 1495470|Doe Hill|Summit|VA|Highland|382313|-793113|
-	31: 1486995|Seldom Seen Hollow|Valley|VA|Highland|382145|-793031|
-	32: 1487013|Seybert Chapel|Church|VA|Highland|382512|-793225|
-	24: 1484896|Little Doe Hill|Summit|VA|Highland|382148|-793109|
-	44: 1495244|Bear Mountain|Summit|VA|Highland|382012|-793254|
-	4: 1482176|Burners Run|Stream|VA|Highland|382812|-793156|
-	35: 1487661|Strait Creek|Stream|VA|Highland|382856|-793031|
-LRU
+	The following 6 feature(s) were found at (382850N +/- 120, 0793030W +/- 240)
+		10:  "Elk Run" "Highland" "VA" (38d 29m 36s East, 79d 31m 53s West)
+		21:  "Key Run" "Highland" "VA" (38d 29m 51s East, 79d 32m 38s West)
+		35:  "Strait Creek" "Highland" "VA" (38d 28m 56s East, 79d 30m 31s West)
+		4:  "Burners Run" "Highland" "VA" (38d 28m 12s East, 79d 31m 56s West)
+		23:  "Laurel Run" "Highland" "VA" (38d 28m 12s East, 79d 31m 56s West)
+		29:  "Peck Run" "Highland" "VA" (38d 28m 6s East, 79d 31m 9s West)
+
 ------------------------------------------------------------------------------------------
-Command 34: quit
+Command 24: what_is_in	-filter	pop	382000N	0793530W	3600	3600
+
+	The following 6 feature(s) were found at (382000N +/- 3600, 0793530W +/- 3600)
+		1:  "Blue Grass" "Highland" "VA" (38d 30m 0s East, 79d 32m 59s West)
+		47:  "New Hampden" "Highland" "VA" (38d 29m 34s East, 79d 33m 48s West)
+		54:  "Monterey" "Highland" "VA" (38d 24m 44s East, 79d 34m 50s West)
+		52:  "Trimble" "Highland" "VA" (38d 18m 16s East, 79d 37m 8s West)
+		45:  "Clover Creek" "Highland" "VA" (38d 16m 12s East, 79d 32m 56s West)
+		48:  "Possum Trot" "Highland" "VA" (38d 28m 12s East, 79d 31m 56s West)
+
+------------------------------------------------------------------------------------------
+Command 25: import	./VA_Bath.txt
+
+Imported Features by name: 41
+Longest probe sequence:    0
+Imported Locations:        41
+Average name length:       16
+------------------------------------------------------------------------------------------
+Command 26: quit
 
 Terminating execution of commands.
 ------------------------------------------------------------------------------------------
-End Time: 2023-07-08 13:57:07
+End Time: 2023-07-08 18:50:01

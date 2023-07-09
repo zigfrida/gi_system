@@ -20,6 +20,7 @@ namespace GIS {
         bufferPool1 = new BufferPool("../Files/database.txt");
         scriptFile = "../Files/script01.txt";
         dbFile = "../Files/database.txt";
+        Logger::getInstance().initialText(scriptFile, dbFile);
         lineOffSet = 0;
         nameIndex = new HashTable();
     }
@@ -39,7 +40,6 @@ namespace GIS {
     void CommandProcessor::importCommand(string const &recordFile, string const &databaseFile) {
         vector<GISRecord> dbRecords;
          ifstream source(recordFile); // Source file
-//         ifstream source("../Files/VA_Monterey.txt");
 
          int featureCount = 0;
          int averageNameLength = 0;

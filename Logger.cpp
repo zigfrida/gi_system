@@ -10,25 +10,27 @@ using namespace std;
 
 namespace GIS {
 
-    Logger::Logger() {
+    Logger::Logger() {}
+
+    Logger::~Logger() {
+        if (logFile.is_open()) logFile.close();
+    }
+
+    void Logger::initialText(const string& scriptFile, const string& databaseFile) {
         logFile.open("../Files/log.txt", ofstream::out | ofstream::trunc);
         if (logFile.is_open()) {
             logFile << "Course Project for COMP 8042" << endl;
             logFile << "Student Name: Amanda Golubics, Student Id: A01048162" << endl;
             logFile << "Student Name: Eunhak Lee, Student Id: A01026056" << endl;
             logFile << "Begin of GIS Program log:" << endl;
-            logFile << "dbFile: " << endl;
-            logFile << "script: " << endl;
-            logFile << "log: " << endl;
+            logFile << "dbFile: " << databaseFile << endl;
+            logFile << "script: " << scriptFile << endl;
+            logFile << "log: " << "../Files/log.txt" << endl;
             logFile << "Start Time: " << getCurrentTime() << endl;
             logFile.flush();
         } else {
             cerr << "Error: Failed to create the log file!" << endl;
         }
-    }
-
-    Logger::~Logger() {
-        if (logFile.is_open()) logFile.close();
     }
 
     Logger& Logger::getInstance() {
