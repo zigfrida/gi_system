@@ -18,7 +18,7 @@ namespace GIS {
         public:
             static Logger& getInstance();
             static void closeLogger();
-            void initialText(const string& scriptFile, const string& databaseFile);
+            void initialText(const string& scriptFile, const string& databaseFile, const string& logFileArg);
             void writeLog(const string& message);
             void writeCommandCount(const string& commandName);
             void quitCommand();

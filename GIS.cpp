@@ -5,7 +5,7 @@ using namespace GIS;
 
 int main(int argc, char* argv[]) {
 
-    CommandProcessor* commandprocessor1 = new CommandProcessor(argv[1], argv[2]);
+    CommandProcessor* commandprocessor1 = new CommandProcessor(argv[1], argv[2], argv[3]);
     if (argc != 4) {
         return 0;
     } else {
