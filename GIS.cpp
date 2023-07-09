@@ -147,6 +147,12 @@ void getUserInput(CommandProcessor* commandprocessor1) {
     }
 }
 
+/**
+ *
+Commandline execution example
+ g++ GIS.cpp CommandProcessor.cpp World.cpp HashTable.cpp BufferPool.cpp GISRecord.cpp Logger.cpp PRQuadtree.cpp -o GIS
+GIS ./Files/database.txt ./Files/script01.txt ./Files/log.txt
+ */
 int main(int argc, char* argv[]) {
 
     CommandProcessor* commandprocessor = new CommandProcessor(argv[1], argv[2], argv[3]);
@@ -156,7 +162,6 @@ int main(int argc, char* argv[]) {
         commandprocessor->readScript();
         getUserInput(commandprocessor);
     }
-
 
     Logger::closeLogger();
     return 0;
