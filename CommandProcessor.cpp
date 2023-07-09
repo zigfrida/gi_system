@@ -17,7 +17,7 @@ using namespace std;
 namespace GIS {
 
     CommandProcessor::CommandProcessor(string dbArg, string scriptArg){
-        bufferPool1 = new BufferPool("../Files/database.txt");
+        bufferPool1 = new BufferPool(dbArg);
         scriptFile = scriptArg;
         dbFile = dbArg;
         Logger::getInstance().initialText(scriptFile, dbFile);
