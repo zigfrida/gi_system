@@ -16,8 +16,8 @@ namespace GIS {
         if (logFile.is_open()) logFile.close();
     }
 
-    void Logger::initialText(const string& scriptFile, const string& databaseFile) {
-        logFile.open("../Files/log.txt", ofstream::out | ofstream::trunc);
+    void Logger::initialText(const string& scriptFile, const string& databaseFile, const string& logFileArg) {
+        logFile.open(logFileArg, ofstream::out | ofstream::trunc);
         if (logFile.is_open()) {
             logFile << "Course Project for COMP 8042" << endl;
             logFile << "Student Name: Amanda Golubics, Student Id: A01048162" << endl;
@@ -25,7 +25,7 @@ namespace GIS {
             logFile << "Begin of GIS Program log:" << endl;
             logFile << "dbFile: " << databaseFile << endl;
             logFile << "script: " << scriptFile << endl;
-            logFile << "log: " << "../Files/log.txt" << endl;
+            logFile << "log: " << logFileArg << endl;
             logFile << "Start Time: " << getCurrentTime() << endl;
             logFile.flush();
         } else {

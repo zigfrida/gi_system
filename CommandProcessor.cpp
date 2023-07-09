@@ -17,10 +17,17 @@ using namespace std;
 namespace GIS {
 
     CommandProcessor::CommandProcessor(){
-        bufferPool1 = new BufferPool("../Files/database.txt");
-        scriptFile = "../Files/script01.txt";
-        dbFile = "../Files/database.txt";
-        Logger::getInstance().initialText(scriptFile, dbFile);
+        dbFile = "../Files/db.txt";
+        bufferPool1 = new BufferPool(dbFile);
+        lineOffSet = 0;
+        nameIndex = new HashTable();
+    }
+
+    CommandProcessor::CommandProcessor(string dbArg, string scriptArg, string logArg){
+        bufferPool1 = new BufferPool(dbArg);
+        scriptFile = scriptArg;
+        dbFile = dbArg;
+        Logger::getInstance().initialText(scriptFile, dbFile, logArg);
         lineOffSet = 0;
         nameIndex = new HashTable();
     }
@@ -35,6 +42,37 @@ namespace GIS {
         while (std::getline(ss, s, delim)) {
             out.push_back(s);
         }
+    }
+
+    void CommandProcessor::tokenizeQuotes(const string &str, const char delim, vector<string> &out) {
+        // construct a stream from the string
+        std::stringstream ss(str);
+        std::string s;
+        bool inQuotes = false; // Flag to track if current token is inside quotes
+        std::string token;
+
+        while (std::getline(ss, s, delim)) {
+            if (!inQuotes) {
+                // Check if the current token starts with a quotation mark
+                if (s.front() == '\"') {
+                    inQuotes = true;
+                    token = s.substr(1); // Exclude the starting quotation mark
+                } else {
+                    out.push_back(s);
+                }
+            } else {
+                // Check if the current token ends with a quotation mark
+                if (s.back() == '\"') {
+                    inQuotes = false;
+                    token += " " + s.substr(0, s.size() - 1); // Exclude the ending quotation mark
+                    out.push_back(token);
+                    token.clear();
+                } else {
+                    token += " " + s;
+                }
+            }
+        }
+
     }
 
     void CommandProcessor::importCommand(const string &recordFile, const string &databaseFile) {

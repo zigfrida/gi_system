@@ -6,10 +6,16 @@
 using namespace GIS;
 using namespace std;
 
-int main() {
+int main(int argc, char* argv[]) {
+
+    CommandProcessor* commandprocessor = new CommandProcessor(argv[1], argv[2], argv[3]);
+    if (argc != 4) {
+        return 0;
+    } else {
+        commandprocessor->readScript();
+    }
 
     CommandProcessor* commandprocessor1 = new CommandProcessor();
-    commandprocessor1->readScript();
 
     bool worldCommandExecuted = false;
     string line;
@@ -20,7 +26,7 @@ int main() {
         if (line == "quit") break;
 
         vector<string> tokens;
-        commandprocessor1->tokenize(line,' ', tokens);
+        commandprocessor1->tokenizeQuotes(line,' ', tokens);
         string command = tokens[0];
 
         // World command needs to be executed first as it set the boundaries for the other structures

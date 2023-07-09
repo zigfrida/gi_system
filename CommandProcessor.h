@@ -25,6 +25,8 @@ namespace GIS {
             int readScript();
             void tokenize(string const &str, const char delim,
                 vector<string> &out);
+            void tokenizeQuotes(string const &str, const char delim,
+                      vector<string> &out);
             void importCommand(string const &recordFile, string const &databaseFile);
             void importCommandLog(string const &recordFile, string const &databaseFile);
             void appendToDatabase(vector<GISRecord> records1, string filePath);
