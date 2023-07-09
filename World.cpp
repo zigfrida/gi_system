@@ -6,6 +6,8 @@
 #include <sstream>
 #include "World.h"
 #include "Logger.h"
+#include "PRQuadtree.h"
+
 using namespace std;
 namespace GIS {
     void World::createWorld(string westLong, string eastLong, string southLat, string northLat) {
@@ -53,6 +55,30 @@ namespace GIS {
         logMessage << "\t\t\t\t\t\t           " <<  this->northLat << endl;
         logMessage << "\t\t\t\t\t\t" << this->westLong << "              " << this->eastLong << endl;
         logMessage << "\t\t\t\t\t\t           " << this->southLat << endl;
+        logMessage << "------------------------------------------------------------------------------------------";
+        Logger::getInstance().writeLog(logMessage.str());
+    }
+
+    void World::debugWorldToLog(GIS::PRQuadtree* prQuadTree) {
+        stringstream logMessage;
+        logMessage << "+--------------------------------------------------------------------------------------------------------------------------------------------+" << endl;
+        int** matrixWorld = prQuadTree->quadAndData();
+        string row = "";
+        for (int i = 0; i < 40; i++) {
+            row ="|";
+            for(int j = 0; j < 140; j++) {
+
+                if (matrixWorld[i][j] > 0) {
+                    row += to_string(matrixWorld[i][j]);
+                } else {
+                    row += " ";
+                }
+            }
+            row +="|\n";
+            logMessage << row;
+        }
+
+        logMessage << "+--------------------------------------------------------------------------------------------------------------------------------------------+" << endl;
         logMessage << "------------------------------------------------------------------------------------------";
         Logger::getInstance().writeLog(logMessage.str());
     }

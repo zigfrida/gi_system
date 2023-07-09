@@ -284,4 +284,49 @@ namespace GIS {
         Logger::getInstance().writeLog(logMessage.str());
     }
 
+
+    int** PRQuadtree::quadAndData() {
+        int** result = new int*[40];
+        for (int i = 0; i < 40; ++i) {
+            result[i] = new int[140]();
+        }
+        for (int i = 0; i < 40; i++) {
+            for(int j = 0; j < 140; j++) {
+                result[i][j] = 0;
+
+            }
+        }
+        if(root == nullptr) {
+            return result;
+        }
+
+        quadAndDataHelper(root, result);
+        return result;
+    }
+
+    void PRQuadtree::quadAndDataHelper(PRQuadtreeNode* node, int**& result) {
+        int nodeCenterLat = (node->maxLatitude + node->minLatitude) / 2;
+        int nodeCenterLong = (node->maxLongitude + node->minLongitude) / 2;
+        int latMin = worldMinLatitude;
+        int latMax = worldMaxLatitude;
+        int longMin = worldMinLongitude;
+        int longMax = worldMaxLongitude;
+        int targetLatMin = 0;
+        int targetLatMax = 40;
+        int targetLongMin = 0;
+        int targetLongMax = 140;
+        if (!node->data.empty()) {
+            int convertedLat = (nodeCenterLat - latMin) / ((latMax-latMin) / targetLatMax);
+            int convertedLong = (nodeCenterLong - longMin) / ((longMax-longMin) / targetLongMax);
+            result[convertedLat][convertedLong] += node->data.size();
+        }
+
+
+
+        for (int i = 0; i < 4; ++i) {
+            if (node->children[i] != nullptr) {
+                quadAndDataHelper(node->children[i], result);
+            }
+        }
+    }
 }

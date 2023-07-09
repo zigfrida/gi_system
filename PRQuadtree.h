@@ -38,6 +38,10 @@ namespace GIS {
             vector<int> treeSearchArea(int latitude, int longitude, int latSpan, int longSpan);
             void treeSearchAreaHelper(int latToSearch, int longToSearch, int latSpan, int longSpan, PRQuadtreeNode* node, vector<int>& result);
             bool isNodeInsideSearchArea(int nodeMaxX, int nodeMinX, int nodeMaxY, int nodeMinY, int searchCenterX, int searchCenterY, int searchSpanX, int searchSpanY);
+            int** quadAndData();
+            void quadAndDataHelper(PRQuadtreeNode* node, int**& result);
+            void convertCoordinates(int x, int y, int& convertedX, int& convertedY);
+
 
         private:
             void destroyTree(PRQuadtreeNode* node);

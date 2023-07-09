@@ -6,6 +6,7 @@
 #define GI_SYSTEM_WORLD_H
 
 #include <string>
+#include "PRQuadtree.h"
 
 using namespace std;
 
@@ -20,6 +21,7 @@ namespace GIS {
         static int convertStringLatLongToInt(string lat);
         bool isItInWorldBoundary(string lat, string longitude);
         void writeWorldToLog(string westLong, string eastLong, string southLat, string northLat);
+        void debugWorldToLog(GIS::PRQuadtree* prQuadTree);
     };
 }
 

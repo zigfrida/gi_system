@@ -343,7 +343,7 @@ namespace GIS {
                         string debugCommand = concatenated[1];
                         if (debugCommand == "world") {
                             Logger::getInstance().writeCommandCount(myText);
-
+                            world1.debugWorldToLog(prquadtree);
                         } else if (debugCommand == "hash") {
                             Logger::getInstance().writeCommandCount(myText);
                             nameIndex->displayDebugHashTable();

@@ -7,7 +7,7 @@
 world	0794530W	0792630W	381000N	383000N
 ;
 ; Import the dataset [the address here is a relative address]
-import	./VA_Monterey.txt
+import	../VA_Monterey.txt
 ;
 ; Lets visualize our already imported geographical data
 debug	world
@@ -73,7 +73,7 @@ import	./VA_Bath.txt
 debug	pool
 ;
 ; Exiting
-quit
+;quit
 ;
 ; From this point on all of the commands will be ignored, you can use the following large dataset to test your implemented software
 ; To consider this file please use the following world command at the beginning of this file
