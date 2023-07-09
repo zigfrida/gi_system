@@ -18,14 +18,16 @@ public:
     int latitude;
     int longitude;
     string COUNTY_NAME;
-    int lineOfSet;
     string usgs_quad;
     string elev_in_ft;
     string date_created;
+    int lineOfSet;
     //Print function used for DB append
     string dbPrint();
     string whatIsPrint();
     string whatIsAtPrint();
+    string whatIsInPrint();
+    string whatIsInPrintLong();
     string convertToDMS(int value);
     string convertToDMS2(int value);
 

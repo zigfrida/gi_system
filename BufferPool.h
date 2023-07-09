@@ -35,7 +35,7 @@ public:
     GISRecord* whatIs(string name, string state, GIS::HashTable* nameIndex);
     vector<GISRecord> whatIsAt(string latString, string longString, GIS::PRQuadtree* prQuadTree);
     vector<GISRecord> whatIsIn(string latString, string longString, string latSpanString, string longSpanString, string filter, GIS::PRQuadtree* prQuadTree);
-    void whatIsInLogger(vector<GISRecord> records, string cord1, string cord2);
+    void whatIsInLogger(vector<GISRecord> records, string cord1, string cord2, string span1, string span2);
     string getLineAtIndex(string &filePath, size_t index);
 
     void insertToBuffer(GISRecord record);

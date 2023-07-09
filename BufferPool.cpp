@@ -105,10 +105,10 @@ vector<GISRecord> BufferPool::whatIsIn(string latString, string longString, stri
     bool isAll = (filter == "" || filter == "-long");
 
     for (size_t i = 0; i < buffer1.size(); ++i) {
-        if (buffer1[i].latitude < latitude + latSpan
-        && buffer1[i].latitude > latitude - latSpan
-        && buffer1[i].longitude < longitude + longSpan
-        && buffer1[i].longitude > longitude - longSpan
+        if (buffer1[i].latitude <= latitude + latSpan
+        && buffer1[i].latitude >= latitude - latSpan
+        && buffer1[i].longitude <= longitude + longSpan
+        && buffer1[i].longitude >= longitude - longSpan
         && (isAll || featureClassType(buffer1[i].FEATURE_CLASS) == filter )) {
             whatIsInList.insert(whatIsInList.begin(), buffer1[i]);
             bringToFrontOfBuffer(i);
@@ -117,7 +117,8 @@ vector<GISRecord> BufferPool::whatIsIn(string latString, string longString, stri
 
     vector<int> resultIndexList;
     resultIndexList.clear();
-    resultIndexList = fakeTreeSearchArea(latitude, longitude, latSpan, longSpan);
+    //resultIndexList = fakeTreeSearchArea(latitude, longitude, latSpan, longSpan);
+    resultIndexList = prQuadTree->treeSearchArea(latitude, longitude, latSpan, longSpan);
     bool alreadyAdded = false;
     for (int resultIndex : resultIndexList) {
         alreadyAdded = false;
@@ -195,12 +196,11 @@ vector<int> BufferPool::fakeTreeSearchArea(int latitude, int longitude, int latS
     recordsInArea.clear();
     for (size_t i = 0; i < allRecords.size(); ++i) {
         GISRecord& record = allRecords[i];
-        if (record.latitude < latitude + latSpan
-            && record.latitude > latitude - latSpan
-            && record.longitude < longitude + longSpan
-            && record.longitude > longitude - longSpan) {
+        if (record.latitude <= latitude + latSpan
+            && record.latitude >= latitude - latSpan
+            && record.longitude <= longitude + longSpan
+            && record.longitude >= longitude - longSpan) {
             recordsInArea.insert(recordsInArea.begin(), i);
-            bringToFrontOfBuffer(i);
         }
     }
     return recordsInArea;
@@ -236,9 +236,9 @@ vector<GISRecord> BufferPool::readDatabaseFile(string filePath) {
                 tempRec.latitude = stoi(featureInfo[4]);
                 tempRec.longitude = stoi(featureInfo[5]);
                 tempRec.STATE_Abbreviation = featureInfo[3];
-                tempRec.COUNTY_NAME = featureInfo[5];
-                tempRec.elev_in_ft = featureInfo[16];
-                tempRec.date_created = featureInfo[18];
+                tempRec.COUNTY_NAME = featureInfo[6];
+                tempRec.elev_in_ft = featureInfo[7];
+                tempRec.date_created = featureInfo[8];
                 tempRec.lineOfSet = lineCount;
                 dbRecords.push_back(tempRec);
 
@@ -317,7 +317,6 @@ string BufferPool::featureClassType(string featureClass) {
                     featureClass == "Post Office" ||
                     featureClass == "School" ||
                     featureClass == "Tower" ||
-                    featureClass == "Tunnel" ||
                     featureClass == "Tunnel"
             ) {
         return "structure";
@@ -330,7 +329,13 @@ string BufferPool::featureClassType(string featureClass) {
             featureClass == "Harbor" ||
             featureClass == "Lake" ||
             featureClass == "Rapids" ||
-            featureClass == "Reservoir"
+            featureClass == "Reservoir"||
+            featureClass == "Sea"||
+            featureClass == "Spring"||
+            featureClass == "Stream"||
+            featureClass == "Swamp"||
+            featureClass == "Well"
+
             ) {
         return "water";
     }
@@ -343,10 +348,10 @@ string BufferPool::featureClassType(string featureClass) {
     return "";
 }
 
-void BufferPool::whatIsInLogger(vector<GISRecord> records, string cord1, string cord2) {
+void BufferPool::whatIsInLogger(vector<GISRecord> records, string cord1, string cord2, string span1, string span2) {
     stringstream logMessage;
 
-    logMessage << "\tThe following " << records.size() << " feature(s) were found in " << cord1 << " " << cord2 << endl;
+    logMessage << "\tThe following " << records.size() << " feature(s) were found in " << cord1 << " +/- " << span1 << ", " << cord2 << " +/- " << span2  << endl;
 
     for (auto rec : records) {
         logMessage << "\n\tFeature ID   :" << rec.FEATURE_ID << endl;
