@@ -16,13 +16,6 @@ using namespace std;
 
 namespace GIS {
 
-    CommandProcessor::CommandProcessor(){
-        dbFile = "../Files/db.txt";
-        bufferPool1 = new BufferPool(dbFile);
-        lineOffSet = 0;
-        nameIndex = new HashTable();
-    }
-
     CommandProcessor::CommandProcessor(string dbArg, string scriptArg, string logArg){
         bufferPool1 = new BufferPool(dbArg);
         scriptFile = scriptArg;
