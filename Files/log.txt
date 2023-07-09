@@ -5,7 +5,7 @@ Begin of GIS Program log:
 dbFile: ../Files/database.txt
 script: ../Files/script01.txt
 log: ../Files/log.txt
-Start Time: 2023-07-08 22:17:17
+Start Time: 2023-07-08 23:46:21
 
 world	0794530W	0792630W	381000N	383000N
 ------------------------------------------------------------------------------------------
@@ -16,7 +16,7 @@ Latitude/longitude values in index entries are shown as signed integers, in tota
 						-794530              -792630
 						           381000
 ------------------------------------------------------------------------------------------
-Command 1: import	./VA_Monterey.txt
+Command 1: import	../VA_Monterey.txt
 
 Imported Features by name: 63
 Longest probe sequence:    0
@@ -405,11 +405,8 @@ LRU
 ------------------------------------------------------------------------------------------
 Command 32: import	./VA_Bath.txt
 
-Imported Features by name: 41
-Longest probe sequence:    0
-Imported Locations:        41
-Average name length:       16
-------------------------------------------------------------------------------------------
+Import failed. Import file ./VA_Bath.txt does not exist!
+
 Command 33: debug	pool
 
 MRU
@@ -434,14 +431,4 @@ Command 34: quit
 
 Terminating execution of commands.
 ------------------------------------------------------------------------------------------
-End Time: 2023-07-08 22:17:17
-
-world	0794530W	0792630W	381000N	383000N
-------------------------------------------------------------------------------------------
-Latitude/longitude values in index entries are shown as signed integers, in total seconds.
-------------------------------------------------------------------------------------------
-						World boundaries are set to:
-						           383000
-						-794530              -792630
-						           381000
-------------------------------------------------------------------------------------------
+End Time: 2023-07-08 23:46:21
