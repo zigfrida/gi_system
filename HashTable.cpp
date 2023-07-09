@@ -102,12 +102,16 @@ namespace GIS {
     }
 
     void HashTable::displayHashTable() {
-        for (int i = 0; i < size; ++i) {
+        cout << "Format of display is \n"
+                      "Slot number: data record" << endl;
+        cout << "Current table size is " << size << endl;
+        cout << "Number of elements in table is " << count << endl << endl;
+        for (int i = 0; i < size; i++) {
             if (!table[i].key.empty() && !table[i].isDeleted) {
-                cout << "Key: " << table[i].key << " Value: " << table[i].value << endl;
-                cout << "---------------------------------------" << endl;
+                cout << "\t" << i << ": [" << table[i].key << ", [" << table[i].value << "]]" << endl;
             }
         }
+        cout << endl;
     }
 
     void HashTable::displayDebugHashTable() {
