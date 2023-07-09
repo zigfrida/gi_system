@@ -62,12 +62,17 @@ namespace GIS {
     void World::debugWorldToLog(GIS::PRQuadtree* prQuadTree) {
         stringstream logMessage;
         logMessage << "+--------------------------------------------------------------------------------------------------------------------------------------------+" << endl;
-
+        int** matrixWorld = prQuadTree->quadAndData();
         string row = "";
         for (int i = 0; i < 40; i++) {
             row ="|";
-            for(int i = 0; i < 140; i++) {
-                row +=" ";
+            for(int j = 0; j < 140; j++) {
+
+                if (matrixWorld[i][j] > 0) {
+                    row += to_string(matrixWorld[i][j]);
+                } else {
+                    row += " ";
+                }
             }
             row +="|\n";
             logMessage << row;

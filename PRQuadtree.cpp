@@ -285,52 +285,47 @@ namespace GIS {
     }
 
 
-    vector<vector<int>> PRQuadtree::quadAndData() {
-        vector<vector<int>> result;
-        result.clear();
-        if (!isCoordinateInWorld(latToSearch, longToSearch)) {
-            return result;
+    int** PRQuadtree::quadAndData() {
+        int** result = new int*[40];
+        for (int i = 0; i < 40; ++i) {
+            result[i] = new int[140]();
         }
+        for (int i = 0; i < 40; i++) {
+            for(int j = 0; j < 140; j++) {
+                result[i][j] = 0;
 
+            }
+        }
         if(root == nullptr) {
             return result;
         }
 
-        treeSearchAreaHelper(latToSearch, longToSearch, latSpan, longSpan, root, result);
+        quadAndDataHelper(root, result);
         return result;
     }
 
-    void PRQuadtree::quadAndDataHelper(PRQuadtreeNode* node, vector<int[]>& result) {
+    void PRQuadtree::quadAndDataHelper(PRQuadtreeNode* node, int**& result) {
+        int nodeCenterLat = (node->maxLatitude + node->minLatitude) / 2;
+        int nodeCenterLong = (node->maxLongitude + node->minLongitude) / 2;
+        int latMin = worldMinLatitude;
+        int latMax = worldMaxLatitude;
+        int longMin = worldMinLongitude;
+        int longMax = worldMaxLongitude;
+        int targetLatMin = 0;
+        int targetLatMax = 40;
+        int targetLongMin = 0;
+        int targetLongMax = 140;
         if (!node->data.empty()) {
-            for (auto dataIndex : node->data) {
-                int latitude = dataIndex->latitude;
-                int longitude = dataIndex->longitude;
-
-                if (latitude <= latToSearch + latSpan
-                    && latitude >= latToSearch - latSpan
-                    && longitude <= longToSearch + longSpan
-                    && longitude >= longToSearch - longSpan) {
-                    // The coordinate is within the search area
-                    result.insert(result.end(), dataIndex->fileOffsets.begin(), dataIndex->fileOffsets.end());
-                }
-            }
+            int convertedLat = (nodeCenterLat - latMin) / ((latMax-latMin) / targetLatMax);
+            int convertedLong = (nodeCenterLong - longMin) / ((longMax-longMin) / targetLongMax);
+            result[convertedLat][convertedLong] += node->data.size();
         }
 
 
 
         for (int i = 0; i < 4; ++i) {
             if (node->children[i] != nullptr) {
-                int nodeMaxLat = node->children[i]->maxLatitude;
-                int nodeMaxLong = node->children[i]->maxLongitude;
-                int nodeMinLat = node->children[i]->minLatitude;
-                int nodeMinLong = node->children[i]->minLongitude;
-                if (
-                        isNodeInsideSearchArea(nodeMaxLat, nodeMinLat, nodeMaxLong, nodeMinLong, latToSearch, longToSearch, latSpan, longSpan)
-                        )
-
-                    treeSearchAreaHelper(latToSearch, longToSearch, latSpan, longSpan, node->children[i], result);
-
-
+                quadAndDataHelper(node->children[i], result);
             }
         }
     }
