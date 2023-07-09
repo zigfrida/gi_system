@@ -293,6 +293,14 @@ void BufferPool::bringToFrontOfBuffer(int index) {
     buffer1.insert(buffer1.begin(), rec);
 }
 
+void BufferPool::displayPool() {
+    cout << "MRU" << endl;
+    for(auto feature : buffer1) {
+        cout << "\t" << feature.lineOfSet << ": " << feature.FEATURE_ID << "|" << feature.FEATURE_Name << "|" << feature.FEATURE_CLASS << "|" << feature.STATE_Abbreviation << "|" << feature.COUNTY_NAME << "|" << feature.latitude << "|" << feature.longitude << "|" << endl;
+    }
+    cout << "LRU" << endl;
+}
+
 void BufferPool::displayDebugPool() {
     stringstream logMessage;
     logMessage << "MRU" << endl;
@@ -368,5 +376,25 @@ void BufferPool::whatIsInLogger(vector<GISRecord> records, string cord1, string 
     logMessage << endl;
     logMessage << "------------------------------------------------------------------------------------------";
     GIS::Logger::getInstance().writeLog(logMessage.str());
+
+}
+
+void BufferPool::whatIsInLoggerOut(vector<GISRecord> records, string cord1, string cord2, string span1, string span2) {
+
+    cout << "The following " << records.size() << " feature(s) were found in " << cord1 << " +/- " << span1 << ", " << cord2 << " +/- " << span2  << endl;
+
+    for (auto rec : records) {
+        cout << "\n\tFeature ID   :" << rec.FEATURE_ID << endl;
+        cout << "\tFeature Name :" << rec.FEATURE_Name << endl;
+        cout << "\tFeature Cat  :" << rec.FEATURE_CLASS << endl;
+        cout << "\tState        :" << rec.STATE_Abbreviation << endl;
+        cout << "\tCounty       :" << rec.COUNTY_NAME << endl;
+        cout << "\tLongitude    :" << rec.longitude << endl;
+        cout << "\tLatitude     :" << rec.latitude << endl;
+        cout << "\tElev in ft   :" << rec.elev_in_ft << endl;
+        cout << "\tDate created :" << rec.date_created << endl;
+    }
+
+    cout << endl;
 
 }

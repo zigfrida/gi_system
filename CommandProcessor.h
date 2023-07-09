@@ -21,11 +21,14 @@ namespace GIS {
             string scriptFile;
             string dbFile;
             CommandProcessor();
+            CommandProcessor(string dbArg, string scriptArg, string logArg);
             int readScript();
             void tokenize(string const &str, const char delim,
                 vector<string> &out);
             void importCommand(string const &recordFile, string const &databaseFile);
+            void importCommandLog(string const &recordFile, string const &databaseFile);
             void appendToDatabase(vector<GISRecord> records1, string filePath);
+            void appendToDatabaseLog(vector<GISRecord> records1, string filePath);
 
     };
 

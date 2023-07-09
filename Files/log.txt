@@ -5,7 +5,7 @@ Begin of GIS Program log:
 dbFile: ../Files/database.txt
 script: ../Files/script01.txt
 log: ../Files/log.txt
-Start Time: 2023-07-08 18:50:01
+Start Time: 2023-07-08 21:31:11
 
 world	0794530W	0792630W	381000N	383000N
 ------------------------------------------------------------------------------------------
@@ -218,4 +218,4 @@ Command 26: quit
 
 Terminating execution of commands.
 ------------------------------------------------------------------------------------------
-End Time: 2023-07-08 18:50:01
+End Time: 2023-07-08 21:31:11

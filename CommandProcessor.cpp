@@ -37,8 +37,68 @@ namespace GIS {
         }
     }
 
-    void CommandProcessor::importCommand(string const &recordFile, string const &databaseFile) {
+    void CommandProcessor::importCommand(const string &recordFile, const string &databaseFile) {
         vector<GISRecord> dbRecords;
+        ifstream source(recordFile); // Source file
+
+        int featureCount = 0;
+        int averageNameLength = 0;
+
+        if (!source.is_open()) {
+            cout << "Import failed. Import file " + recordFile + " does not exist!" << endl;
+        } else {
+            string line;
+            bool firstLine = true;
+
+            while (getline(source, line)) {
+                istringstream iss(line);
+                string feature;
+                vector<string> featureInfo;
+
+                if (!firstLine) {
+                    while (getline(iss, feature, '|')) {
+                        featureInfo.push_back(feature);
+                    }
+                    if (world1.isItInWorldBoundary(featureInfo[7], featureInfo[8])) {
+                        string key = featureInfo[1] + " " + featureInfo[3]; // Key is the concatenation of feature name and state abbreviation
+                        string value = to_string(lineOffSet); // line the feature was found in the import file
+                        GISRecord tempRec;
+                        tempRec.FEATURE_ID = stoi(featureInfo[0]);
+                        tempRec.FEATURE_Name = featureInfo[1];
+                        tempRec.FEATURE_CLASS = featureInfo[2];
+                        tempRec.latitude = World::convertStringLatLongToInt(featureInfo[7]);
+                        tempRec.longitude = World::convertStringLatLongToInt(featureInfo[8]);
+                        tempRec.STATE_Abbreviation = featureInfo[3];
+                        tempRec.COUNTY_NAME = featureInfo[5];
+                        tempRec.elev_in_ft = featureInfo[16];
+                        tempRec.date_created = featureInfo[18];
+                        dbRecords.push_back(tempRec);
+                        nameIndex->insert(key, value);
+                        CoordinateIndex* newCordIndex = new CoordinateIndex(tempRec.latitude, tempRec.longitude);
+                        newCordIndex->fileOffsets.push_back(lineOffSet);
+                        prquadtree->insert(*newCordIndex, tempRec);
+                        lineOffSet++;
+                        featureCount++;
+                        averageNameLength += featureInfo[1].length();
+                    }
+                }
+                if (firstLine) firstLine = false;
+            }
+
+            averageNameLength = averageNameLength / featureCount;
+
+            cout << "Imported Features by name: " << featureCount << endl;
+            cout << "Longest probe sequence:    " << nameIndex->getLongestProbSequence() << endl;
+            cout << "Imported Locations:        " << featureCount << endl;
+            cout << "Average name length:       " << averageNameLength << endl;
+
+            appendToDatabase(dbRecords, databaseFile);
+            source.close();
+        }
+    }
+
+    void CommandProcessor::importCommandLog(string const &recordFile, string const &databaseFile) {
+         vector<GISRecord> dbRecords;
          ifstream source(recordFile); // Source file
 
          int featureCount = 0;
@@ -96,17 +156,32 @@ namespace GIS {
             logMessage << "------------------------------------------------------------------------------------------";
             Logger::getInstance().writeLog(logMessage.str());
 
-            appendToDatabase(dbRecords, databaseFile);
+            appendToDatabaseLog(dbRecords, databaseFile);
             source.close();
         }
     }
 
-    /**
+    void CommandProcessor::appendToDatabase(vector<GISRecord> records1, string filePath) {
+        ofstream outputFile(filePath, std::ios::out | std::ios::app);  // Open the file for writing in binary mode
+        if (!outputFile) {
+            cout << "Database file does not exist and creating file at designated path did not work." << endl;
+        } else {
+            string tempp = "";
+            for (GISRecord& record : records1) {
+                tempp = record.dbPrint();
+                outputFile << tempp << endl;
+            }
+        }
+        outputFile.close();  // Close the file after writing
+        cout << "Record have been saved to the database." << endl;
+    }
+
+     /**
      * Function to append record to the database.txt
      * @param records1
      * @param filePath
      */
-    void CommandProcessor::appendToDatabase(vector<GISRecord> records1, string filePath) {
+    void CommandProcessor::appendToDatabaseLog(vector<GISRecord> records1, string filePath) {
         ofstream outputFile(filePath, std::ios::out | std::ios::app);  // Open the file for writing in binary mode
         if (!outputFile) {
             Logger::getInstance().writeLog("Database file does not exist and creating file at designated path did not work\n");
@@ -119,7 +194,6 @@ namespace GIS {
         }
         outputFile.close();  // Close the file after writing
     }
-
 
 
     int CommandProcessor::readScript()
@@ -142,7 +216,7 @@ namespace GIS {
                         prquadtree = new PRQuadtree(world1.westLong, world1.eastLong, world1.southLat, world1.northLat); // Initialize PRQuadtree with world boundaries
                     } else if (command == "import") {
                         Logger::getInstance().writeCommandCount(myText);
-                        importCommand(concatenated[1], dbFile);
+                        importCommandLog(concatenated[1], dbFile);
                     } else if (command == "what_is") {
                         Logger::getInstance().writeCommandCount(myText);
                         GISRecord* what_isThis;
