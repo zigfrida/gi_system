@@ -20,7 +20,7 @@ namespace GIS {
             int lineOffSet;
             string scriptFile;
             string dbFile;
-            CommandProcessor();
+            CommandProcessor(string dbArg, string scriptArg);
             int readScript();
             void tokenize(string const &str, const char delim,
                 vector<string> &out);
